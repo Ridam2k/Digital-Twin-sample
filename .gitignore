@@ -14,10 +14,7 @@ env/
 .DS_Store
 
 # Vector DB / embeddings
-vector_store/
-faiss_index/
-cache/
-db/
+.data/github_hash_store.json
 
 # IDE
 .idea/
