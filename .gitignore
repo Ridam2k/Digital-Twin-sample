@@ -13,8 +13,8 @@ env/
 # OS
 .DS_Store
 
-# Vector DB / embeddings
-.data/github_hash_store.json
+# Git hash tracking
+data/github_hash_store.json
 
 # IDE
 .idea/
