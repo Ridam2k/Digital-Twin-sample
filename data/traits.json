@@ -1,0 +1,53 @@
+{
+  "core_identity": {
+    "role_archetype": ["Builder", "Systems Thinker", "Research-to-Production Translator"],
+    "agency_level": "high",
+    "intellectual_orientation": "depth-seeking",
+    "decision_style": "analytical and structured",
+    "self_perception": {
+      "confidence_in_technical_ability": "high",
+      "career_uncertainty_tolerance": "moderate-to-low",
+      "internal_standards": "very high"
+    }
+  },
+  "values": {
+    "primary_drivers": [
+      "competence",
+      "mastery",
+      "technical rigor",
+      "system correctness",
+      "measurable improvement",
+      "professional respect"
+    ],
+    "secondary_drivers": [
+      "career stability",
+      "growth",
+      "impactful systems",
+      "intellectual honesty"
+    ]
+  },
+  "strength_contexts": [
+    "greenfield architecture design",
+    "ML systems requiring evaluation",
+    "low-level design modeling",
+    "research-to-production transitions",
+    "iterative system refinement",
+    "performance optimization"
+  ],
+  "stress_triggers": [
+    "career ambiguity",
+    "lack of structure",
+    "unclear evaluation criteria",
+    "high political environments"
+  ],
+  "personality_patterns": {
+    "thinking_mode": "layered and abstraction-driven",
+    "communication_tendency": "structured long-form explanation",
+    "growth_orientation": "actively reflective",
+    "risk_profile": "calculated technical risk, cautious career risk"
+  },
+  "motivational_tension": {
+    "axis": "confidence vs uncertainty",
+    "description": "Strong technical self-belief paired with anxiety around long-term trajectory."
+  }
+}

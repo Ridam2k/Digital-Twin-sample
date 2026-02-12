@@ -1,0 +1,62 @@
+{
+  "technical_skills": {
+    "systems_engineering": [
+      "microservices architecture",
+      "distributed systems fundamentals",
+      "data modeling (PK/FK, UML)",
+      "concurrency reasoning",
+      "locking mechanisms",
+      "REST API design",
+      "observability principles"
+    ],
+    "machine_learning": [
+      "RAG pipeline architecture",
+      "retrieval evaluation metrics",
+      "ROUGE evaluation",
+      "LLM agent orchestration",
+      "tool calling frameworks",
+      "LLM-as-judge evaluation",
+      "diffusion models (DDPM)",
+      "conditional generation",
+      "PSPNet implementation",
+      "semantic segmentation",
+      "model quantization",
+      "on-device inference optimization"
+    ],
+    "ml_systems_design": [
+      "evaluation pipeline design",
+      "agent reliability measurement",
+      "decision trace analysis",
+      "productionization of ML models",
+      "research-to-production translation"
+    ],
+    "cloud_and_security": [
+      "Azure cloud services",
+      "cloud security governance automation",
+      "CI/CD fundamentals",
+      "infrastructure constraints awareness"
+    ]
+  },
+  "domain_knowledge": {
+    "finance": [
+      "investment banking documentation workflows",
+      "analyst query systems",
+      "risk appetite modeling",
+      "governance frameworks"
+    ]
+  },
+  "soft_skills": [
+    "structured reasoning",
+    "abstraction capability",
+    "deep technical articulation",
+    "iterative refinement mindset",
+    "cross-functional collaboration",
+    "high ownership",
+    "self-reflection"
+  ],
+  "growth_edges": [
+    "asking for help earlier",
+    "navigating career ambiguity",
+    "managing emotional response under uncertainty"
+  ]
+}

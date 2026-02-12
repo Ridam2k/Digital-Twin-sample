@@ -1,0 +1,24 @@
+# Secrets
+credentials.json
+token.json
+config.py
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+env/
+
+# OS
+.DS_Store
+
+# Vector DB / embeddings
+vector_store/
+faiss_index/
+cache/
+db/
+
+# IDE
+.idea/
+.vscode/
