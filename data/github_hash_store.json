@@ -1,0 +1,691 @@
+{
+  "Ridam2k/EcoNest/AnalysisStructuredResponse.py": {
+    "git_sha": "0a8554c136961f8ac39a556bedba87d74a2cd96c",
+    "point_ids": [
+      "baa75eb7-2f08-46f0-89d1-039c18be758a"
+    ]
+  },
+  "Ridam2k/EcoNest/Flow.ipynb": {
+    "git_sha": "9df06e480ba7e8a046bcf6648bec613f83acba09",
+    "point_ids": [
+      "6b419994-c21a-4dbb-8993-cdb88b122fc6",
+      "302e2581-087a-4d52-b123-75aa3dac78c5",
+      "b9a7d686-c501-4f84-b7ed-7f12e757ec75",
+      "c601192f-a276-4f5a-b055-2006d45f7a20",
+      "ec37012f-5e94-4b16-9de1-5edfd8904c7b",
+      "25e822f6-2d8e-4d27-b26e-e07d98c75987",
+      "d39be7c6-433b-42bb-b62c-dd6abb67cb86",
+      "57d33638-7f29-42ac-968a-a6e6f312171b",
+      "2248f377-f8d8-4266-84ba-d3ff35b25653",
+      "59bb56bc-1d1a-4626-b639-9288b256d523",
+      "8618b68c-7233-40f8-b2ce-88dc1b5c7746",
+      "511cdc72-a56a-4de9-866c-daa4d6aaaa7d",
+      "85cbea2a-f387-4453-9486-183e53a10ca5",
+      "02f2bf1d-3bd3-4c25-b797-6f4b762472a6",
+      "e8a420a9-f1e7-48c6-aaf5-3c6b4a8955e8",
+      "9d5e1566-df8c-4f4a-a783-4a4c2bdf0b0f"
+    ]
+  },
+  "Ridam2k/EcoNest/Prompts/onboarding.txt": {
+    "git_sha": "5186a82ea24439585769583e58dcbcb6da127bff",
+    "point_ids": [
+      "988501e2-70d6-49d3-920e-6d3a67a9b321"
+    ]
+  },
+  "Ridam2k/EcoNest/Prompts/products.txt": {
+    "git_sha": "1d3165c7043ff015652855359c68f4226d776dd5",
+    "point_ids": [
+      "617d457e-67a3-45f9-832d-30e4b25070f7"
+    ]
+  },
+  "Ridam2k/EcoNest/Prompts/recommendations.txt": {
+    "git_sha": "2418fb72f986d7d0a462ff0fec33916196421466",
+    "point_ids": [
+      "9b302942-c490-4ad9-a9d7-454249e053f6"
+    ]
+  },
+  "Ridam2k/EcoNest/Prompts/updates.txt": {
+    "git_sha": "c37ce8c1f705aa5a5bc01af3c52e9e13a183dc6d",
+    "point_ids": [
+      "0c19dbc8-c885-41d4-96ec-ec8e53014aba"
+    ]
+  },
+  "Ridam2k/EcoNest/RecommendationsStructuredResponse.py": {
+    "git_sha": "8f9a7741c6ba25c055c50838d8d80b0f63e45cc7",
+    "point_ids": [
+      "c1a6f9d6-dbe1-4076-84d0-4b339f5be276"
+    ]
+  },
+  "Ridam2k/EcoNest/SponsoredProductsResponse.py": {
+    "git_sha": "eda25ecdadab796bf9a58e3714d3b3593dde5011",
+    "point_ids": [
+      "9a3d48a0-a3df-4d4b-89b4-03d42e4c3102"
+    ]
+  },
+  "Ridam2k/EcoNest/Starter.ipynb": {
+    "git_sha": "452c0e7788706fd36a1fca3d6305aa9d4ab85794",
+    "point_ids": [
+      "8e6e0cea-5a01-4a11-9c5c-17150c30d346",
+      "abd500aa-7ee3-45f6-87ee-b3ca6f42fe95",
+      "3f2a38ab-ed3f-483d-88a2-4ffb613964c9",
+      "ffece911-a159-4f14-822f-f20c3ab914a9",
+      "b0d004b3-1588-4b4f-a7c8-51d236d9cd98",
+      "17c9372d-4615-4e20-acd3-b04de6e3f2f7",
+      "1092a94a-0fce-4216-8ef9-a8972109baec",
+      "fb5ed98a-030a-4762-8306-0b0774c5f6f6",
+      "0de1c10a-2e07-48ed-bc32-18d1e5f46667"
+    ]
+  },
+  "Ridam2k/EcoNest/UpdatedStructuredResponse.py": {
+    "git_sha": "e3d468487796e8bbc00db56cba444f92d01a2a4c",
+    "point_ids": [
+      "92903f15-38e6-4dc3-9bc5-a155e7ae2537"
+    ]
+  },
+  "Ridam2k/EcoNest/app.py": {
+    "git_sha": "1253404efd4595b90567b425f63d6bc82cdcd5b7",
+    "point_ids": [
+      "77aac14f-6c7b-40c6-9bc0-01d670a8a79d",
+      "638816bf-de00-4d71-bff8-315aa4567b31",
+      "76376e4d-9edd-45d0-9d2b-3ac5f1a26aed",
+      "86387d29-bbbc-46ee-a15f-3666a285f760",
+      "2c74170d-0a5b-476e-b7fd-c9fe3857e386",
+      "60f218ca-325b-4e89-bf8e-0d1c57d4e900"
+    ]
+  },
+  "Ridam2k/EcoNest/carbon_footprint_analyzer.py": {
+    "git_sha": "675a22dab07613d36610af26f9d30f9679d68d64",
+    "point_ids": [
+      "1ae0b074-1ee0-417c-90a6-c5e74ab73fab",
+      "0d0ed298-03f3-4b1b-b7e6-a37adf9866da",
+      "764385be-db6d-4603-9529-7ca2782129d7",
+      "46123390-bbae-434f-bcbf-1cdfcecb8bba",
+      "66987171-a783-4877-973f-955fcb1be7a8",
+      "8548feb5-af7c-4e51-b84d-a8bd0b38e2d3",
+      "71f0e856-61fe-473a-934d-9cf0014dd476",
+      "1043d068-0dcb-49af-a5a5-16b0189ea455"
+    ]
+  },
+  "Ridam2k/EcoNest/starter.jsx": {
+    "git_sha": "388ac5d28863e9c34d1510282e625c77d4dc64a8",
+    "point_ids": [
+      "43c83c37-03bc-423e-a847-f170175aca3d",
+      "405c5dc3-9699-482b-9f21-d54788386e26"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/README.md": {
+    "git_sha": "f768e33fc946e6074d6bd3ce5d454853adb3615e",
+    "point_ids": [
+      "a4f2c37a-c148-44ad-aa63-ea92bc793d1d"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/eslint.config.js": {
+    "git_sha": "238d2e4e6436b353404369d9a59fda5f1f980657",
+    "point_ids": [
+      "769745e6-cdb1-43d9-ad2f-c55142217065"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/index.html": {
+    "git_sha": "0c589eccd4d48e270e161a1ab91baee5e5f4b4bc",
+    "point_ids": [
+      "65fff530-daa3-4302-a5ed-d020715fc9d7"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/postcss.config.js": {
+    "git_sha": "2e7af2b7f1a6f391da1631d93968a9d487ba977d",
+    "point_ids": [
+      "d0885071-6c5a-43d5-8488-05e35e0e6201"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/src/App.css": {
+    "git_sha": "d4e59b0eb026e04aa7d6110382de7465941965a4",
+    "point_ids": [
+      "0654b2f2-e720-434c-98f7-dbf2c2d8482e"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/src/App.jsx": {
+    "git_sha": "1a0ffb2734617986a0885d3b448f1ceb3cb9ef89",
+    "point_ids": [
+      "08ea93aa-cf32-4356-a55f-5ceaf1e6dcf2",
+      "e60dc3c4-950c-4cf0-aa13-392b35a9fdd2",
+      "a6a11600-422d-49a3-88bb-49e824b37a91",
+      "b1d5f34c-2165-4e2e-ba55-07b5162a69ee",
+      "fbc2e632-fe73-4e97-a665-edb1428a6e64"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/src/components/ui/button.jsx": {
+    "git_sha": "bf3d2ef5e930fa8edaa8339109e9359901070132",
+    "point_ids": [
+      "a3769d01-9bfc-4e49-b1dd-f8da7ecfb0f3"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/src/components/ui/card.jsx": {
+    "git_sha": "2985cca80f03eae3175a3ee94936204141e38b6f",
+    "point_ids": [
+      "bb08f8d3-d8fe-48e6-a9a4-2ea685ef6462"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/src/components/ui/dialog.jsx": {
+    "git_sha": "b41b8e1a061f95bbc925802378c7da7b84055489",
+    "point_ids": [
+      "4e8dda6f-3500-4f14-a1d5-672ad8f5b5e2",
+      "4f3b8797-8179-4fd4-a74f-499f9b2bee7f"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/src/components/ui/sheet.jsx": {
+    "git_sha": "6741fcb0d2550ce3b01c4816753316987790d2a9",
+    "point_ids": [
+      "a331d254-44a9-4fd0-b14b-c50437932707",
+      "8edc435b-67b1-4699-baee-309bc0c1f7c0"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/src/components/ui/table.jsx": {
+    "git_sha": "07443a1a5a091046a7bed640882106fbc2df47cf",
+    "point_ids": [
+      "731097d5-ecda-4d6c-a20b-bebdf472084a"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/src/components/ui/theme-provider.jsx": {
+    "git_sha": "8f41e9aa14721065c1dab9b974389e0d61f02e1b",
+    "point_ids": [
+      "219bd098-2cb4-49dd-af35-368051037a91"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/src/index.css": {
+    "git_sha": "c281c5b8d2a8aa7ee2c980c25c59715467d6d744",
+    "point_ids": [
+      "0654a12d-8bda-41b5-91ef-60e69c6f1f59",
+      "76c526ef-2e80-4088-a804-87af7dea37c1"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/src/lib/atoms.js": {
+    "git_sha": "ff3ec1368570a42065db1fc5d9d09e46ecea89f0",
+    "point_ids": [
+      "bdf63f90-2f53-4aa5-a148-ff54c60f5a75"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/src/lib/utils.js": {
+    "git_sha": "b20bf017182a344cc7cd55ce40eb2e19752a42df",
+    "point_ids": [
+      "213589fd-d219-439a-82f8-8a4bd94f9b7b"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/src/main.jsx": {
+    "git_sha": "6b9b7eb26f8aec19dde4c0f22078cd31bc89f18d",
+    "point_ids": [
+      "dbf5b50c-8cc8-4f9e-a02b-7afcf9c1727f"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/src/routes/__root.jsx": {
+    "git_sha": "7c4f747190aff2b42f7fd3533feef3bc1b046900",
+    "point_ids": [
+      "f39eae72-4c44-402e-8b43-f2aa1c405560"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/src/routes/_authenticated.jsx": {
+    "git_sha": "84222ee00ad038aa316211a1c70b88be40ace950",
+    "point_ids": [
+      "cafd074f-0ec8-4762-9b88-46f90a97a3c4"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/src/routes/_authenticated/dashboard.lazy.jsx": {
+    "git_sha": "d94762462dae2d442adaf767ea3d379aa295f454",
+    "point_ids": [
+      "28c60f05-30ee-4e83-9185-826aa12fb487",
+      "227eb931-3b21-45ee-be3f-8c559ae511b4",
+      "796920df-48ff-4d02-b5c9-85949e299b53",
+      "4913a8eb-c337-4a38-91fa-031458ee1f3e",
+      "05b8ef81-e6db-487a-8834-df3bb6990cbc",
+      "e08bac14-679a-4493-b4b7-bfe7a8fef6c7",
+      "9cd5cd29-7ada-4943-8b34-1e65fd4efb1d"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/src/routes/login.lazy.jsx": {
+    "git_sha": "494b93487a016a80edb919b4ffa8bd820374a0eb",
+    "point_ids": [
+      "cd0198f4-bf87-401e-8bc3-8818f7dee66e",
+      "d62e6911-5e35-43c6-ab11-b57165b84550"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/src/routes/register.lazy.jsx": {
+    "git_sha": "40e664da72966353c62e09865f50c5eeba7e73e2",
+    "point_ids": [
+      "3d6f5753-33be-4479-bcaa-a1f17ad6a04c",
+      "5734265f-4cb8-46b9-9b13-06fc19ba69df",
+      "634f2774-922c-4620-8740-11e83f701fd4",
+      "80850958-3785-4cce-8854-2c55cb3b47f1",
+      "ece733a2-85b2-4ebb-9665-6f37252eb16f",
+      "1bdde4dd-b04d-4a0d-8c3c-d0cc03567c37",
+      "94817c8b-2d94-4001-8b0a-12c5e955ad17"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/tailwind.config.js": {
+    "git_sha": "730acd06a0b6a86b7dfadfc51b4d61a69145c380",
+    "point_ids": [
+      "761d6695-27e6-4d22-b511-74e4513ce72c"
+    ]
+  },
+  "Ridam2k/EcoNest/ui/vite.config.js": {
+    "git_sha": "09bafdcd61e067f8ba5d8bd75e37a1b7b468b468",
+    "point_ids": [
+      "aad94ea9-8e69-4e8e-a014-527cb3669e5e"
+    ]
+  },
+  "Ridam2k/BinaryNeuralNetworks/README.md": {
+    "git_sha": "9f7030423abc5937cbabe219b51541adfbd94fb5",
+    "point_ids": [
+      "0b32d6b2-1fe0-4aa2-8c9c-c184049faa2e"
+    ]
+  },
+  "Ridam2k/BinaryNeuralNetworks/SampleSlimnet.py": {
+    "git_sha": "3bafe14827d24fe69c987e304ee08f4f30ce0f26",
+    "point_ids": [
+      "858f1f23-b117-4b84-af44-26cba66ac561"
+    ]
+  },
+  "Ridam2k/BinaryNeuralNetworks/slimnet.py": {
+    "git_sha": "6b2be20286c1bbd1fa5cf7094e3256c588116eb9",
+    "point_ids": [
+      "d8c83135-9b1d-4681-beb3-5ece4cf41e4f",
+      "5f688ac5-113b-4872-9e29-7bd2a2580c63"
+    ]
+  },
+  "Ridam2k/FinDocSummariser/README.md": {
+    "git_sha": "fd3bac10fbcb3261954bd215523dbe5e1b19238b",
+    "point_ids": [
+      "48a0771a-bb39-462b-a28f-6f6982f46b33"
+    ]
+  },
+  "Ridam2k/FinDocSummariser/chainlit.md": {
+    "git_sha": "c8ec725f2e8b21c1eff7f2388b806c7dc38b6996",
+    "point_ids": [
+      "1b7bb11c-97ab-404c-a091-d37b5e0d56ee"
+    ]
+  },
+  "Ridam2k/FinDocSummariser/ingest.py": {
+    "git_sha": "fe05693c59fb143be8a94a65de79f124d225cb1d",
+    "point_ids": [
+      "35c8f7b7-7b43-4905-8890-b6a9d202636c"
+    ]
+  },
+  "Ridam2k/FinDocSummariser/main.py": {
+    "git_sha": "d1e1d41e9ac3868388118b21635f0fc31abfd678",
+    "point_ids": [
+      "d558e75f-5290-4e01-a283-24188f332b8a",
+      "310556ff-6372-48c7-82bf-4b059873d397"
+    ]
+  },
+  "Ridam2k/FinDocSummariser/rag.py": {
+    "git_sha": "23a29dac5cb5682463bc77181db9a0215d6d2bd7",
+    "point_ids": [
+      "6487c301-82a0-4566-a566-2ece2d0d049f",
+      "5cacac35-816c-4a10-bb43-dca0ea7e3a23",
+      "3320fe94-68ec-414b-a9a2-9dce4edf2f94",
+      "a9864f7d-0e7c-494f-a07d-9a7c9c01296c"
+    ]
+  },
+  "Ridam2k/FinDocSummariser/requirements.txt": {
+    "git_sha": "b3813df23af858281faed08013f26e5a9cdd7441",
+    "point_ids": [
+      "04dec337-b345-4059-a474-1ff21188917e"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/public/index.html": {
+    "git_sha": "cc9855840d2c7271a28035638f770d0156d4f7ec",
+    "point_ids": [
+      "6ebdc7e8-3feb-4960-b00d-ed5fe324f585"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/public/robots.txt": {
+    "git_sha": "e9e57dc4d41b9b46e05112e9f45b7ea6ac0ba15e",
+    "point_ids": [
+      "d238c13c-ef08-41c5-8479-3abe81b41bd5"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/App.css": {
+    "git_sha": "644b28daf6559242f890ccee1b2944dfb5ad35ea",
+    "point_ids": [
+      "faaa538f-290c-456a-955e-6f2376d5449a",
+      "13016e2d-9f18-4d6c-8795-f41f75a88f3d",
+      "49310b73-a3cb-435b-a7bc-381092de0790",
+      "8b420524-587a-4f5e-8d5c-2a0ac08761e4"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/App.js": {
+    "git_sha": "1b5ac07c6bb0e407460d66754e0fd63a098911c8",
+    "point_ids": [
+      "a861d644-ed59-465a-a635-f70ac23e1439"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/components/auth/Login.js": {
+    "git_sha": "d0415e5e6f29d29ace82ceb7328006e4154d42f7",
+    "point_ids": [
+      "3584ea29-f60e-466c-a184-9e5aad1e3e3c"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/components/auth/Register.js": {
+    "git_sha": "863c59351c30642ec2b82862fd1fd035a8269fe8",
+    "point_ids": [
+      "9f90c559-e06f-4464-9521-4abc5d937d10"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/components/auth/Register1.js": {
+    "git_sha": "3f9a6b43fba9cc6853b981b20680f621660a57f8",
+    "point_ids": [
+      "a8b40510-37c6-4c37-aa1f-143795c30aad"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/components/contacts/ContactFilter.js": {
+    "git_sha": "8072bfa3c42202aeedd194e815787c806683202e",
+    "point_ids": [
+      "aa86ea58-838e-4145-8a2a-022fb4bf3303"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/components/contacts/ContactForm.js": {
+    "git_sha": "8ed04cfbf3115060264745ff2a9b03a50b7b1902",
+    "point_ids": [
+      "3113589d-8ce0-4443-a50b-8fc40677309c"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/components/contacts/ContactItem.js": {
+    "git_sha": "f9aab8f434d56e43c708302121eaf241543edeee",
+    "point_ids": [
+      "4b33ec56-6266-4d7b-879b-1889accfd4bf"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/components/contacts/Contacts.js": {
+    "git_sha": "056a1cfcca76cb799fedfe78ecd1719ad18cc172",
+    "point_ids": [
+      "c519d57f-8ff1-4d2c-b7ef-7d60008afee3"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/components/layout/Alerts.js": {
+    "git_sha": "38f2c1fc6ec159d83512af8d5140ead1638c8760",
+    "point_ids": [
+      "b8b1003b-0f9b-4fb9-af6c-d00d3fed2a1b"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/components/layout/Navbar.js": {
+    "git_sha": "14f087848a92c90b25571adc3a93d24b2494d7d2",
+    "point_ids": [
+      "5d160441-92e0-495c-94d8-bf6230a5d45e"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/components/layout/Spinner.js": {
+    "git_sha": "25f777e4d349a113a7c5652d55c28b45a9fd6f78",
+    "point_ids": [
+      "1157f899-0f92-4cd0-923e-8e88f1f180b7"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/components/pages/About.js": {
+    "git_sha": "1fe13c3e6771453c2c26eb3050229ff50e78c8dd",
+    "point_ids": [
+      "7514181c-e6f9-4fa5-a502-1bf23426913e"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/components/pages/Home.js": {
+    "git_sha": "308f669de6af042d0c516ea500517627fa031d31",
+    "point_ids": [
+      "7bd33f26-5050-44a0-834c-9617c22f16b7"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/components/routing/privateRoute.js": {
+    "git_sha": "e5508924dbe69afc92cb209f1be8f17db0cc7574",
+    "point_ids": [
+      "8787269f-7106-4efd-86ea-bde4d17bb384"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/context/alert/alertContext.js": {
+    "git_sha": "7f53a1a280ac573553e81ea89fd973d1fdc0db12",
+    "point_ids": [
+      "fdf2e1ff-517d-4264-9698-deb0f0889eaa"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/context/alert/alertReducer.js": {
+    "git_sha": "53d79e150fba9f2c270fbb69a185e898c8693cbf",
+    "point_ids": [
+      "79480d21-9b8d-4b2d-bc1f-9409d42220bd"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/context/alert/alertState.js": {
+    "git_sha": "310bf1c683bc6bca66eec16cb7432db91b4be56a",
+    "point_ids": [
+      "927a2e8b-6841-4f98-951e-b0ce790a6bf7"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/context/auth/authContext.js": {
+    "git_sha": "2a48c242477fdf4c3e4711736caf5155938623f4",
+    "point_ids": [
+      "2bc914a5-6f2d-41d2-94b3-128967083746"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/context/auth/authReducer.js": {
+    "git_sha": "3e46b3ee57ef39c214f5b0823d47bfef39afc243",
+    "point_ids": [
+      "9d162729-6577-4164-9c86-8709cb69fd0b"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/context/auth/authState.js": {
+    "git_sha": "7037827c1939e1bfafead0b61b1c1091ade298cd",
+    "point_ids": [
+      "53371694-389d-4604-944d-0f2ebfb3c086"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/context/auth/authState1.js": {
+    "git_sha": "acf06be14d3eafd02bc5e32a9090830053ce3598",
+    "point_ids": [
+      "f60f0966-67b2-416a-93f7-0434082c9445"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/context/contact/contactContext.js": {
+    "git_sha": "c1799e16f7876ccbd63bdd08eb9f8ab63da0e898",
+    "point_ids": [
+      "4ecf4b30-9f46-4795-9fe0-1720c5b1b880"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/context/contact/contactReducer.js": {
+    "git_sha": "aca64d803e2775f5d3ed5721dd1eb43a4fe5f13e",
+    "point_ids": [
+      "dc70af31-ec51-48c6-9c9e-afd0ba0e9d58"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/context/contact/contactState.js": {
+    "git_sha": "8e19b1ec39f2f53d01cd7022d8aa8162c0f72848",
+    "point_ids": [
+      "09b1ac1d-6db6-42b2-a5df-8928a8930bba",
+      "e76c8e55-d1ca-4be8-8bcf-a3cb148ad654"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/context/types.js": {
+    "git_sha": "3d26d6d0f7fd9826fdfec52b3a378fec837b4e56",
+    "point_ids": [
+      "e3460da5-e3b8-4e4a-9ac3-8f506b4888aa"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/index.js": {
+    "git_sha": "ba2885ba37b088b9c678d14e5bbb336ce951ff8b",
+    "point_ids": [
+      "b97f6af6-be35-4696-9d1b-2eaea6f1b8ab"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/setupTests.js": {
+    "git_sha": "8f2609b7b3e0e3897ab3bcaad13caf6876e48699",
+    "point_ids": [
+      "630ae7c6-7247-4337-95bb-c61567d1af92"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/client/src/utils/setAuthToken.js": {
+    "git_sha": "da8efb515290e1e6426dfd050812fd8d1250c6cf",
+    "point_ids": [
+      "af53cc53-2ae0-4372-a0b5-f4f44d90825b"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/config/db.js": {
+    "git_sha": "01212af28c7851d007b6206e2e8de03d03771e99",
+    "point_ids": [
+      "cdcfe717-396f-40ac-91ef-f54390e95c93"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/middleware/auth.js": {
+    "git_sha": "149e3a30c0e209db5c5fc8a042af1b5bb8a307e1",
+    "point_ids": [
+      "361dc7d8-b6c6-470c-8c38-82d6a8211ff6"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/models/Contact.js": {
+    "git_sha": "2401b86dff9d6df08ac8b1a8b6161fc3cf8bd961",
+    "point_ids": [
+      "ab207b3c-e831-4b64-851a-d8e7069892a9"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/models/User.js": {
+    "git_sha": "4983cb539ecac42814ab09d9925911c6c463c179",
+    "point_ids": [
+      "d9714386-553f-424c-96ee-bec4938b4d97"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/routes/auth.js": {
+    "git_sha": "e50035990fbd6816b085fe66bb40aa60f2f312e1",
+    "point_ids": [
+      "25f901b5-0ada-4e60-9b92-fb9491db4c8c"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/routes/contacts.js": {
+    "git_sha": "510f6964618473e38bca16bfaff8b9197378d86c",
+    "point_ids": [
+      "0e5720fe-0b72-4c85-a079-5e3c693e4500",
+      "0341e9b7-5730-4b9a-9c34-0887e689623b"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/routes/users.js": {
+    "git_sha": "7989efef4e663eb3fd90dbbe914a0870b55675b4",
+    "point_ids": [
+      "812f17d3-551b-411a-b409-dbde27ba1fad"
+    ]
+  },
+  "Ridam2k/Udemy_contact-keeper/server.js": {
+    "git_sha": "fc2ccf80be9050a28beafed0e8b430d8eca7d94a",
+    "point_ids": [
+      "3ac1acc5-d1da-4e8f-9684-3bb3538b2eff"
+    ]
+  },
+  "Ridam2k/her-hygiene/README.md": {
+    "git_sha": "a8c89194328e6e31519489f3b44033e02657e90b",
+    "point_ids": [
+      "e72fd891-ba71-4ed4-ac7d-d162759342ad"
+    ]
+  },
+  "Ridam2k/her-hygiene/app.css": {
+    "git_sha": "39b895713dd5983f77383a61cb22c3f9277e2242",
+    "point_ids": [
+      "3b82ca86-6ec8-4733-b31d-93af5db7fc0a"
+    ]
+  },
+  "Ridam2k/her-hygiene/client/README.md": {
+    "git_sha": "89b278ae3edb64263849deb1bc26cca15fa96bf2",
+    "point_ids": [
+      "d20d0fc4-0c9f-4b65-9178-f00487885362"
+    ]
+  },
+  "Ridam2k/her-hygiene/client/public/index.html": {
+    "git_sha": "aa069f27cbd9d53394428171c3989fd03db73c76",
+    "point_ids": [
+      "fadbb8ca-38a9-41aa-ab47-f6f4e1c8ecd3"
+    ]
+  },
+  "Ridam2k/her-hygiene/client/public/robots.txt": {
+    "git_sha": "01b0f9a10733b39c3bbeba1ccb1521d866f8e3a5",
+    "point_ids": [
+      "e6bac18a-9f4b-444c-a005-1f2e429d8252"
+    ]
+  },
+  "Ridam2k/her-hygiene/client/src/App.css": {
+    "git_sha": "74b5e053450a48a6bdb4d71aad648e7af821975c",
+    "point_ids": [
+      "e2c99d72-08e3-419f-83e8-c5d46a17297e"
+    ]
+  },
+  "Ridam2k/her-hygiene/client/src/App.js": {
+    "git_sha": "ce9cbd2946d6962cfc19d65c8cb91757d8f4d4c6",
+    "point_ids": [
+      "ec112245-9c77-4f66-ab76-9a0a6d638f9b"
+    ]
+  },
+  "Ridam2k/her-hygiene/client/src/App.test.js": {
+    "git_sha": "4db7ebc25c2d066cd254805af5dda1ed1d2bc819",
+    "point_ids": [
+      "2d8cd7b2-e1e8-408a-a8ea-a0164fae0229"
+    ]
+  },
+  "Ridam2k/her-hygiene/client/src/index.css": {
+    "git_sha": "ec2585e8c0bb8188184ed1e0703c4c8f2a8419b0",
+    "point_ids": [
+      "5efda4de-2152-425a-8dd4-4cefae874aa1"
+    ]
+  },
+  "Ridam2k/her-hygiene/client/src/index.js": {
+    "git_sha": "87d1be551891a8eccfe648e1b5a49b5751e5cad5",
+    "point_ids": [
+      "99fa94b4-d554-4bb5-a445-d0854ee50b1c"
+    ]
+  },
+  "Ridam2k/her-hygiene/client/src/serviceWorker.js": {
+    "git_sha": "8703ddb7ecb007e7b15d290ce7d8f7f086c57407",
+    "point_ids": [
+      "519600ba-3bb3-4dee-9214-72816e1d866b",
+      "9cc058b3-d212-4e3e-8686-df746d194b2c"
+    ]
+  },
+  "Ridam2k/her-hygiene/client/src/setupTests.js": {
+    "git_sha": "74b1a275a0ea7df518f17bcea5375abf003abe55",
+    "point_ids": [
+      "5f9d215d-c757-4d3e-96e9-779fd40a2ce5"
+    ]
+  },
+  "Ridam2k/her-hygiene/config/db.js": {
+    "git_sha": "925b4c92a46037d892ea2754b6874ab5f2caf28a",
+    "point_ids": [
+      "15fac3c8-3685-476e-ac32-39ae2c72d72f"
+    ]
+  },
+  "Ridam2k/her-hygiene/home.html": {
+    "git_sha": "240eeae563902b344f542dec6486c870ffdd6f08",
+    "point_ids": [
+      "572b54d3-b1ce-46b3-a33a-78d344aa6f66",
+      "2d452346-2416-48f0-a16c-142e61e7e9f8",
+      "e2cc2253-8a0d-45bd-94d8-39a3197a660d",
+      "1e696268-faa4-4218-a1a3-f1db5d9dfe9d",
+      "f5d254d3-6073-4e60-981e-46c5f7d394a5"
+    ]
+  },
+  "Ridam2k/her-hygiene/models/Request.js": {
+    "git_sha": "7be80a61293154b6353c8e1d3bc67f4f32b7fa79",
+    "point_ids": [
+      "2c22da03-7bc4-4fec-922f-6234a1f41ed8"
+    ]
+  },
+  "Ridam2k/her-hygiene/models/User.js": {
+    "git_sha": "22fce4cb3e6fecb01a95421cedad20eebd8c6b6c",
+    "point_ids": [
+      "b7a2c039-bbf0-4640-9c77-d8740acadec2"
+    ]
+  },
+  "Ridam2k/her-hygiene/routes/auth.js": {
+    "git_sha": "464a2a5fac1dd34f2d2aae32be2c72f7d8af75c5",
+    "point_ids": [
+      "58884435-1234-4ae8-9b4f-a854a2b532b4"
+    ]
+  },
+  "Ridam2k/her-hygiene/routes/users.js": {
+    "git_sha": "da642e857b1f3e5b6979107ed17a3da5bfbf7c12",
+    "point_ids": [
+      "3ff17fba-3240-4863-bd12-ebad50703f2f"
+    ]
+  },
+  "Ridam2k/her-hygiene/server.js": {
+    "git_sha": "74efd2d426e0169a489ae40f0bdbfe7a6c0fab51",
+    "point_ids": [
+      "9cf25724-95dc-4dba-bbd9-3d1d3bd4bd34"
+    ]
+  }
+}

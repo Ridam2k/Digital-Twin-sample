@@ -36,3 +36,15 @@ def upsert_nodes(nodes: list):
         show_progress=True
     )
     print(f"Upserted {len(nodes)} chunks.")
+
+def delete_points_by_ids(point_ids: list[str]) -> None:
+    """Delete specific Qdrant points by their IDs (used when a file changes)."""
+    if not point_ids:
+        return
+    client = get_qdrant_client()
+    from qdrant_client.models import PointIdsList
+    client.delete(
+        collection_name=COLLECTION_NAME,
+        points_selector=PointIdsList(points=point_ids),
+    )
+    print(f"[embedder] Deleted {len(point_ids)} stale chunks.")
