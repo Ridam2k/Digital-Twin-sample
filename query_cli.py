@@ -12,6 +12,8 @@ from core.router import detect_mode
 from core.retriever import retrieve
 from core.context_builder import build_context
 from core.generator import generate
+from core.groundedness import check_groundedness
+import json, datetime
 
 DIVIDER = "─" * 60
 
@@ -63,6 +65,8 @@ def run():
 
         # Step 2: retrieve
         chunks, out_of_scope = retrieve(query, namespace=mode)
+        
+        retrieved_texts = [c.text for c in chunks]
 
         # Step 3: assemble context
         system_prompt, user_message = build_context(query, mode, chunks, out_of_scope)
@@ -72,6 +76,21 @@ def run():
 
         # Step 5: display
         print(format_response(result, mode, scores))
+        
+        #Eval
+        grounded_result = check_groundedness(response=result, retrieved_chunks=retrieved_texts)
+
+        # Log to JSONL — one record per query, append-only
+        log_entry = {
+            "ts": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            "query": query,
+            "namespace": mode,
+            "groundedness_score": grounded_result.groundedness_score,
+            "fabricated_claims": grounded_result.fabricated_claims,
+            "claim_audits": [vars(a) for a in grounded_result.claim_audits],
+        }
+        with open("eval_log.jsonl", "a") as f:
+            f.write(json.dumps(log_entry) + "\n")
 
 
 if __name__ == "__main__":

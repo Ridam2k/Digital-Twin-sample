@@ -1,16 +1,27 @@
 import json
 from pathlib import Path
+from .pdf_extractor import load_all_writing_samples
 
 DATA_DIR = Path("data/")
+WRITING_SAMPLES_DIR = DATA_DIR / "writing_samples"
 
 
 def load_identity_context() -> dict:
     """Loads all three JSON persona files. These are never chunked — always injected whole."""
-    return {
+    identity = {
         "skills": json.loads((DATA_DIR / "skills.json").read_text()),
         "traits": json.loads((DATA_DIR / "traits.json").read_text()),
         "style":  json.loads((DATA_DIR / "style.json").read_text()),
     }
+
+    # Load writing samples if available (PDFs in data/writing_samples/)
+    # These are used ONLY for style calibration, not as evidence
+    # Extract actual text excerpts (2-3 short samples, ~100 words each)
+    identity["writing_samples"] = load_all_writing_samples(
+        WRITING_SAMPLES_DIR,
+        max_total=3
+    )
+    return identity
 
 
 def build_system_prompt_block(identity: dict, mode: str) -> str:
@@ -22,7 +33,12 @@ def build_system_prompt_block(identity: dict, mode: str) -> str:
     style  = identity["style"]
     skills = identity["skills"]
 
-    base = f"""You are a digital twin. Respond as the person described below. Only make claims that are grounded in the retrieved context provided to you. If retrieved context is insufficient, respond with: "I don't have enough information about that in my current knowledge base."
+    base = f"""You are a digital twin. Respond as the person described below.
+
+## Grounding Rules
+- Answer questions using the retrieved evidence provided in the user message.
+- If evidence is insufficient, say: "I don't have enough information about that in my current knowledge base."
+- Writing samples (if provided below) are for style calibration only, NOT evidence.
 
 ## Identity
 - Role archetypes: {', '.join(traits['core_identity']['role_archetype'])}
@@ -47,8 +63,25 @@ def build_system_prompt_block(identity: dict, mode: str) -> str:
         base += f"""
 ## Mode: Non-Technical
 - Tone: {style['tone_profile']['reflective_mode']}
-- Draw on personal interests, debate background, and intellectual curiosity.
+- Draw on personal interests, debate and dance background, and intellectual curiosity.
 - Prioritise depth over breadth. Avoid hype-driven or surface-level responses.
+"""
+
+    # Writing samples for style calibration only
+    writing_samples = identity.get("writing_samples", [])
+    if writing_samples:
+        # Join excerpts with clear separators
+        samples_text = "\n\n---\n\n".join(writing_samples)
+        base += f"""
+
+## Writing Style Reference
+IMPORTANT: The excerpts below are provided solely to calibrate voice, tone, sentence rhythm, and structural patterns.
+They are not evidence. Do not treat any claim, opinion, or fact appearing in these excerpts as something you can assert in your answer.
+Your answer must be grounded exclusively in the Retrieved Evidence provided in the user message.
+
+Use these excerpts only to answer: "How would this person phrase and structure a response?" — not "What would this person say?"
+
+{samples_text}
 """
 
     return base.strip()

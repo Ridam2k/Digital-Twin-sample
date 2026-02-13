@@ -7,6 +7,8 @@ os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
 global _anchor_vecs
 
+CONFIDENCE_THRESHOLD = 0.08
+
 # new
 _ANCHORS = {
     "technical": (
@@ -51,6 +53,7 @@ _ANCHORS = {
         "interest reading books travel values beliefs philosophy "
         "non-work life reflection essay topic discussion"
         "cooking recipes dance contemporary western ballet"
+        "likes dislikes eating drinking food"
     ),
 }
 
@@ -58,12 +61,48 @@ _embed_model = OpenAIEmbedding(model=EMBEDDING_MODEL)
 _anchor_vecs: dict[str, np.ndarray] = {}
 
 
-def _get_anchor_vecs() -> dict[str, np.ndarray]:
-    if not _anchor_vecs:
-        for ns, text in _ANCHORS.items():
-            vec = _embed_model.get_text_embedding(text)
-            _anchor_vecs[ns] = np.array(vec)
-    return _anchor_vecs
+# def _get_anchor_vecs() -> dict[str, np.ndarray]:
+#     if not _anchor_vecs:
+#         for ns, text in _ANCHORS.items():
+#             vec = _embed_model.get_text_embedding(text)
+#             _anchor_vecs[ns] = np.array(vec)
+#     return _anchor_vecs
+
+
+# def _cosine(a: np.ndarray, b: np.ndarray) -> float:
+#     return float(np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b) + 1e-9))
+
+
+# def detect_mode(query: str) -> tuple[str, dict[str, float]]:
+#     """
+#     Returns (mode, scores) where:
+#       mode   — "technical" or "nontechnical"
+#       scores — {"technical": 0.82, "nontechnical": 0.61} for transparency
+#     """
+#     anchors  = _get_anchor_vecs()
+#     qvec     = np.array(_embed_model.get_text_embedding(query))
+#     scores   = {ns: _cosine(qvec, vec) for ns, vec in anchors.items()}
+#     mode     = max(scores, key=scores.get)
+#     return mode, scores
+
+# Cache: maps each utterance string -> np.ndarray
+_utterance_vecs: dict[str, np.ndarray] = {}
+
+
+def _get_utterance_vecs() -> dict[str, dict[str, list[np.ndarray]]]:
+    """
+    Returns a nested dict: { namespace -> { utterance -> vec } }
+    Embeddings are computed once and cached in _utterance_vecs.
+    """
+    result: dict[str, list[np.ndarray]] = {}
+    for ns, utterances in _ANCHORS.items():
+        vecs = []
+        for utt in utterances:
+            if utt not in _utterance_vecs:
+                _utterance_vecs[utt] = np.array(_embed_model.get_text_embedding(utt))
+            vecs.append(_utterance_vecs[utt])
+        result[ns] = vecs
+    return result
 
 
 def _cosine(a: np.ndarray, b: np.ndarray) -> float:
@@ -72,12 +111,37 @@ def _cosine(a: np.ndarray, b: np.ndarray) -> float:
 
 def detect_mode(query: str) -> tuple[str, dict[str, float]]:
     """
-    Returns (mode, scores) where:
-      mode   — "technical" or "nontechnical"
-      scores — {"technical": 0.82, "nontechnical": 0.61} for transparency
+    Scores the query against every utterance in each namespace,
+    takes the max per-namespace (nearest-neighbor, not centroid),
+    then applies a confidence margin check.
+
+    Returns:
+        mode   – "technical", "nontechnical", or "ambiguous"
+        scores – {"technical": 0.82, "nontechnical": 0.61} for transparency
     """
-    anchors  = _get_anchor_vecs()
-    qvec     = np.array(_embed_model.get_text_embedding(query))
-    scores   = {ns: _cosine(qvec, vec) for ns, vec in anchors.items()}
-    mode     = max(scores, key=scores.get)
+    ns_vecs = _get_utterance_vecs()
+    qvec = np.array(_embed_model.get_text_embedding(query))
+
+    # Score each namespace as the MAX cosine similarity across its utterances.
+    # This is a nearest-neighbor decision rather than centroid, which preserves
+    # intra-class variance and avoids outlier utterances dragging the mean.
+    scores: dict[str, float] = {
+        ns: max(_cosine(qvec, vec) for vec in vecs)
+        for ns, vecs in ns_vecs.items()
+    }
+
+    sorted_scores = sorted(scores.values(), reverse=True)
+    best, second = sorted_scores[0], sorted_scores[1]
+    margin = best - second
+
+    if margin < CONFIDENCE_THRESHOLD:
+        return "ambiguous", scores
+
+    mode = max(scores, key=scores.get)
     return mode, scores
+
+
+
+
+
+

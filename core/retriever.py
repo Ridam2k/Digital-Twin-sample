@@ -12,6 +12,9 @@ os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
 TOP_K                 = 6
 OUT_OF_SCOPE_THRESHOLD = 0.3
+AMBIGUOUS_K_PER_NS = TOP_K
+
+namespaces = ['technical', 'nontechnical']
 
 
 @dataclass
@@ -25,34 +28,31 @@ class RetrievedChunk:
     content_type:   str
 
 
-def retrieve(query: str, namespace: str) -> tuple[list[RetrievedChunk], bool]:
+
+def _query_namespace(
+    client:     QdrantClient,
+    query_vec:  list[float],
+    namespace:  str,
+    limit:      int,
+) -> list[RetrievedChunk]:
     """
-    Retrieve top-k chunks from the given namespace.
-
-    Returns:
-        chunks      — list of RetrievedChunk, sorted by score desc
-        out_of_scope — True if best score < OUT_OF_SCOPE_THRESHOLD
+    Run a single filtered Qdrant query for one namespace.
+    Extracted so both retrieve() and the ambiguous branch can reuse it.
     """
-    client      = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
-    embed_model = OpenAIEmbedding(model=EMBEDDING_MODEL)
-
-    query_vec = embed_model.get_text_embedding(query)
-
     results = client.query_points(
-    collection_name=COLLECTION_NAME,
-    query=query_vec,
-    query_filter=models.Filter(
-        must=[
-            models.FieldCondition(
-                key="personality_ns",
-                match=models.MatchValue(value=namespace),
-            )
+        collection_name=COLLECTION_NAME,
+        query=query_vec,
+        query_filter=models.Filter(
+            must=[
+                models.FieldCondition(
+                    key="personality_ns",
+                    match=models.MatchValue(value=namespace),
+                )
             ]
         ),
-        limit=TOP_K,
+        limit=limit,
         with_payload=True,
     ).points
-    
 
     chunks = []
     for r in results:
@@ -66,6 +66,47 @@ def retrieve(query: str, namespace: str) -> tuple[list[RetrievedChunk], bool]:
             personality_ns = p.get("personality_ns", namespace),
             content_type   = p.get("content_type", ""),
         ))
+    return chunks
+
+
+def retrieve(
+    query:     str,
+    namespace: str,                    # "technical" | "nontechnical" | "ambiguous"
+) -> tuple[list[RetrievedChunk], bool]:
+    """
+    Retrieve top-k chunks from Qdrant.
+
+    - For a definite namespace ("technical" / "nontechnical"):
+        queries that namespace only, same behaviour as before.
+
+    - For "ambiguous":
+        queries ALL namespaces in `namespaces`, merges by score desc,
+        returns the global top-K. The caller must pass `namespaces`.
+
+    Returns:
+        chunks       – list of RetrievedChunk, sorted by score desc
+        out_of_scope – True if best score < OUT_OF_SCOPE_THRESHOLD
+    """
+    client      = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+    embed_model = OpenAIEmbedding(model=EMBEDDING_MODEL)
+    query_vec   = embed_model.get_text_embedding(query)
+
+    if namespace == "ambiguous":
+        if not namespaces:
+            raise ValueError(
+                "namespace='ambiguous' requires the `namespaces` list "
+                "(e.g. ['technical', 'nontechnical'])."
+            )
+        # Query each namespace independently, then merge and re-rank.
+        all_chunks: list[RetrievedChunk] = []
+        for ns in namespaces:
+            all_chunks.extend(
+                _query_namespace(client, query_vec, ns, limit=AMBIGUOUS_K_PER_NS)
+            )
+        # Global re-rank by score; ties broken by namespace order in `namespaces`.
+        chunks = sorted(all_chunks, key=lambda c: c.score, reverse=True)[:TOP_K]
+    else:
+        chunks = _query_namespace(client, query_vec, namespace, limit=TOP_K)
 
     out_of_scope = len(chunks) == 0 or chunks[0].score < OUT_OF_SCOPE_THRESHOLD
     return chunks, out_of_scope

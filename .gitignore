@@ -15,6 +15,7 @@ env/
 
 # Git hash tracking
 data/github_hash_store.json
+data/gdrive_hash_store.json
 
 # IDE
 .idea/
