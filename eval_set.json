@@ -1,0 +1,134 @@
+[
+  {
+    "query": "What accuracy gains did your approach achieve on the CRASS benchmark compared to the original Llama-3.2-1B-Instruct model?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1npgz7-GO_0tcA8Kmaky6neOKPjIxvfXB",
+      "doc_title": null,
+      "doc_hash": "80920ddcafcd271574271d1ca2fc5518797cc38ff1dedd6369b6dc6be78b7cba"
+    }
+  },
+  {
+    "query": "How does the BBox-Adapter use sentence-level beam search to guide LLaMA\u2019s generations for counterfactual reasoning tasks like CRASS and IfQA?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1npgz7-GO_0tcA8Kmaky6neOKPjIxvfXB",
+      "doc_title": null,
+      "doc_hash": "80920ddcafcd271574271d1ca2fc5518797cc38ff1dedd6369b6dc6be78b7cba"
+    }
+  },
+  {
+    "query": "How do you mathematically distinguish between intervention-based causal questions and hypothetical \u201cwhat if\u201d scenarios when evaluating language models?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1npgz7-GO_0tcA8Kmaky6neOKPjIxvfXB",
+      "doc_title": null,
+      "doc_hash": "80920ddcafcd271574271d1ca2fc5518797cc38ff1dedd6369b6dc6be78b7cba"
+    }
+  },
+  {
+    "query": "Describe your training setup and loss formulation for teaching a smaller auxiliary model to rank good and bad answers on counterfactual QA datasets.",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1npgz7-GO_0tcA8Kmaky6neOKPjIxvfXB",
+      "doc_title": null,
+      "doc_hash": "80920ddcafcd271574271d1ca2fc5518797cc38ff1dedd6369b6dc6be78b7cba"
+    }
+  },
+  {
+    "query": "If you had to justify using a lightweight sidecar model instead of full fine-tuning for a privacy-sensitive client, how would you explain your design choice?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1npgz7-GO_0tcA8Kmaky6neOKPjIxvfXB",
+      "doc_title": null,
+      "doc_hash": "80920ddcafcd271574271d1ca2fc5518797cc38ff1dedd6369b6dc6be78b7cba"
+    }
+  },
+  {
+    "query": "When improving an LLM\u2019s ability to answer nuanced medical \u201cwhat would have happened if\u2026\u201d questions, what kind of benchmarking and adaptation strategy would you rely on?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "cross_domain",
+    "gold": {
+      "doc_id": "1npgz7-GO_0tcA8Kmaky6neOKPjIxvfXB",
+      "doc_title": null,
+      "doc_hash": "80920ddcafcd271574271d1ca2fc5518797cc38ff1dedd6369b6dc6be78b7cba"
+    }
+  },
+  {
+    "query": "What kind of SpringBoot and React applications have you built at Wells Fargo, and how did the automated testing service fit in?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1opVLNVnhNl9HAMB2t9-ocq3RMTGokQQGJOL1G4bMNQM",
+      "doc_title": "1opVLNVnhNl9HAMB2t9-ocq3RMTGokQQGJOL1G4bMNQM.docx",
+      "doc_hash": "f415ccea072e3a2c0e645470587baefa4b7bfd30bdb89375b2497b39e1fc3ed1"
+    }
+  },
+  {
+    "query": "Can you explain your work on integrating ML models with banking infrastructure for trading desk support and bond pricing?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1opVLNVnhNl9HAMB2t9-ocq3RMTGokQQGJOL1G4bMNQM",
+      "doc_title": "1opVLNVnhNl9HAMB2t9-ocq3RMTGokQQGJOL1G4bMNQM.docx",
+      "doc_hash": "f415ccea072e3a2c0e645470587baefa4b7bfd30bdb89375b2497b39e1fc3ed1"
+    }
+  },
+  {
+    "query": "How did your undergraduate research in speech emotion recognition, text summarization, and fake news detection shape your current research interests?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1opVLNVnhNl9HAMB2t9-ocq3RMTGokQQGJOL1G4bMNQM",
+      "doc_title": "1opVLNVnhNl9HAMB2t9-ocq3RMTGokQQGJOL1G4bMNQM.docx",
+      "doc_hash": "f415ccea072e3a2c0e645470587baefa4b7bfd30bdb89375b2497b39e1fc3ed1"
+    }
+  },
+  {
+    "query": "In what ways did your internships at Amazon and Coding Ninjas complement your NLP-focused academic projects and prepare you for your present role?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1opVLNVnhNl9HAMB2t9-ocq3RMTGokQQGJOL1G4bMNQM",
+      "doc_title": "1opVLNVnhNl9HAMB2t9-ocq3RMTGokQQGJOL1G4bMNQM.docx",
+      "doc_hash": "f415ccea072e3a2c0e645470587baefa4b7bfd30bdb89375b2497b39e1fc3ed1"
+    }
+  },
+  {
+    "query": "If you were asked to design a tool to help neurodivergent users communicate more effectively online, how would your past projects and future study plans influence your design choices?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1opVLNVnhNl9HAMB2t9-ocq3RMTGokQQGJOL1G4bMNQM",
+      "doc_title": "1opVLNVnhNl9HAMB2t9-ocq3RMTGokQQGJOL1G4bMNQM.docx",
+      "doc_hash": "f415ccea072e3a2c0e645470587baefa4b7bfd30bdb89375b2497b39e1fc3ed1"
+    }
+  },
+  {
+    "query": "How have your leadership roles in debating, dance, and IEEE informed the way you would lead a research initiative aimed at combating harmful content on social media?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "cross_domain",
+    "gold": {
+      "doc_id": "1opVLNVnhNl9HAMB2t9-ocq3RMTGokQQGJOL1G4bMNQM",
+      "doc_title": "1opVLNVnhNl9HAMB2t9-ocq3RMTGokQQGJOL1G4bMNQM.docx",
+      "doc_hash": "f415ccea072e3a2c0e645470587baefa4b7bfd30bdb89375b2497b39e1fc3ed1"
+    }
+  }
+]

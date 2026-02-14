@@ -10,7 +10,7 @@ import os
 
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
-TOP_K                 = 6
+TOP_K                 = 5
 OUT_OF_SCOPE_THRESHOLD = 0.3
 AMBIGUOUS_K_PER_NS = TOP_K
 
@@ -26,6 +26,7 @@ class RetrievedChunk:
     chunk_index: int
     personality_ns: str
     content_type:   str
+    doc_id:      str  # Added for evaluation purposes
 
 
 
@@ -65,6 +66,7 @@ def _query_namespace(
             chunk_index    = p.get("chunk_index", 0),
             personality_ns = p.get("personality_ns", namespace),
             content_type   = p.get("content_type", ""),
+            doc_id         = p.get("file id", ""),  # GoogleDriveReader uses "file id"
         ))
     return chunks
 

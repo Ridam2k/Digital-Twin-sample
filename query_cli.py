@@ -31,17 +31,17 @@ def format_response(result: dict, mode: str, scores: dict,
         lines.append(f"  Status : grounded ({len(result['citations'])} sources)")
 
     # Persona consistency display
-    lines.append(f"  Persona: {persona_result.weighted_score:.2f} " +
-                f"(values={persona_result.values_alignment.score}/5, " +
-                f"tone={persona_result.tone_fidelity.score}/5)")
+    # lines.append(f"  Persona: {persona_result.weighted_score:.2f} " +
+    #             f"(values={persona_result.values_alignment.score}/5, " +
+    #             f"tone={persona_result.tone_fidelity.score}/5)")
 
-    # Show violations if any
-    all_violations = (persona_result.values_alignment.violations +
-                     persona_result.tone_fidelity.violations)
-    if all_violations:
-        lines.append(f"  ⚠ Persona violations: {', '.join(all_violations[:2])}")
+    # # Show violations if any
+    # all_violations = (persona_result.values_alignment.violations +
+    #                  persona_result.tone_fidelity.violations)
+    # if all_violations:
+    #     lines.append(f"  ⚠ Persona violations: {', '.join(all_violations[:2])}")
 
-    lines.append(DIVIDER)
+    # lines.append(DIVIDER)
     lines.append(result["response"])
 
     if result["citations"]:
@@ -101,6 +101,7 @@ def run():
 
         # Step 6: display
         # print(format_response(result, mode, scores, grounded_result, persona_result))
+        print(format_response(result, mode, scores, None, None))
 
         # Log to JSONL — one record per query, append-only
         # log_entry = {
