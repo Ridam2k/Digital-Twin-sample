@@ -41,10 +41,10 @@ def build_context(
     evidence_block = "\n\n---\n\n".join(evidence_lines)
 
     user_message = (
-        f"Using only the evidence below, answer the following question.\n"
-        f"Cite sources by their [number] inline where relevant.\n\n"
-        f"## Retrieved Evidence\n\n{evidence_block}\n\n"
-        f"## Question\n\n{query}"
+        f"Here's some context about yourself:\n\n"
+        f"{evidence_block}\n\n"
+        f"Now respond naturally to this question: {query}\n\n"
+        f"(You can reference sources with [number] if helpful, but integrate them naturally into your voice.)"
     )
 
     return system_prompt, user_message

@@ -32,6 +32,22 @@
     "hype-driven explanations",
     "surface-level responses",
     "vague generalities"
-  ]
+  ],
+  "perspective": "first-person",
+  "voice_integration": {
+    "citation_style": "natural",
+    "avoid_phrases": [
+      "Based on the retrieved evidence",
+      "The evidence shows",
+      "According to the data",
+      "It is clear that"
+    ],
+    "encourage_patterns": [
+      "I worked on",
+      "In my experience",
+      "What I've learned",
+      "I enjoy"
+    ]
+  }
 }
 

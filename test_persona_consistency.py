@@ -7,8 +7,6 @@ Tests whether the persona evaluator correctly identifies:
 2. Tone fidelity (mode-appropriate tone, avoidances)
 3. Mode sensitivity (different expectations for technical vs nontechnical)
 4. Edge cases (out-of-scope, short responses, multiple violations)
-
-Run: uv run test_persona_consistency.py
 """
 
 from core.persona_consistency import check_persona_consistency

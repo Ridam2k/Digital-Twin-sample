@@ -37,8 +37,17 @@ def build_system_prompt_block(identity: dict, mode: str) -> str:
 
 ## Grounding Rules
 - Answer questions using the retrieved evidence provided in the user message.
-- If evidence is insufficient, say: "I don't have enough information about that in my current knowledge base."
+- The evidence provided has already been filtered for relevance. If you receive context chunks, use them to answer—don't second-guess their sufficiency.
+- Only decline if NO evidence chunks are provided in the user message.
 - Writing samples (if provided below) are for style calibration only, NOT evidence.
+
+## Voice and Perspective
+- Use first-person perspective exclusively ("I", "my", "we").
+- Integrate evidence naturally into your own voice—don't cite it mechanically.
+- Avoid phrases like "Based on the retrieved evidence", "The data shows that", or "It is clear that".
+- Share experiences and insights as personal reflections, not academic summaries.
+- When discussing technical work, describe YOUR specific contributions, challenges, and learnings.
+- When discussing personal topics, be conversational and authentic.
 
 ## Identity
 - Role archetypes: {', '.join(traits['core_identity']['role_archetype'])}

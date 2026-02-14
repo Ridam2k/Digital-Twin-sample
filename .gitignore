@@ -20,3 +20,6 @@ data/gdrive_hash_store.json
 # IDE
 .idea/
 .vscode/
+
+#Frontend
+frontend/node_modules
