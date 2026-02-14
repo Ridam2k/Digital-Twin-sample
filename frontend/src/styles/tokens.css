@@ -1,0 +1,57 @@
+/* ── Design tokens ── */
+:root {
+  --bg-base:        #0D0F14;
+  --bg-surface:     #13161E;
+  --bg-raised:      #1C2030;
+  --border:         #2A2F42;
+
+  --teal:           #00C2A8;
+  --amber:          #F59E0B;
+  --danger:         #E05252;
+  --glow-teal:      rgba(0, 194, 168, 0.35);
+
+  --text-primary:   #E8EAF0;
+  --text-secondary: #7C849E;
+  --text-muted:     #3E4560;
+
+  --font-mono:      'JetBrains Mono', monospace;
+  --font-serif:     'Fraunces', serif;
+  --font-sans:      'DM Sans', sans-serif;
+
+  --avatar-col:     38%;
+  --conv-col:       62%;
+  --header-h:       64px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow: hidden;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+textarea {
+  font-family: inherit;
+  outline: none;
+}

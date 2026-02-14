@@ -1,0 +1,111 @@
+.avatar-panel {
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 32px 24px;
+  height: 100%;
+}
+
+.silhouette-wrapper {
+  filter: drop-shadow(0 0 24px var(--glow-teal));
+}
+
+.silhouette {
+  display: block;
+}
+
+.waveform {
+  display: block;
+}
+
+.oos-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--danger);
+  animation: fadeIn 300ms ease-out;
+}
+
+/* Animations */
+
+/* idle: slow vertical bob */
+@keyframes breathe {
+  0%, 100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-6px);
+    opacity: 0.88;
+  }
+}
+
+.anim-breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+/* listening: outline shimmer via filter hue-rotate */
+@keyframes shimmer {
+  0%, 100% {
+    filter: drop-shadow(0 0 24px rgba(0, 194, 168, 0.35));
+  }
+  50% {
+    filter: drop-shadow(0 0 36px rgba(245, 158, 11, 0.55));
+  }
+}
+
+.anim-shimmer {
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+/* processing: scan-line sweep via clip-path animation */
+@keyframes scan {
+  0% {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0.5;
+  }
+  50% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(100% 0 0 0);
+    opacity: 0.5;
+  }
+}
+
+.anim-scan {
+  animation: scan 1.5s linear infinite;
+}
+
+/* speaking: gentle scale pulse */
+@keyframes speak-pulse {
+  0%, 100% {
+    transform: scale(1.00);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+.anim-speaking {
+  animation: speak-pulse 0.6s ease-in-out infinite;
+}
+
+/* out-of-scope: desaturate */
+.anim-oos {
+  filter: grayscale(0.85) drop-shadow(0 0 8px rgba(224, 82, 82, 0.2));
+  opacity: 0.55;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
