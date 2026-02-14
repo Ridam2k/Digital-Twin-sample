@@ -65,6 +65,8 @@ async def query_endpoint(req : QueryRequest):
 
         # Step 2: Retriever - get relevant chunks from vector DB
         chunks, out_of_scope = retrieve(req.query, namespace=mode)
+        
+        print()
         retrieved_texts = [c.text for c in chunks]
 
         # Step 3: Context Builder - assemble system prompt + user message

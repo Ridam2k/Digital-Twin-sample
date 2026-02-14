@@ -1,6 +1,39 @@
 [
   {
-    "query": "What accuracy gains did your approach achieve on the CRASS benchmark compared to the original Llama-3.2-1B-Instruct model?",
+    "query": "What simple breakfast ideas do you recommend for college students, like avocado toast or yogurt bowls?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "16sXPXQOEB8TsnfzIh0SHQcW-c39OXt-t7ZMJsVpmEGQ",
+      "doc_title": "16sXPXQOEB8TsnfzIh0SHQcW-c39OXt-t7ZMJsVpmEGQ.docx",
+      "doc_hash": "24120bf8e0e82d0a2cfeab562fe04622b60ba6642fa6d1583b3625162221cdcf"
+    }
+  },
+  {
+    "query": "If a student has limited time between classes, what are some straightforward midday meal options they could prepare without much cooking experience?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "16sXPXQOEB8TsnfzIh0SHQcW-c39OXt-t7ZMJsVpmEGQ",
+      "doc_title": "16sXPXQOEB8TsnfzIh0SHQcW-c39OXt-t7ZMJsVpmEGQ.docx",
+      "doc_hash": "24120bf8e0e82d0a2cfeab562fe04622b60ba6642fa6d1583b3625162221cdcf"
+    }
+  },
+  {
+    "query": "How would you help a first-year student plan a full day of affordable, relatively healthy meals they can make themselves in a dorm or small apartment?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "16sXPXQOEB8TsnfzIh0SHQcW-c39OXt-t7ZMJsVpmEGQ",
+      "doc_title": "16sXPXQOEB8TsnfzIh0SHQcW-c39OXt-t7ZMJsVpmEGQ.docx",
+      "doc_hash": "24120bf8e0e82d0a2cfeab562fe04622b60ba6642fa6d1583b3625162221cdcf"
+    }
+  },
+  {
+    "query": "What accuracy gains did the BBox-Adapter achieve for Llama-3.2-1B-Instruct on the CRASS counterfactual reasoning benchmark?",
     "namespace": "technical",
     "difficulty": "easy",
     "query_type": "direct",
@@ -11,18 +44,7 @@
     }
   },
   {
-    "query": "How does the BBox-Adapter use sentence-level beam search to guide LLaMA\u2019s generations for counterfactual reasoning tasks like CRASS and IfQA?",
-    "namespace": "technical",
-    "difficulty": "easy",
-    "query_type": "direct",
-    "gold": {
-      "doc_id": "1npgz7-GO_0tcA8Kmaky6neOKPjIxvfXB",
-      "doc_title": null,
-      "doc_hash": "80920ddcafcd271574271d1ca2fc5518797cc38ff1dedd6369b6dc6be78b7cba"
-    }
-  },
-  {
-    "query": "How do you mathematically distinguish between intervention-based causal questions and hypothetical \u201cwhat if\u201d scenarios when evaluating language models?",
+    "query": "How does your approach use a smaller auxiliary model to steer a larger language model toward better answers on hypothetical \u2018what-if\u2019 question datasets?",
     "namespace": "technical",
     "difficulty": "medium",
     "query_type": "paraphrased",
@@ -33,18 +55,7 @@
     }
   },
   {
-    "query": "Describe your training setup and loss formulation for teaching a smaller auxiliary model to rank good and bad answers on counterfactual QA datasets.",
-    "namespace": "technical",
-    "difficulty": "medium",
-    "query_type": "paraphrased",
-    "gold": {
-      "doc_id": "1npgz7-GO_0tcA8Kmaky6neOKPjIxvfXB",
-      "doc_title": null,
-      "doc_hash": "80920ddcafcd271574271d1ca2fc5518797cc38ff1dedd6369b6dc6be78b7cba"
-    }
-  },
-  {
-    "query": "If you had to justify using a lightweight sidecar model instead of full fine-tuning for a privacy-sensitive client, how would you explain your design choice?",
+    "query": "If you had to cheaply upgrade a low-capacity language model so it could handle complex causal \u2018what would have happened otherwise\u2019 decisions without retraining the core model, what strategy would you use and why?",
     "namespace": "technical",
     "difficulty": "hard",
     "query_type": "inferential",
@@ -55,18 +66,7 @@
     }
   },
   {
-    "query": "When improving an LLM\u2019s ability to answer nuanced medical \u201cwhat would have happened if\u2026\u201d questions, what kind of benchmarking and adaptation strategy would you rely on?",
-    "namespace": "technical",
-    "difficulty": "hard",
-    "query_type": "cross_domain",
-    "gold": {
-      "doc_id": "1npgz7-GO_0tcA8Kmaky6neOKPjIxvfXB",
-      "doc_title": null,
-      "doc_hash": "80920ddcafcd271574271d1ca2fc5518797cc38ff1dedd6369b6dc6be78b7cba"
-    }
-  },
-  {
-    "query": "What kind of SpringBoot and React applications have you built at Wells Fargo, and how did the automated testing service fit in?",
+    "query": "What kind of SpringBoot and React applications did you build at Wells Fargo, and how did the automated testing workflow service fit in?",
     "namespace": "technical",
     "difficulty": "easy",
     "query_type": "direct",
@@ -77,18 +77,7 @@
     }
   },
   {
-    "query": "Can you explain your work on integrating ML models with banking infrastructure for trading desk support and bond pricing?",
-    "namespace": "technical",
-    "difficulty": "easy",
-    "query_type": "direct",
-    "gold": {
-      "doc_id": "1opVLNVnhNl9HAMB2t9-ocq3RMTGokQQGJOL1G4bMNQM",
-      "doc_title": "1opVLNVnhNl9HAMB2t9-ocq3RMTGokQQGJOL1G4bMNQM.docx",
-      "doc_hash": "f415ccea072e3a2c0e645470587baefa4b7bfd30bdb89375b2497b39e1fc3ed1"
-    }
-  },
-  {
-    "query": "How did your undergraduate research in speech emotion recognition, text summarization, and fake news detection shape your current research interests?",
+    "query": "How did your transition from an instrumentation and control degree into NLP research and large-scale software engineering roles shape your current research plans?",
     "namespace": "technical",
     "difficulty": "medium",
     "query_type": "paraphrased",
@@ -99,18 +88,7 @@
     }
   },
   {
-    "query": "In what ways did your internships at Amazon and Coding Ninjas complement your NLP-focused academic projects and prepare you for your present role?",
-    "namespace": "technical",
-    "difficulty": "medium",
-    "query_type": "paraphrased",
-    "gold": {
-      "doc_id": "1opVLNVnhNl9HAMB2t9-ocq3RMTGokQQGJOL1G4bMNQM",
-      "doc_title": "1opVLNVnhNl9HAMB2t9-ocq3RMTGokQQGJOL1G4bMNQM.docx",
-      "doc_hash": "f415ccea072e3a2c0e645470587baefa4b7bfd30bdb89375b2497b39e1fc3ed1"
-    }
-  },
-  {
-    "query": "If you were asked to design a tool to help neurodivergent users communicate more effectively online, how would your past projects and future study plans influence your design choices?",
+    "query": "If you were tasked with designing a tool to help neurodivergent users navigate online discussions safely and confidently, how would your prior projects and long-term goals influence your approach?",
     "namespace": "technical",
     "difficulty": "hard",
     "query_type": "inferential",
@@ -121,14 +99,1785 @@
     }
   },
   {
-    "query": "How have your leadership roles in debating, dance, and IEEE informed the way you would lead a research initiative aimed at combating harmful content on social media?",
+    "query": "Can you describe your multimodal stacked ensemble framework from the fake news detection project and how you plan to adapt it for hate speech detection?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1gBNS64uyFy5ajot-SCaxY_cwy9P500BgllS3B2HwrYA",
+      "doc_title": "1gBNS64uyFy5ajot-SCaxY_cwy9P500BgllS3B2HwrYA.docx",
+      "doc_hash": "23c788d99e30d0a28f606160a5fea10401bd4c590d6f92a7336c337c08776802"
+    }
+  },
+  {
+    "query": "How did your transition from an instrumentation background into NLP research and enterprise software engineering shape your current research goals for graduate school?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1gBNS64uyFy5ajot-SCaxY_cwy9P500BgllS3B2HwrYA",
+      "doc_title": "1gBNS64uyFy5ajot-SCaxY_cwy9P500BgllS3B2HwrYA.docx",
+      "doc_hash": "23c788d99e30d0a28f606160a5fea10401bd4c590d6f92a7336c337c08776802"
+    }
+  },
+  {
+    "query": "If you joined a team that struggles to translate promising research ideas into production systems, what concrete steps would you take to close that gap based on your past experiences?",
     "namespace": "technical",
     "difficulty": "hard",
-    "query_type": "cross_domain",
+    "query_type": "inferential",
     "gold": {
-      "doc_id": "1opVLNVnhNl9HAMB2t9-ocq3RMTGokQQGJOL1G4bMNQM",
-      "doc_title": "1opVLNVnhNl9HAMB2t9-ocq3RMTGokQQGJOL1G4bMNQM.docx",
-      "doc_hash": "f415ccea072e3a2c0e645470587baefa4b7bfd30bdb89375b2497b39e1fc3ed1"
+      "doc_id": "1gBNS64uyFy5ajot-SCaxY_cwy9P500BgllS3B2HwrYA",
+      "doc_title": "1gBNS64uyFy5ajot-SCaxY_cwy9P500BgllS3B2HwrYA.docx",
+      "doc_hash": "23c788d99e30d0a28f606160a5fea10401bd4c590d6f92a7336c337c08776802"
+    }
+  },
+  {
+    "query": "What roles and departments within DebSoc have you been involved with, like MUN, Tech, or Sponsorship?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1c2vp5Pw3DmJ54QoerT2jxQ8vxWr2_YWUGxmP21pdhtU",
+      "doc_title": "1c2vp5Pw3DmJ54QoerT2jxQ8vxWr2_YWUGxmP21pdhtU.docx",
+      "doc_hash": "4685011236520831f081de799c5763fdea6627376fff0ce6e6849d383c167f43"
+    }
+  },
+  {
+    "query": "Can you describe how your training structure in debating societies has shaped your approach to mentoring newer members?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1c2vp5Pw3DmJ54QoerT2jxQ8vxWr2_YWUGxmP21pdhtU",
+      "doc_title": "1c2vp5Pw3DmJ54QoerT2jxQ8vxWr2_YWUGxmP21pdhtU.docx",
+      "doc_hash": "4685011236520831f081de799c5763fdea6627376fff0ce6e6849d383c167f43"
+    }
+  },
+  {
+    "query": "If you noticed a student club struggling with poor attendance, rushed preparation, and uneven task allocation, how would you practically try to fix these issues?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1c2vp5Pw3DmJ54QoerT2jxQ8vxWr2_YWUGxmP21pdhtU",
+      "doc_title": "1c2vp5Pw3DmJ54QoerT2jxQ8vxWr2_YWUGxmP21pdhtU.docx",
+      "doc_hash": "4685011236520831f081de799c5763fdea6627376fff0ce6e6849d383c167f43"
+    }
+  },
+  {
+    "query": "How did becoming President of the dance club change your approach to leadership and responsibility in college?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1AgMDWeAUr2UkCiCGY41KGKsy_bxm9OK-YMFAeHvwLkw",
+      "doc_title": "1AgMDWeAUr2UkCiCGY41KGKsy_bxm9OK-YMFAeHvwLkw.docx",
+      "doc_hash": "82d970225af34a3bd3d0afbb8462adaf005d4170896ca3a98fec698725719879"
+    }
+  },
+  {
+    "query": "Can you describe a time in university when you had to coordinate a large student initiative while keeping everyone aligned and motivated?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1AgMDWeAUr2UkCiCGY41KGKsy_bxm9OK-YMFAeHvwLkw",
+      "doc_title": "1AgMDWeAUr2UkCiCGY41KGKsy_bxm9OK-YMFAeHvwLkw.docx",
+      "doc_hash": "82d970225af34a3bd3d0afbb8462adaf005d4170896ca3a98fec698725719879"
+    }
+  },
+  {
+    "query": "If we asked your college teammates how you behaved when events were at risk due to logistical chaos, what specific actions would they mention?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "behavioural",
+    "gold": {
+      "doc_id": "1AgMDWeAUr2UkCiCGY41KGKsy_bxm9OK-YMFAeHvwLkw",
+      "doc_title": "1AgMDWeAUr2UkCiCGY41KGKsy_bxm9OK-YMFAeHvwLkw.docx",
+      "doc_hash": "82d970225af34a3bd3d0afbb8462adaf005d4170896ca3a98fec698725719879"
+    }
+  },
+  {
+    "query": "What topics did you cover in your 30-day DSA placement preparation roadmap, from arrays and trees to graphs and dynamic programming?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1zFu_N4Ba33N7e6slwBXAYH30iBjeXnioDePLK7MY5S8",
+      "doc_title": "1zFu_N4Ba33N7e6slwBXAYH30iBjeXnioDePLK7MY5S8.docx",
+      "doc_hash": "1eab545c931a349092a2acd10001afd5dd5e1d92367a18cb347878ddffe263af"
+    }
+  },
+  {
+    "query": "If you had to explain your structured plan for becoming interview-ready in algorithms and core CS subjects over about a month, how would you break it down day by day?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1zFu_N4Ba33N7e6slwBXAYH30iBjeXnioDePLK7MY5S8",
+      "doc_title": "1zFu_N4Ba33N7e6slwBXAYH30iBjeXnioDePLK7MY5S8.docx",
+      "doc_hash": "1eab545c931a349092a2acd10001afd5dd5e1d92367a18cb347878ddffe263af"
+    }
+  },
+  {
+    "query": "As a collaborator, I\u2019m curious how systematically you prepare for high-stakes technical interviews: what does your study schedule suggest about your discipline, topic coverage, and ability to organize complex learning over time?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "behavioural",
+    "gold": {
+      "doc_id": "1zFu_N4Ba33N7e6slwBXAYH30iBjeXnioDePLK7MY5S8",
+      "doc_title": "1zFu_N4Ba33N7e6slwBXAYH30iBjeXnioDePLK7MY5S8.docx",
+      "doc_hash": "1eab545c931a349092a2acd10001afd5dd5e1d92367a18cb347878ddffe263af"
+    }
+  },
+  {
+    "query": "What is the Her Hygiene app and how does PAD SOS help women during menstrual emergencies?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1Gn23GpIA61HVZJzTNfCL8-SjQEAVYH7K",
+      "doc_title": "1Gn23GpIA61HVZJzTNfCL8-SjQEAVYH7K.pdf",
+      "doc_hash": "c405951b3facc383034a474f652805ce28964ff5f00949fb25caf3ddb4dfdbfe"
+    }
+  },
+  {
+    "query": "Can you describe how your solution tackles the combined issues of cost, limited availability, and social stigma around menstrual care?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1Gn23GpIA61HVZJzTNfCL8-SjQEAVYH7K",
+      "doc_title": "1Gn23GpIA61HVZJzTNfCL8-SjQEAVYH7K.pdf",
+      "doc_hash": "c405951b3facc383034a474f652805ce28964ff5f00949fb25caf3ddb4dfdbfe"
+    }
+  },
+  {
+    "query": "If you were presenting an example of tech-driven social entrepreneurship focused on women\u2019s health, how would you explain the product, its revenue strategy, and its impact model?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1Gn23GpIA61HVZJzTNfCL8-SjQEAVYH7K",
+      "doc_title": "1Gn23GpIA61HVZJzTNfCL8-SjQEAVYH7K.pdf",
+      "doc_hash": "c405951b3facc383034a474f652805ce28964ff5f00949fb25caf3ddb4dfdbfe"
+    }
+  },
+  {
+    "query": "Can you describe your experience with the Interact Club and how you became a district-level Director?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "12e2ukRBkWzJNgG1oZs2f2HK9y2yLv1i43JTR2jtOXWU",
+      "doc_title": "12e2ukRBkWzJNgG1oZs2f2HK9y2yLv1i43JTR2jtOXWU.docx",
+      "doc_hash": "47076ed08cf9e4df6a231e59a18d0c7af9b6da43f2cf77967cd15f27ea0e0acc"
+    }
+  },
+  {
+    "query": "How did your early volunteer teaching experiences influence your decision to merge technology with social impact later in your studies and work?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "12e2ukRBkWzJNgG1oZs2f2HK9y2yLv1i43JTR2jtOXWU",
+      "doc_title": "12e2ukRBkWzJNgG1oZs2f2HK9y2yLv1i43JTR2jtOXWU.docx",
+      "doc_hash": "47076ed08cf9e4df6a231e59a18d0c7af9b6da43f2cf77967cd15f27ea0e0acc"
+    }
+  },
+  {
+    "query": "If you joined a university lab focused on community outreach, what past experiences would you draw on to design programs for school-age children?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "12e2ukRBkWzJNgG1oZs2f2HK9y2yLv1i43JTR2jtOXWU",
+      "doc_title": "12e2ukRBkWzJNgG1oZs2f2HK9y2yLv1i43JTR2jtOXWU.docx",
+      "doc_hash": "47076ed08cf9e4df6a231e59a18d0c7af9b6da43f2cf77967cd15f27ea0e0acc"
+    }
+  },
+  {
+    "query": "What was the annual production project related to Capella, the choreography society of NSUT, that you worked on for Project Management EO005?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1DJfUsPZrxYGGs-MGktObsZtsWpSwR3XN",
+      "doc_title": "1DJfUsPZrxYGGs-MGktObsZtsWpSwR3XN.pdf",
+      "doc_hash": "ba72bd7f2f3cefae26da1acdad498f37d4c5ca5a2907cdf28a859df8a14ca775"
+    }
+  },
+  {
+    "query": "Can you describe the academic project you completed with your teammates under Duru Arun Kumar that involved a university dance society?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1DJfUsPZrxYGGs-MGktObsZtsWpSwR3XN",
+      "doc_title": "1DJfUsPZrxYGGs-MGktObsZtsWpSwR3XN.pdf",
+      "doc_hash": "ba72bd7f2f3cefae26da1acdad498f37d4c5ca5a2907cdf28a859df8a14ca775"
+    }
+  },
+  {
+    "query": "If I want to understand how you collaborate on creative, team-based assignments in college, which group coursework example would best illustrate this?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1DJfUsPZrxYGGs-MGktObsZtsWpSwR3XN",
+      "doc_title": "1DJfUsPZrxYGGs-MGktObsZtsWpSwR3XN.pdf",
+      "doc_hash": "ba72bd7f2f3cefae26da1acdad498f37d4c5ca5a2907cdf28a859df8a14ca775"
+    }
+  },
+  {
+    "query": "What kinds of files and secrets should you exclude from version control, and how does .gitignore help with secure repo hygiene?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1w32hd0hzQyOG1FgBZXvLjsBbWMGlHxxKxIi0oAZHkA4",
+      "doc_title": "1w32hd0hzQyOG1FgBZXvLjsBbWMGlHxxKxIi0oAZHkA4.docx",
+      "doc_hash": "ff6de2af40469c3653493d579a74f6bfe8c61fb5637aa90f0cabb18eb256645e"
+    }
+  },
+  {
+    "query": "When preparing an LLM-based assistant for real-world deployment, how would you design evaluation and observability so the system stays reliable and safe over time?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1w32hd0hzQyOG1FgBZXvLjsBbWMGlHxxKxIi0oAZHkA4",
+      "doc_title": "1w32hd0hzQyOG1FgBZXvLjsBbWMGlHxxKxIi0oAZHkA4.docx",
+      "doc_hash": "ff6de2af40469c3653493d579a74f6bfe8c61fb5637aa90f0cabb18eb256645e"
+    }
+  },
+  {
+    "query": "If a hiring manager asks how you prevent an autonomous AI agent from quietly dropping parts of its reasoning while still looking confident, how would you explain your approach?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "behavioural",
+    "gold": {
+      "doc_id": "1w32hd0hzQyOG1FgBZXvLjsBbWMGlHxxKxIi0oAZHkA4",
+      "doc_title": "1w32hd0hzQyOG1FgBZXvLjsBbWMGlHxxKxIi0oAZHkA4.docx",
+      "doc_hash": "ff6de2af40469c3653493d579a74f6bfe8c61fb5637aa90f0cabb18eb256645e"
+    }
+  },
+  {
+    "query": "How did your Model United Nations and dance experiences shape your leadership skills during engineering?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1qsjAlql1-GC_bkLRoJVqMI3q5QtKET4Xl6BOYq-HYFI",
+      "doc_title": "1qsjAlql1-GC_bkLRoJVqMI3q5QtKET4Xl6BOYq-HYFI.docx",
+      "doc_hash": "c5e1397c8dc402afaded827955f0d4a66f5f2180c2a4de14b95d5fb1c9039029"
+    }
+  },
+  {
+    "query": "Given that you studied instrumentation and control rather than CS, how did you still manage to move into a software engineering role?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1qsjAlql1-GC_bkLRoJVqMI3q5QtKET4Xl6BOYq-HYFI",
+      "doc_title": "1qsjAlql1-GC_bkLRoJVqMI3q5QtKET4Xl6BOYq-HYFI.docx",
+      "doc_hash": "c5e1397c8dc402afaded827955f0d4a66f5f2180c2a4de14b95d5fb1c9039029"
+    }
+  },
+  {
+    "query": "If you joined a big tech research lab today, what kind of socially impactful systems would you want to build for communities in India, and why?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1qsjAlql1-GC_bkLRoJVqMI3q5QtKET4Xl6BOYq-HYFI",
+      "doc_title": "1qsjAlql1-GC_bkLRoJVqMI3q5QtKET4Xl6BOYq-HYFI.docx",
+      "doc_hash": "c5e1397c8dc402afaded827955f0d4a66f5f2180c2a4de14b95d5fb1c9039029"
+    }
+  },
+  {
+    "query": "How was the Llama 3 pre\u2011training data mix designed, including the proportions for code, math, multilingual, and general knowledge?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1gMybM7xICinETfi8kQtuzbVnuO4adAm2",
+      "doc_title": null,
+      "doc_hash": "89ce9dd0209387235b277538bebbef4b7e9c2ab04f41eedc7a7c71a19b5600e4"
+    }
+  },
+  {
+    "query": "Can you walk me through how you scale dense Transformer models like Llama 3 efficiently across thousands of GPUs, including your approach to sharding and communication?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1gMybM7xICinETfi8kQtuzbVnuO4adAm2",
+      "doc_title": null,
+      "doc_hash": "89ce9dd0209387235b277538bebbef4b7e9c2ab04f41eedc7a7c71a19b5600e4"
+    }
+  },
+  {
+    "query": "Suppose you\u2019re responsible for keeping a months\u2011long training run on tens of megawatts of GPU hardware both stable and cost\u2011effective. What concrete strategies would you use to handle hardware failures, slow workers, and network limits while still hitting your quality targets?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1gMybM7xICinETfi8kQtuzbVnuO4adAm2",
+      "doc_title": null,
+      "doc_hash": "89ce9dd0209387235b277538bebbef4b7e9c2ab04f41eedc7a7c71a19b5600e4"
+    }
+  },
+  {
+    "query": "How do you think lack of diversity and inclusion harms the field of computing and technological progress?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1_0Hx4L3wI0uvPCNY9jmCcbAUVRzYCNCg7prgP4MMRWA",
+      "doc_title": "1_0Hx4L3wI0uvPCNY9jmCcbAUVRzYCNCg7prgP4MMRWA.docx",
+      "doc_hash": "c4c1740d6167adde00ef4d19bbecc4055ad741cf09cf7bc21a23db0fe912fc67"
+    }
+  },
+  {
+    "query": "What concrete steps would you prioritize to create a more equitable and welcoming environment in tech for underrepresented genders and identities?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1_0Hx4L3wI0uvPCNY9jmCcbAUVRzYCNCg7prgP4MMRWA",
+      "doc_title": "1_0Hx4L3wI0uvPCNY9jmCcbAUVRzYCNCg7prgP4MMRWA.docx",
+      "doc_hash": "c4c1740d6167adde00ef4d19bbecc4055ad741cf09cf7bc21a23db0fe912fc67"
+    }
+  },
+  {
+    "query": "If you were designing a company-wide initiative to prevent another \u2018missed revolution\u2019 caused by biased hiring, what guiding principles would shape your plan?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1_0Hx4L3wI0uvPCNY9jmCcbAUVRzYCNCg7prgP4MMRWA",
+      "doc_title": "1_0Hx4L3wI0uvPCNY9jmCcbAUVRzYCNCg7prgP4MMRWA.docx",
+      "doc_hash": "c4c1740d6167adde00ef4d19bbecc4055ad741cf09cf7bc21a23db0fe912fc67"
+    }
+  },
+  {
+    "query": "Can you describe the Her Hygiene web app you built for the Smart India Hackathon and the main features you implemented?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1qYfVl4XpNqh9XbhFrZH70gMniP0ujozh9k0dczY6X1g",
+      "doc_title": "1qYfVl4XpNqh9XbhFrZH70gMniP0ujozh9k0dczY6X1g.docx",
+      "doc_hash": "0766f920608e756c159c2310f799dbeb55e232651e734d69c8e94bd986c569ee"
+    }
+  },
+  {
+    "query": "How has your combination of NLP research, large-scale backend work at Wells Fargo and Amazon, and hackathon projects prepared you for ML internships at companies like Pinterest or Netflix?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1qYfVl4XpNqh9XbhFrZH70gMniP0ujozh9k0dczY6X1g",
+      "doc_title": "1qYfVl4XpNqh9XbhFrZH70gMniP0ujozh9k0dczY6X1g.docx",
+      "doc_hash": "0766f920608e756c159c2310f799dbeb55e232651e734d69c8e94bd986c569ee"
+    }
+  },
+  {
+    "query": "If you joined a team building a safety\u2011critical system that serves underrepresented users at scale, what past experience would you draw on to balance real\u2011time reliability, social impact, and efficient ML modeling?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1qYfVl4XpNqh9XbhFrZH70gMniP0ujozh9k0dczY6X1g",
+      "doc_title": "1qYfVl4XpNqh9XbhFrZH70gMniP0ujozh9k0dczY6X1g.docx",
+      "doc_hash": "0766f920608e756c159c2310f799dbeb55e232651e734d69c8e94bd986c569ee"
+    }
+  },
+  {
+    "query": "When did your internship at Amazon India start, and what role were you hired for?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1zcvfZVJqQw6-9XLdY04FCVXO0KYXg19m",
+      "doc_title": "1zcvfZVJqQw6-9XLdY04FCVXO0KYXg19m.pdf",
+      "doc_hash": "efdf358f03c53ee2b883b4824d44cf68a97f2805ace2e3783ca1c6ad38a9dbdf"
+    }
+  },
+  {
+    "query": "Describe the initial terms and position details from your software internship offer in Bangalore with a large global e-commerce company.",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1zcvfZVJqQw6-9XLdY04FCVXO0KYXg19m",
+      "doc_title": "1zcvfZVJqQw6-9XLdY04FCVXO0KYXg19m.pdf",
+      "doc_hash": "efdf358f03c53ee2b883b4824d44cf68a97f2805ace2e3783ca1c6ad38a9dbdf"
+    }
+  },
+  {
+    "query": "If a recruiter wanted to verify your early industry experience, what formal agreement could they reference and what responsibilities would it imply about your performance expectations?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1zcvfZVJqQw6-9XLdY04FCVXO0KYXg19m",
+      "doc_title": "1zcvfZVJqQw6-9XLdY04FCVXO0KYXg19m.pdf",
+      "doc_hash": "efdf358f03c53ee2b883b4824d44cf68a97f2805ace2e3783ca1c6ad38a9dbdf"
+    }
+  },
+  {
+    "query": "What work did Ridam do on RAG systems for financial document quality and semantic search at Wells Fargo?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "12Y31I8-Cv8GT6g99B1Pk9xwNsswbwh-a",
+      "doc_title": "12Y31I8-Cv8GT6g99B1Pk9xwNsswbwh-a.pdf",
+      "doc_hash": "28fff3dcb9262acb9fe35f47dbdc6dfcc231883d12be679e9422e4fd34bc3e53"
+    }
+  },
+  {
+    "query": "Can you describe how Ridam has previously architected and optimized large-scale, low-latency ML services from data preprocessing through inference in production environments?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "12Y31I8-Cv8GT6g99B1Pk9xwNsswbwh-a",
+      "doc_title": "12Y31I8-Cv8GT6g99B1Pk9xwNsswbwh-a.pdf",
+      "doc_hash": "28fff3dcb9262acb9fe35f47dbdc6dfcc231883d12be679e9422e4fd34bc3e53"
+    }
+  },
+  {
+    "query": "If you needed someone to both speed up a high-performance computing workload for power systems and also deploy real-time perception on AR devices, what relevant past experiences would Ridam bring?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "12Y31I8-Cv8GT6g99B1Pk9xwNsswbwh-a",
+      "doc_title": "12Y31I8-Cv8GT6g99B1Pk9xwNsswbwh-a.pdf",
+      "doc_hash": "28fff3dcb9262acb9fe35f47dbdc6dfcc231883d12be679e9422e4fd34bc3e53"
+    }
+  },
+  {
+    "query": "How does BBOX-ADAPTER adapt black-box LLMs like GPT-4 through APIs while addressing transparency, privacy, and cost issues of fine-tuning?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1_N86fqBivrLJTC_3RwVhRv6vpGcQSacA",
+      "doc_title": "1_N86fqBivrLJTC_3RwVhRv6vpGcQSacA.pdf",
+      "doc_hash": "77bf8a13c7a844ec1a46e270927ae4ed23287cb5ecd4fa92dc5bf3dd78835171"
+    }
+  },
+  {
+    "query": "If you cannot see a model\u2019s weights or token-level probabilities, what strategy would you use to specialize it for a new domain using only its API?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1_N86fqBivrLJTC_3RwVhRv6vpGcQSacA",
+      "doc_title": "1_N86fqBivrLJTC_3RwVhRv6vpGcQSacA.pdf",
+      "doc_hash": "77bf8a13c7a844ec1a46e270927ae4ed23287cb5ecd4fa92dc5bf3dd78835171"
+    }
+  },
+  {
+    "query": "Suppose a healthcare company wants to leverage a commercial language model on sensitive electronic health records but cannot expose raw data or control internal layers. What kind of lightweight mechanism could they deploy around the model to gradually improve domain performance while keeping usage costs manageable?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1_N86fqBivrLJTC_3RwVhRv6vpGcQSacA",
+      "doc_title": "1_N86fqBivrLJTC_3RwVhRv6vpGcQSacA.pdf",
+      "doc_hash": "77bf8a13c7a844ec1a46e270927ae4ed23287cb5ecd4fa92dc5bf3dd78835171"
+    }
+  },
+  {
+    "query": "What kinds of SIGs and bootcamps does IEEE NSUT run for freshers to build software and hardware skills?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1IdTJ02nlbo4OcgkwGPXAzBS2kcyjq_aduh7oDRbdaY0",
+      "doc_title": "1IdTJ02nlbo4OcgkwGPXAzBS2kcyjq_aduh7oDRbdaY0.docx",
+      "doc_hash": "74f884f9149b2b93e11f28f6f72ebf4f919e77f7bbcc19384ad16423c87c603d"
+    }
+  },
+  {
+    "query": "How does the IEEE student chapter at NSUT expose newcomers to industry professionals and external organisations while they learn technical skills?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1IdTJ02nlbo4OcgkwGPXAzBS2kcyjq_aduh7oDRbdaY0",
+      "doc_title": "1IdTJ02nlbo4OcgkwGPXAzBS2kcyjq_aduh7oDRbdaY0.docx",
+      "doc_hash": "74f884f9149b2b93e11f28f6f72ebf4f919e77f7bbcc19384ad16423c87c603d"
+    }
+  },
+  {
+    "query": "If I want a college community that simultaneously improves my chances at top tech placements and lets me experiment with projects, events, and competitions, what aspects of your experience would you highlight?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1IdTJ02nlbo4OcgkwGPXAzBS2kcyjq_aduh7oDRbdaY0",
+      "doc_title": "1IdTJ02nlbo4OcgkwGPXAzBS2kcyjq_aduh7oDRbdaY0.docx",
+      "doc_hash": "74f884f9149b2b93e11f28f6f72ebf4f919e77f7bbcc19384ad16423c87c603d"
+    }
+  },
+  {
+    "query": "What are you studying in your BTech, and how does it relate to your plans for an MS in Computer Science and a career in Data Science or Web Development?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1X4BPvOrCRUTnQ6nwQtMxHToWfEAHOchMUZpf5gPnDRo",
+      "doc_title": "1X4BPvOrCRUTnQ6nwQtMxHToWfEAHOchMUZpf5gPnDRo.docx",
+      "doc_hash": "deaabf956ea3d1534ae92e8af42fe05bf3f3819cd4abff99bc5b06523ff77c5f"
+    }
+  },
+  {
+    "query": "Can you describe how your current undergraduate program and online coursework are preparing you for advanced study abroad and future roles in the IT sector?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1X4BPvOrCRUTnQ6nwQtMxHToWfEAHOchMUZpf5gPnDRo",
+      "doc_title": "1X4BPvOrCRUTnQ6nwQtMxHToWfEAHOchMUZpf5gPnDRo.docx",
+      "doc_hash": "deaabf956ea3d1534ae92e8af42fe05bf3f3819cd4abff99bc5b06523ff77c5f"
+    }
+  },
+  {
+    "query": "If we sponsored a series of advanced online modules for you, how confident are you that you\u2019d complete the whole track diligently, given your past behavior with similar opportunities?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "behavioural",
+    "gold": {
+      "doc_id": "1X4BPvOrCRUTnQ6nwQtMxHToWfEAHOchMUZpf5gPnDRo",
+      "doc_title": "1X4BPvOrCRUTnQ6nwQtMxHToWfEAHOchMUZpf5gPnDRo.docx",
+      "doc_hash": "deaabf956ea3d1534ae92e8af42fe05bf3f3819cd4abff99bc5b06523ff77c5f"
+    }
+  },
+  {
+    "query": "How does your Android reading companion use MusicGen and AudioGen together to create ambient backgrounds and event-specific sound effects for book pages?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1ukw4wMU-KLhk-wJhWAk-K31KMQKdSoqhckl9A2jpcnk",
+      "doc_title": null,
+      "doc_hash": "626224138bf067d6641105fffab03c19381ede2422bf4995ce7048f49a8cf4ad"
+    }
+  },
+  {
+    "query": "Describe the overall architecture of your immersive reading assistant, from the mobile client through the Python services to the GPU-based audio generation components.",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1ukw4wMU-KLhk-wJhWAk-K31KMQKdSoqhckl9A2jpcnk",
+      "doc_title": null,
+      "doc_hash": "626224138bf067d6641105fffab03c19381ede2422bf4995ce7048f49a8cf4ad"
+    }
+  },
+  {
+    "query": "If you were designing a tool to help neurodivergent readers stay engaged with long fantasy series, what product features and system capabilities would you prioritize and why?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1ukw4wMU-KLhk-wJhWAk-K31KMQKdSoqhckl9A2jpcnk",
+      "doc_title": null,
+      "doc_hash": "626224138bf067d6641105fffab03c19381ede2422bf4995ce7048f49a8cf4ad"
+    }
+  },
+  {
+    "query": "How does the Constraints-of-Thought framework use intent\u2013constraint pairs with Monte Carlo Tree Search to reduce hallucinated, infeasible steps in multi-step planning?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1TDg0xKlI-Mov_r_vl-OvB-sYyzTUM1Ne",
+      "doc_title": "1TDg0xKlI-Mov_r_vl-OvB-sYyzTUM1Ne.pdf",
+      "doc_hash": "59ca5f7cc3f4fb03ab2f419ead1dded3c106ab584e43fd5738881e2cae12d39c"
+    }
+  },
+  {
+    "query": "When language models must follow strict symbolic rules in multi-step decision problems, what strategy can be used to narrow the search to only valid, user-aligned actions?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1TDg0xKlI-Mov_r_vl-OvB-sYyzTUM1Ne",
+      "doc_title": "1TDg0xKlI-Mov_r_vl-OvB-sYyzTUM1Ne.pdf",
+      "doc_hash": "59ca5f7cc3f4fb03ab2f419ead1dded3c106ab584e43fd5738881e2cae12d39c"
+    }
+  },
+  {
+    "query": "Suppose you are designing an AI assistant for a complex board game that must never suggest illegal moves. Without referencing specific model names, describe how you would structure its internal reasoning so that exploration is both efficient and guaranteed to respect the game\u2019s rules and the player\u2019s objectives.",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1TDg0xKlI-Mov_r_vl-OvB-sYyzTUM1Ne",
+      "doc_title": "1TDg0xKlI-Mov_r_vl-OvB-sYyzTUM1Ne.pdf",
+      "doc_hash": "59ca5f7cc3f4fb03ab2f419ead1dded3c106ab584e43fd5738881e2cae12d39c"
+    }
+  },
+  {
+    "query": "Can you describe the datasets, tech stacks, and your percentage contributions for your main AI research projects like fake news detection or emotion recognition?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "14tvoRHFIAfvlqhI4X7rAzYpGR1ePaGKJ57Lon5fIG5g",
+      "doc_title": "14tvoRHFIAfvlqhI4X7rAzYpGR1ePaGKJ57Lon5fIG5g.docx",
+      "doc_hash": "1397a63d89b06947f88b7d1622eda99c56a84dc684af538492424003b98df9ed"
+    }
+  },
+  {
+    "query": "For your large-scale NLP and multimodal ML work, how big were the datasets, what tools and languages did you rely on, and what functionality did these systems deliver?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "14tvoRHFIAfvlqhI4X7rAzYpGR1ePaGKJ57Lon5fIG5g",
+      "doc_title": "14tvoRHFIAfvlqhI4X7rAzYpGR1ePaGKJ57Lon5fIG5g.docx",
+      "doc_hash": "1397a63d89b06947f88b7d1622eda99c56a84dc684af538492424003b98df9ed"
+    }
+  },
+  {
+    "query": "If I asked you to prove that you can own an end-to-end ML system from research idea through edge deployment under tight latency and memory limits, which concrete past projects and results would you point to?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "14tvoRHFIAfvlqhI4X7rAzYpGR1ePaGKJ57Lon5fIG5g",
+      "doc_title": "14tvoRHFIAfvlqhI4X7rAzYpGR1ePaGKJ57Lon5fIG5g.docx",
+      "doc_hash": "1397a63d89b06947f88b7d1622eda99c56a84dc684af538492424003b98df9ed"
+    }
+  },
+  {
+    "query": "Can you describe your work on automatic extractive text summarization and how you evaluated it on datasets like CNN DailyMail or DUC2002?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "12Dh21KOadK0hSDEJSND4uRhRT6ZmSJTm2DeJCpcj7iE",
+      "doc_title": "12Dh21KOadK0hSDEJSND4uRhRT6ZmSJTm2DeJCpcj7iE.docx",
+      "doc_hash": "3d9746f03042ce17cbca95722fa1d5d2647ffc99e14ca7535939fd964c13d1b2"
+    }
+  },
+  {
+    "query": "How did you design a low\u2011latency system to flag misleading online posts using both written content and associated images while keeping computation modest?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "12Dh21KOadK0hSDEJSND4uRhRT6ZmSJTm2DeJCpcj7iE",
+      "doc_title": "12Dh21KOadK0hSDEJSND4uRhRT6ZmSJTm2DeJCpcj7iE.docx",
+      "doc_hash": "3d9746f03042ce17cbca95722fa1d5d2647ffc99e14ca7535939fd964c13d1b2"
+    }
+  },
+  {
+    "query": "If we asked you to lead a small team to build a fast, resource\u2011efficient prototype that analyzes public reactions to health services across countries, what past experience would you draw on and how would you structure the project?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "12Dh21KOadK0hSDEJSND4uRhRT6ZmSJTm2DeJCpcj7iE",
+      "doc_title": "12Dh21KOadK0hSDEJSND4uRhRT6ZmSJTm2DeJCpcj7iE.docx",
+      "doc_hash": "3d9746f03042ce17cbca95722fa1d5d2647ffc99e14ca7535939fd964c13d1b2"
+    }
+  },
+  {
+    "query": "How did you architect the RAG-based semantic retrieval system for financial documents at Wells Fargo, and what accuracy did it achieve?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1ahnishx0d0pbIJh_qWatIJxtYPzjJDHY",
+      "doc_title": "1ahnishx0d0pbIJh_qWatIJxtYPzjJDHY.pdf",
+      "doc_hash": "043b0372148400c0f5e3a8b7cce110602589f7c423d6461235cde34b77cbb8b7"
+    }
+  },
+  {
+    "query": "Can you describe a project where you combined symbolic reasoning with large language models to improve decision-making performance in real-time settings?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1ahnishx0d0pbIJh_qWatIJxtYPzjJDHY",
+      "doc_title": "1ahnishx0d0pbIJh_qWatIJxtYPzjJDHY.pdf",
+      "doc_hash": "043b0372148400c0f5e3a8b7cce110602589f7c423d6461235cde34b77cbb8b7"
+    }
+  },
+  {
+    "query": "If you joined a team struggling with slow, expensive LLM inference in production, what prior experience would you draw on to cut latency and compute costs without hurting accuracy too much?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1ahnishx0d0pbIJh_qWatIJxtYPzjJDHY",
+      "doc_title": "1ahnishx0d0pbIJh_qWatIJxtYPzjJDHY.pdf",
+      "doc_hash": "043b0372148400c0f5e3a8b7cce110602589f7c423d6461235cde34b77cbb8b7"
+    }
+  },
+  {
+    "query": "What experience does Ridam have with distributed systems and real-time data handling from his work at Wells Fargo?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1dnIuQ5NbVn_Nn90ayIHKhBh7sQhLwkh32RKfSMLCjvE",
+      "doc_title": "1dnIuQ5NbVn_Nn90ayIHKhBh7sQhLwkh32RKfSMLCjvE.docx",
+      "doc_hash": "8ad13357d6d3bac64197dc65fa87c3f006491b03afd06fd36adbb3ee2146127c"
+    }
+  },
+  {
+    "query": "How has Ridam combined his software engineering background with large-scale event organization and leadership roles when applying for roles at Georgia Tech and industry?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1dnIuQ5NbVn_Nn90ayIHKhBh7sQhLwkh32RKfSMLCjvE",
+      "doc_title": "1dnIuQ5NbVn_Nn90ayIHKhBh7sQhLwkh32RKfSMLCjvE.docx",
+      "doc_hash": "8ad13357d6d3bac64197dc65fa87c3f006491b03afd06fd36adbb3ee2146127c"
+    }
+  },
+  {
+    "query": "If you needed someone to both mentor peers on career materials and also analyze metrics to improve outreach programs, how would Ridam justify being a strong choice based on his past experiences?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "behavioural",
+    "gold": {
+      "doc_id": "1dnIuQ5NbVn_Nn90ayIHKhBh7sQhLwkh32RKfSMLCjvE",
+      "doc_title": "1dnIuQ5NbVn_Nn90ayIHKhBh7sQhLwkh32RKfSMLCjvE.docx",
+      "doc_hash": "8ad13357d6d3bac64197dc65fa87c3f006491b03afd06fd36adbb3ee2146127c"
+    }
+  },
+  {
+    "query": "Can you summarize Tito\u2019s role in keeping Yugoslavia unified after World War II?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1HVmv4uot8qCurchrL8VR-9OES-r8OQOZIo0xIT2rxfs",
+      "doc_title": "1HVmv4uot8qCurchrL8VR-9OES-r8OQOZIo0xIT2rxfs.docx",
+      "doc_hash": "a5c8b27b474b15047564cbdf997abb4236bf500e679617c035f721ea76ad20ce"
+    }
+  },
+  {
+    "query": "How did political changes after the communist era contribute to the breakup of the Yugoslav federation and renewed tensions in its republics?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1HVmv4uot8qCurchrL8VR-9OES-r8OQOZIo0xIT2rxfs",
+      "doc_title": "1HVmv4uot8qCurchrL8VR-9OES-r8OQOZIo0xIT2rxfs.docx",
+      "doc_hash": "a5c8b27b474b15047564cbdf997abb4236bf500e679617c035f721ea76ad20ce"
+    }
+  },
+  {
+    "query": "If you were explaining why Kosovo still struggles to gain full UN membership despite broad international recognition, what key geopolitical and historical factors would you highlight?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1HVmv4uot8qCurchrL8VR-9OES-r8OQOZIo0xIT2rxfs",
+      "doc_title": "1HVmv4uot8qCurchrL8VR-9OES-r8OQOZIo0xIT2rxfs.docx",
+      "doc_hash": "a5c8b27b474b15047564cbdf997abb4236bf500e679617c035f721ea76ad20ce"
+    }
+  },
+  {
+    "query": "In your critique of Dr. Karp\u2019s work on Tertia, what specific statistical details do you say are missing for his claims to be valid?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1au0GlumjJULXx8gcPRLt-9iSYIMRtJlE",
+      "doc_title": "1au0GlumjJULXx8gcPRLt-9iSYIMRtJlE.docx",
+      "doc_hash": "726c44dead233f6b258f9eccaa8d0d8616739daac2732f810e4bb476a07f31c1"
+    }
+  },
+  {
+    "query": "When you evaluate arguments like the Monarch Books caf\u00e9 proposal or the Appleton family-meals recommendation, what kinds of evidence and context do you look for before accepting their conclusions?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1au0GlumjJULXx8gcPRLt-9iSYIMRtJlE",
+      "doc_title": "1au0GlumjJULXx8gcPRLt-9iSYIMRtJlE.docx",
+      "doc_hash": "726c44dead233f6b258f9eccaa8d0d8616739daac2732f810e4bb476a07f31c1"
+    }
+  },
+  {
+    "query": "If you were reviewing a new policy proposal at work that everyone else seemed to support, how would your habit of questioning hidden assumptions in arguments influence the way you\u2019d respond?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "behavioural",
+    "gold": {
+      "doc_id": "1au0GlumjJULXx8gcPRLt-9iSYIMRtJlE",
+      "doc_title": "1au0GlumjJULXx8gcPRLt-9iSYIMRtJlE.docx",
+      "doc_hash": "726c44dead233f6b258f9eccaa8d0d8616739daac2732f810e4bb476a07f31c1"
+    }
+  },
+  {
+    "query": "Can you describe your work with the Interact Club and how you became a district-level Director?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1sEdV1zp97GabooqnGCaC3AmQ-AJQJ42lBtdZBYOa05U",
+      "doc_title": "1sEdV1zp97GabooqnGCaC3AmQ-AJQJ42lBtdZBYOa05U.docx",
+      "doc_hash": "fc7bca0d0fa39435f4f8f3bc7e18fc947c65fd9cf2d3791870bf8da5c101b90c"
+    }
+  },
+  {
+    "query": "How did your early volunteer teaching experiences shape your approach to using technology to address social and educational inequalities?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1sEdV1zp97GabooqnGCaC3AmQ-AJQJ42lBtdZBYOa05U",
+      "doc_title": "1sEdV1zp97GabooqnGCaC3AmQ-AJQJ42lBtdZBYOa05U.docx",
+      "doc_hash": "fc7bca0d0fa39435f4f8f3bc7e18fc947c65fd9cf2d3791870bf8da5c101b90c"
+    }
+  },
+  {
+    "query": "If you joined our company\u2019s volunteer committee, what kinds of community initiatives would you naturally propose or feel most prepared to lead, and why?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "behavioural",
+    "gold": {
+      "doc_id": "1sEdV1zp97GabooqnGCaC3AmQ-AJQJ42lBtdZBYOa05U",
+      "doc_title": "1sEdV1zp97GabooqnGCaC3AmQ-AJQJ42lBtdZBYOa05U.docx",
+      "doc_hash": "fc7bca0d0fa39435f4f8f3bc7e18fc947c65fd9cf2d3791870bf8da5c101b90c"
+    }
+  },
+  {
+    "query": "What hierarchical deep learning setup did you use for multimodal speech emotion recognition with audio and text inputs?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1GaXZygRNA88EZKBwKDsDPBkLaTATlQYZ",
+      "doc_title": "1GaXZygRNA88EZKBwKDsDPBkLaTATlQYZ.pdf",
+      "doc_hash": "e0efa4a02e8ddd88755b537424a713319dc6b63db9a626ad03655201da12abff"
+    }
+  },
+  {
+    "query": "How did you combine acoustic signals and language information to better detect emotional states compared with single-channel models?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1GaXZygRNA88EZKBwKDsDPBkLaTATlQYZ",
+      "doc_title": "1GaXZygRNA88EZKBwKDsDPBkLaTATlQYZ.pdf",
+      "doc_hash": "e0efa4a02e8ddd88755b537424a713319dc6b63db9a626ad03655201da12abff"
+    }
+  },
+  {
+    "query": "If you were designing a virtual assistant that adapts its responses based on how a caller feels, what kind of model architecture and input representations would you rely on?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1GaXZygRNA88EZKBwKDsDPBkLaTATlQYZ",
+      "doc_title": "1GaXZygRNA88EZKBwKDsDPBkLaTATlQYZ.pdf",
+      "doc_hash": "e0efa4a02e8ddd88755b537424a713319dc6b63db9a626ad03655201da12abff"
+    }
+  },
+  {
+    "query": "Can you describe your project using Canonical Correlation Analysis on infant EEG signals to study looming response differences?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "13oMvWVjSzJ-HTjSJ-hxVGgWf4slHabj6UoHiUhuNKwk",
+      "doc_title": "13oMvWVjSzJ-HTjSJ-hxVGgWf4slHabj6UoHiUhuNKwk.docx",
+      "doc_hash": "873f07ea58d305a3e556a563dcab82b8fda1ccd779f1fcb000dfc40044048f08"
+    }
+  },
+  {
+    "query": "How did you bring together your interest in the developing nervous system and data-driven methods to improve early diagnosis of childhood behavioural conditions?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "13oMvWVjSzJ-HTjSJ-hxVGgWf4slHabj6UoHiUhuNKwk",
+      "doc_title": "13oMvWVjSzJ-HTjSJ-hxVGgWf4slHabj6UoHiUhuNKwk.docx",
+      "doc_hash": "873f07ea58d305a3e556a563dcab82b8fda1ccd779f1fcb000dfc40044048f08"
+    }
+  },
+  {
+    "query": "If you were tasked with designing a research study that could produce even a small but meaningful improvement in pediatric healthcare in India, how would your past work inform your approach?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "13oMvWVjSzJ-HTjSJ-hxVGgWf4slHabj6UoHiUhuNKwk",
+      "doc_title": "13oMvWVjSzJ-HTjSJ-hxVGgWf4slHabj6UoHiUhuNKwk.docx",
+      "doc_hash": "873f07ea58d305a3e556a563dcab82b8fda1ccd779f1fcb000dfc40044048f08"
+    }
+  },
+  {
+    "query": "What was the core theme and storyline of the M\u00e9lange annual dance production you were part of in 2019-20?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1jHr7LnY83DfJbyG1C6v0HYr6n8voRhoLC8UfTLbKGkU",
+      "doc_title": "1jHr7LnY83DfJbyG1C6v0HYr6n8voRhoLC8UfTLbKGkU.docx",
+      "doc_hash": "482bc618b41aa13cccf2ba1f0f601446493fbb34de2921e5a870f0e877a9f9ed"
+    }
+  },
+  {
+    "query": "Can you describe how your college dance production explored the journey from oppression and exclusion to unity through a shared art form?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1jHr7LnY83DfJbyG1C6v0HYr6n8voRhoLC8UfTLbKGkU",
+      "doc_title": "1jHr7LnY83DfJbyG1C6v0HYr6n8voRhoLC8UfTLbKGkU.docx",
+      "doc_hash": "482bc618b41aa13cccf2ba1f0f601446493fbb34de2921e5a870f0e877a9f9ed"
+    }
+  },
+  {
+    "query": "If you had to explain to a new teammate how your experiences in performance-based activism shape the way you approach collaboration and inclusion, what would you say?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1jHr7LnY83DfJbyG1C6v0HYr6n8voRhoLC8UfTLbKGkU",
+      "doc_title": "1jHr7LnY83DfJbyG1C6v0HYr6n8voRhoLC8UfTLbKGkU.docx",
+      "doc_hash": "482bc618b41aa13cccf2ba1f0f601446493fbb34de2921e5a870f0e877a9f9ed"
+    }
+  },
+  {
+    "query": "What role did Imre Nagy play during the 1956 Budapest protests and how did his position change over those days?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1tDGJCNeczE6At5Ns7yn4fsvR453WRxvI",
+      "doc_title": "1tDGJCNeczE6At5Ns7yn4fsvR453WRxvI.docx",
+      "doc_hash": "f1fb9e348908ab0c08ba89b3a5a46601aed01edd09b766c0e60a4b22333d798b"
+    }
+  },
+  {
+    "query": "Can you describe how postwar economic strain and political repression in Hungary combined to trigger the nationwide uprising in autumn 1956?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1tDGJCNeczE6At5Ns7yn4fsvR453WRxvI",
+      "doc_title": "1tDGJCNeczE6At5Ns7yn4fsvR453WRxvI.docx",
+      "doc_hash": "f1fb9e348908ab0c08ba89b3a5a46601aed01edd09b766c0e60a4b22333d798b"
+    }
+  },
+  {
+    "query": "Imagine you\u2019re a delegate in a crisis simulation about a popular revolt against a one\u2011party state. Based on this historical case, what underlying conditions and turning points would you focus on to prevent the situation from escalating into full\u2011scale armed conflict?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1tDGJCNeczE6At5Ns7yn4fsvR453WRxvI",
+      "doc_title": "1tDGJCNeczE6At5Ns7yn4fsvR453WRxvI.docx",
+      "doc_hash": "f1fb9e348908ab0c08ba89b3a5a46601aed01edd09b766c0e60a4b22333d798b"
+    }
+  },
+  {
+    "query": "What experimental techniques like polymerase chain reaction and molecular docking has Amartya actually used in the lab?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "0B9CAM5ZkSLeOTVVvOGZtdFhCS0cxMmItajNVbjYzWHB0R1Bz",
+      "doc_title": "0B9CAM5ZkSLeOTVVvOGZtdFhCS0cxMmItajNVbjYzWHB0R1Bz.docx",
+      "doc_hash": "05a80a9016f650286e6fa0ff885c8e68e2370c593194246e263ee0d42c57dfe6"
+    }
+  },
+  {
+    "query": "Can you describe the kind of computational and wet-lab experience he gained during his undergraduate research, including any disease areas he focused on?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "0B9CAM5ZkSLeOTVVvOGZtdFhCS0cxMmItajNVbjYzWHB0R1Bz",
+      "doc_title": "0B9CAM5ZkSLeOTVVvOGZtdFhCS0cxMmItajNVbjYzWHB0R1Bz.docx",
+      "doc_hash": "05a80a9016f650286e6fa0ff885c8e68e2370c593194246e263ee0d42c57dfe6"
+    }
+  },
+  {
+    "query": "If we needed someone to independently drive a multi-year, cross-institutional biology project that mixes bench work, simulations, and international collaboration, how well does his past track record suggest he would perform?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "behavioural",
+    "gold": {
+      "doc_id": "0B9CAM5ZkSLeOTVVvOGZtdFhCS0cxMmItajNVbjYzWHB0R1Bz",
+      "doc_title": "0B9CAM5ZkSLeOTVVvOGZtdFhCS0cxMmItajNVbjYzWHB0R1Bz.docx",
+      "doc_hash": "05a80a9016f650286e6fa0ff885c8e68e2370c593194246e263ee0d42c57dfe6"
+    }
+  },
+  {
+    "query": "How does the SEMI-FND stacked ensemble use visual and lexical features for faster fake news detection?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1EkHQleuO9sjz0BZOas6ubVzkRro3UsGP",
+      "doc_title": "1EkHQleuO9sjz0BZOas6ubVzkRro3UsGP.pdf",
+      "doc_hash": "bd875db7eca2197a7f220313a627884f4d60acc6ba7f762c73ec09e71370ce1a"
+    }
+  },
+  {
+    "query": "Can you describe a multimodal deep learning setup that combines transformer-based text encoders with image information to identify misleading articles efficiently?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1EkHQleuO9sjz0BZOas6ubVzkRro3UsGP",
+      "doc_title": "1EkHQleuO9sjz0BZOas6ubVzkRro3UsGP.pdf",
+      "doc_hash": "bd875db7eca2197a7f220313a627884f4d60acc6ba7f762c73ec09e71370ce1a"
+    }
+  },
+  {
+    "query": "If you had to design a system to quickly filter out deceptive online posts on a social platform, what kind of model architecture and input signals would you rely on?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1EkHQleuO9sjz0BZOas6ubVzkRro3UsGP",
+      "doc_title": "1EkHQleuO9sjz0BZOas6ubVzkRro3UsGP.pdf",
+      "doc_hash": "bd875db7eca2197a7f220313a627884f4d60acc6ba7f762c73ec09e71370ce1a"
+    }
+  },
+  {
+    "query": "What kind of work did you do with SpringBoot and React at Wells Fargo, and how did it relate to integrating ML models in banking?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1CkC2fHP5Ym9T-Xma6s_L_xIqkNMuzv3HN3NVVCi32SE",
+      "doc_title": "1CkC2fHP5Ym9T-Xma6s_L_xIqkNMuzv3HN3NVVCi32SE.docx",
+      "doc_hash": "84086cebfc0e4a031c9b350909c549d2f1aed05f4270d0d1946f2ef05eebd7ec"
+    }
+  },
+  {
+    "query": "How did your background in instrumentation and control shape the way you approach modern machine learning problems like emotion understanding and news summarization?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1CkC2fHP5Ym9T-Xma6s_L_xIqkNMuzv3HN3NVVCi32SE",
+      "doc_title": "1CkC2fHP5Ym9T-Xma6s_L_xIqkNMuzv3HN3NVVCi32SE.docx",
+      "doc_hash": "84086cebfc0e4a031c9b350909c549d2f1aed05f4270d0d1946f2ef05eebd7ec"
+    }
+  },
+  {
+    "query": "If you were asked to design a product for users in India who struggle with reading fast-changing online information, what kind of system would you propose and why are you interested in that direction?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1CkC2fHP5Ym9T-Xma6s_L_xIqkNMuzv3HN3NVVCi32SE",
+      "doc_title": "1CkC2fHP5Ym9T-Xma6s_L_xIqkNMuzv3HN3NVVCi32SE.docx",
+      "doc_hash": "84086cebfc0e4a031c9b350909c549d2f1aed05f4270d0d1946f2ef05eebd7ec"
+    }
+  },
+  {
+    "query": "In your TinyTTM work, how did you use condition merging and word dropout for text augmentation, and why was that combination preferred?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1Eq94W5MUhcS3-5iJiToe3lCAB5i83sKeg_gtPPPars8",
+      "doc_title": "1Eq94W5MUhcS3-5iJiToe3lCAB5i83sKeg_gtPPPars8.docx",
+      "doc_hash": "fa68d6ca04103b1203192bfeb1c98bbd41dad3bb285266dd13c679e2ecdb1af9"
+    }
+  },
+  {
+    "query": "When shrinking a text-to-music transformer to mobile scale, how did you design the distillation loss and weighting scheme to keep quality close to the original model?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1Eq94W5MUhcS3-5iJiToe3lCAB5i83sKeg_gtPPPars8",
+      "doc_title": "1Eq94W5MUhcS3-5iJiToe3lCAB5i83sKeg_gtPPPars8.docx",
+      "doc_hash": "fa68d6ca04103b1203192bfeb1c98bbd41dad3bb285266dd13c679e2ecdb1af9"
+    }
+  },
+  {
+    "query": "Suppose a lightweight music generation model you deployed runs fast but listeners complain about timing drift in the drums and occasional strange vocal sounds. Based on your prior research, what aspects of the training or architecture would you investigate or adjust first?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1Eq94W5MUhcS3-5iJiToe3lCAB5i83sKeg_gtPPPars8",
+      "doc_title": "1Eq94W5MUhcS3-5iJiToe3lCAB5i83sKeg_gtPPPars8.docx",
+      "doc_hash": "fa68d6ca04103b1203192bfeb1c98bbd41dad3bb285266dd13c679e2ecdb1af9"
+    }
+  },
+  {
+    "query": "Can you describe your experience creating the Her-Hygiene app and what motivated that project?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "15I0SN62p2vPdMWoJZ4R14mC8NwUWqpo8LoPF9UBNRdI",
+      "doc_title": "15I0SN62p2vPdMWoJZ4R14mC8NwUWqpo8LoPF9UBNRdI.docx",
+      "doc_hash": "042d46a1ce9b2d5e6583d2e56f3da6b95de1bcda5ccc7b256fdd48a4bc72d721"
+    }
+  },
+  {
+    "query": "How did your time at a government-run college shape your view of how computing can be used to help communities?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "15I0SN62p2vPdMWoJZ4R14mC8NwUWqpo8LoPF9UBNRdI",
+      "doc_title": "15I0SN62p2vPdMWoJZ4R14mC8NwUWqpo8LoPF9UBNRdI.docx",
+      "doc_hash": "042d46a1ce9b2d5e6583d2e56f3da6b95de1bcda5ccc7b256fdd48a4bc72d721"
+    }
+  },
+  {
+    "query": "If a team is designing a tech initiative for under-resourced schools, what aspects of your background would guide how you frame the problem and engage the students?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "behavioural",
+    "gold": {
+      "doc_id": "15I0SN62p2vPdMWoJZ4R14mC8NwUWqpo8LoPF9UBNRdI",
+      "doc_title": "15I0SN62p2vPdMWoJZ4R14mC8NwUWqpo8LoPF9UBNRdI.docx",
+      "doc_hash": "042d46a1ce9b2d5e6583d2e56f3da6b95de1bcda5ccc7b256fdd48a4bc72d721"
+    }
+  },
+  {
+    "query": "Can you describe your Corporate Social Responsibility activities like plantation drives or school visits?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1wICgTUDGzBcsvf5RWRYADwyVkenJRnUZBQOtpzCqz8E",
+      "doc_title": "1wICgTUDGzBcsvf5RWRYADwyVkenJRnUZBQOtpzCqz8E.docx",
+      "doc_hash": "3770d3b0f9630217002ad138e939cd4d7a81ba088d975dbd6ae2698cebad98d1"
+    }
+  },
+  {
+    "query": "How did your early volunteer work with schools and nonprofits influence the way you now think about using technology for social good?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1wICgTUDGzBcsvf5RWRYADwyVkenJRnUZBQOtpzCqz8E",
+      "doc_title": "1wICgTUDGzBcsvf5RWRYADwyVkenJRnUZBQOtpzCqz8E.docx",
+      "doc_hash": "3770d3b0f9630217002ad138e939cd4d7a81ba088d975dbd6ae2698cebad98d1"
+    }
+  },
+  {
+    "query": "If a university prioritizes community outreach and real-world impact, what aspects of its environment would make you feel it aligns with your personal journey and goals?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1wICgTUDGzBcsvf5RWRYADwyVkenJRnUZBQOtpzCqz8E",
+      "doc_title": "1wICgTUDGzBcsvf5RWRYADwyVkenJRnUZBQOtpzCqz8E.docx",
+      "doc_hash": "3770d3b0f9630217002ad138e939cd4d7a81ba088d975dbd6ae2698cebad98d1"
+    }
+  },
+  {
+    "query": "What did you work on during your Summer Software Engineering Internship at Samsung Research America?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1qJN4Cfn1QqNej9GS1lePOe2Dv3OYDtfG",
+      "doc_title": "1qJN4Cfn1QqNej9GS1lePOe2Dv3OYDtfG.pdf",
+      "doc_hash": "4563a5e380dd308070118b2bb71430a52d68e8770f38df9d1fd09c20e4aaaaf1"
+    }
+  },
+  {
+    "query": "How have you designed systems that can process hundreds of thousands of real-time telemetry signals while still supporting fast optimization workloads?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1qJN4Cfn1QqNej9GS1lePOe2Dv3OYDtfG",
+      "doc_title": "1qJN4Cfn1QqNej9GS1lePOe2Dv3OYDtfG.pdf",
+      "doc_hash": "4563a5e380dd308070118b2bb71430a52d68e8770f38df9d1fd09c20e4aaaaf1"
+    }
+  },
+  {
+    "query": "If you had to improve the reliability and monitoring of a trading analytics backend under strict latency and uptime requirements, which past experiences would you draw from and why?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1qJN4Cfn1QqNej9GS1lePOe2Dv3OYDtfG",
+      "doc_title": "1qJN4Cfn1QqNej9GS1lePOe2Dv3OYDtfG.pdf",
+      "doc_hash": "4563a5e380dd308070118b2bb71430a52d68e8770f38df9d1fd09c20e4aaaaf1"
+    }
+  },
+  {
+    "query": "How did you compress computer vision models by 70% while keeping most of the detection accuracy?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1dHrv8YjOdK_iph_PwqKXE-jAwvYwDMSd",
+      "doc_title": "1dHrv8YjOdK_iph_PwqKXE-jAwvYwDMSd.pdf",
+      "doc_hash": "89d3cf36d8691d7557e776b5ffbee78b57b4b601a69bc16ffadc11f9a7d414e3"
+    }
+  },
+  {
+    "query": "Describe how you\u2019ve designed ML systems to run reliably with low latency on limited hardware in production environments.",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1dHrv8YjOdK_iph_PwqKXE-jAwvYwDMSd",
+      "doc_title": "1dHrv8YjOdK_iph_PwqKXE-jAwvYwDMSd.pdf",
+      "doc_hash": "89d3cf36d8691d7557e776b5ffbee78b57b4b601a69bc16ffadc11f9a7d414e3"
+    }
+  },
+  {
+    "query": "If you had to make a small language model competitive for real-time use on edge devices, what past work would you draw on and how would that shape your strategy?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1dHrv8YjOdK_iph_PwqKXE-jAwvYwDMSd",
+      "doc_title": "1dHrv8YjOdK_iph_PwqKXE-jAwvYwDMSd.pdf",
+      "doc_hash": "89d3cf36d8691d7557e776b5ffbee78b57b4b601a69bc16ffadc11f9a7d414e3"
+    }
+  },
+  {
+    "query": "What leadership and mentoring experiences prepare you for the Graduate Career Peer Advisor role at Georgia Tech?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1IWr8A2hLYPvgfq-lVGS03RRIsMcrKYWXPkbfa__h9Go",
+      "doc_title": "1IWr8A2hLYPvgfq-lVGS03RRIsMcrKYWXPkbfa__h9Go.docx",
+      "doc_hash": "840b58a7b268ab9afb9aae86668a175173327734648b2e0266fbb389d82fc284"
+    }
+  },
+  {
+    "query": "How have your past roles organizing student groups and large academic events shaped your approach to guiding other graduate students on careers?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1IWr8A2hLYPvgfq-lVGS03RRIsMcrKYWXPkbfa__h9Go",
+      "doc_title": "1IWr8A2hLYPvgfq-lVGS03RRIsMcrKYWXPkbfa__h9Go.docx",
+      "doc_hash": "840b58a7b268ab9afb9aae86668a175173327734648b2e0266fbb389d82fc284"
+    }
+  },
+  {
+    "query": "If a grad student is overwhelmed balancing research, job hunting, and campus involvement, how would your own background influence the way you support them?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "behavioural",
+    "gold": {
+      "doc_id": "1IWr8A2hLYPvgfq-lVGS03RRIsMcrKYWXPkbfa__h9Go",
+      "doc_title": "1IWr8A2hLYPvgfq-lVGS03RRIsMcrKYWXPkbfa__h9Go.docx",
+      "doc_hash": "840b58a7b268ab9afb9aae86668a175173327734648b2e0266fbb389d82fc284"
+    }
+  },
+  {
+    "query": "How does your system use constraint satisfaction planning and bias detection to turn a commander\u2019s natural language intent into an executable plan?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1an8aVjRPz3fQJFxY1-3bqz4yeljj5ohNOBFMA8YNm_I",
+      "doc_title": "1an8aVjRPz3fQJFxY1-3bqz4yeljj5ohNOBFMA8YNm_I.docx",
+      "doc_hash": "dd3a3d0257e5bcebd47309fa5cdb4733aa26184ee1b604869675f0d45eb840ac"
+    }
+  },
+  {
+    "query": "If a user describes a high-level military strategy in plain language, how does your interface extract priorities and limitations and iteratively refine a machine-executable course of action?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1an8aVjRPz3fQJFxY1-3bqz4yeljj5ohNOBFMA8YNm_I",
+      "doc_title": "1an8aVjRPz3fQJFxY1-3bqz4yeljj5ohNOBFMA8YNm_I.docx",
+      "doc_hash": "dd3a3d0257e5bcebd47309fa5cdb4733aa26184ee1b604869675f0d45eb840ac"
+    }
+  },
+  {
+    "query": "Suppose a decision-maker keeps overcommitting resources to a territory for emotional reasons. How would your interactive planning tool surface this issue and guide them toward a more efficient allocation without violating their stated preferences?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1an8aVjRPz3fQJFxY1-3bqz4yeljj5ohNOBFMA8YNm_I",
+      "doc_title": "1an8aVjRPz3fQJFxY1-3bqz4yeljj5ohNOBFMA8YNm_I.docx",
+      "doc_hash": "dd3a3d0257e5bcebd47309fa5cdb4733aa26184ee1b604869675f0d45eb840ac"
+    }
+  },
+  {
+    "query": "Can you describe how you created and optimized the ultra-lightweight, low-latency image classification model for edge devices?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1yQrrPbhhcL38lC6UsvW76ESyj_l0hWvZAQvY_vUIIb8",
+      "doc_title": "1yQrrPbhhcL38lC6UsvW76ESyj_l0hWvZAQvY_vUIIb8.docx",
+      "doc_hash": "278f4c72e4470e4f59af06b4b824644eaea51a3cb6f133d0b50aedc6c32d8871"
+    }
+  },
+  {
+    "query": "How have you previously shrunk neural networks to run in real time on constrained hardware while keeping accuracy acceptable?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1yQrrPbhhcL38lC6UsvW76ESyj_l0hWvZAQvY_vUIIb8",
+      "doc_title": "1yQrrPbhhcL38lC6UsvW76ESyj_l0hWvZAQvY_vUIIb8.docx",
+      "doc_hash": "278f4c72e4470e4f59af06b4b824644eaea51a3cb6f133d0b50aedc6c32d8871"
+    }
+  },
+  {
+    "query": "In a situation where you must ship intelligent functionality on a device with tight power and memory budgets, what concrete strategies from your past work would you reuse, and why?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "behavioural",
+    "gold": {
+      "doc_id": "1yQrrPbhhcL38lC6UsvW76ESyj_l0hWvZAQvY_vUIIb8",
+      "doc_title": "1yQrrPbhhcL38lC6UsvW76ESyj_l0hWvZAQvY_vUIIb8.docx",
+      "doc_hash": "278f4c72e4470e4f59af06b4b824644eaea51a3cb6f133d0b50aedc6c32d8871"
+    }
+  },
+  {
+    "query": "What was the focus of Kanishka's summer training report at Samsung Semiconductor India R&D Centre?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1t8FeWSvG5PRt3eOnnFDi97PoMkTkW9hY",
+      "doc_title": "1t8FeWSvG5PRt3eOnnFDi97PoMkTkW9hY.pdf",
+      "doc_hash": "05531559bab58c0e078cca0971646915ace82418aa83579c6941555f665c8ea0"
+    }
+  },
+  {
+    "query": "During the industrial training at a semiconductor R&D centre, what specific engineering task formed the core of the student's project work?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1t8FeWSvG5PRt3eOnnFDi97PoMkTkW9hY",
+      "doc_title": "1t8FeWSvG5PRt3eOnnFDi97PoMkTkW9hY.pdf",
+      "doc_hash": "05531559bab58c0e078cca0971646915ace82418aa83579c6941555f665c8ea0"
+    }
+  },
+  {
+    "query": "For the B.E. degree requirement, what kind of practical project did Kanishka complete to demonstrate applied skills in electronics and communication within an industry setting?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1t8FeWSvG5PRt3eOnnFDi97PoMkTkW9hY",
+      "doc_title": "1t8FeWSvG5PRt3eOnnFDi97PoMkTkW9hY.pdf",
+      "doc_hash": "05531559bab58c0e078cca0971646915ace82418aa83579c6941555f665c8ea0"
+    }
+  },
+  {
+    "query": "What is your stance on government support for the arts and how do you balance wider access with protecting artistic freedom?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1-XPZTfQRVSbjfwV2AFPpb10O6HKTHfup",
+      "doc_title": "1-XPZTfQRVSbjfwV2AFPpb10O6HKTHfup.docx",
+      "doc_hash": "dd770b83b462ef9bddc8d3f93e0f6017b131bc75a77ed2c52c0aec3e0f550dfd"
+    }
+  },
+  {
+    "query": "When, if ever, do you think leaders should be required to leave their positions, and how do you weigh experience against the need for fresh perspectives?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1-XPZTfQRVSbjfwV2AFPpb10O6HKTHfup",
+      "doc_title": "1-XPZTfQRVSbjfwV2AFPpb10O6HKTHfup.docx",
+      "doc_hash": "dd770b83b462ef9bddc8d3f93e0f6017b131bc75a77ed2c52c0aec3e0f550dfd"
+    }
+  },
+  {
+    "query": "If you were advising a school designing its curriculum and teacher training, how would you shape classroom culture so that students both think independently and still meet demanding academic standards?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1-XPZTfQRVSbjfwV2AFPpb10O6HKTHfup",
+      "doc_title": "1-XPZTfQRVSbjfwV2AFPpb10O6HKTHfup.docx",
+      "doc_hash": "dd770b83b462ef9bddc8d3f93e0f6017b131bc75a77ed2c52c0aec3e0f550dfd"
+    }
+  },
+  {
+    "query": "How did you reduce LLaMA-3.2-1B inference latency using Advanced LayerSkip and early-exit strategies?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1vhK5rN5THHvIDV3uBj3wSMmmMA11F_nU",
+      "doc_title": "1vhK5rN5THHvIDV3uBj3wSMmmMA11F_nU.pdf",
+      "doc_hash": "b9b9388db7b5e47807bf5e92204ec6b62e9d91856a787a7796bc6d64088fa42a"
+    }
+  },
+  {
+    "query": "Can you walk me through how you\u2019ve previously combined visual and textual signals to detect misleading or low-quality online content at scale?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1vhK5rN5THHvIDV3uBj3wSMmmMA11F_nU",
+      "doc_title": "1vhK5rN5THHvIDV3uBj3wSMmmMA11F_nU.pdf",
+      "doc_hash": "b9b9388db7b5e47807bf5e92204ec6b62e9d91856a787a7796bc6d64088fa42a"
+    }
+  },
+  {
+    "query": "If we asked you to harden an autonomous decision pipeline so that it makes more reliable choices with fewer human overrides, what past work would you draw on and how would you structure the solution?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1vhK5rN5THHvIDV3uBj3wSMmmMA11F_nU",
+      "doc_title": "1vhK5rN5THHvIDV3uBj3wSMmmMA11F_nU.pdf",
+      "doc_hash": "b9b9388db7b5e47807bf5e92204ec6b62e9d91856a787a7796bc6d64088fa42a"
+    }
+  },
+  {
+    "query": "How did receiving the Annual Scholarship Award and the NIE Times Student of the Year Award influence your study habits and attitude toward academics?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1F7SqYiFuchZmYoZxulfPlKKaviyVkW-gsh--qxjOhwg",
+      "doc_title": "1F7SqYiFuchZmYoZxulfPlKKaviyVkW-gsh--qxjOhwg.docx",
+      "doc_hash": "6bc935f98ad3f156076f4bc808182c111140b22e3ec941a4151b60d5cc09c759"
+    }
+  },
+  {
+    "query": "Can you describe how you learned to balance strong academic performance with hobbies and personal growth as you moved from school into university?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1F7SqYiFuchZmYoZxulfPlKKaviyVkW-gsh--qxjOhwg",
+      "doc_title": "1F7SqYiFuchZmYoZxulfPlKKaviyVkW-gsh--qxjOhwg.docx",
+      "doc_hash": "6bc935f98ad3f156076f4bc808182c111140b22e3ec941a4151b60d5cc09c759"
+    }
+  },
+  {
+    "query": "When collaborating on a demanding project, how would your past experiences with ego, stress, and later embracing empathy and service shape the way you support your teammates?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "behavioural",
+    "gold": {
+      "doc_id": "1F7SqYiFuchZmYoZxulfPlKKaviyVkW-gsh--qxjOhwg",
+      "doc_title": "1F7SqYiFuchZmYoZxulfPlKKaviyVkW-gsh--qxjOhwg.docx",
+      "doc_hash": "6bc935f98ad3f156076f4bc808182c111140b22e3ec941a4151b60d5cc09c759"
+    }
+  },
+  {
+    "query": "How does the resume matching API generate and return the most relevant resumes to the client?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1kMYhOvg01rg1WAz-znOWz2ToQFqBeaii7VUEwOKVr78",
+      "doc_title": "1kMYhOvg01rg1WAz-znOWz2ToQFqBeaii7VUEwOKVr78.docx",
+      "doc_hash": "537907221517d61ab320c947201ecf59cfe2c0801ad41565463696a2ce9f89c8"
+    }
+  },
+  {
+    "query": "Can you explain how your cloud-hosted resume screening system processes PDF CVs and ranks them against a job description?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1kMYhOvg01rg1WAz-znOWz2ToQFqBeaii7VUEwOKVr78",
+      "doc_title": "1kMYhOvg01rg1WAz-znOWz2ToQFqBeaii7VUEwOKVr78.docx",
+      "doc_hash": "537907221517d61ab320c947201ecf59cfe2c0801ad41565463696a2ce9f89c8"
+    }
+  },
+  {
+    "query": "If a recruiter complains that candidate recommendations slow to a crawl during peak hiring season, what aspects of your system\u2019s design would you examine first?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1kMYhOvg01rg1WAz-znOWz2ToQFqBeaii7VUEwOKVr78",
+      "doc_title": "1kMYhOvg01rg1WAz-znOWz2ToQFqBeaii7VUEwOKVr78.docx",
+      "doc_hash": "537907221517d61ab320c947201ecf59cfe2c0801ad41565463696a2ce9f89c8"
+    }
+  },
+  {
+    "query": "What kinds of backend and infrastructure technologies has Ridam used professionally, including cloud platforms and databases?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "12KtvkWPClajPliTTTO36oUs-nTaPX0aM",
+      "doc_title": "12KtvkWPClajPliTTTO36oUs-nTaPX0aM.pdf",
+      "doc_hash": "72fb5d0bbaa852192734294ade570b91914a10877e6ee5341fd102238ebf2531"
+    }
+  },
+  {
+    "query": "Can you describe a project where Ridam had to process very large volumes of real-time data and significantly speed up computation on a distributed system?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "12KtvkWPClajPliTTTO36oUs-nTaPX0aM",
+      "doc_title": "12KtvkWPClajPliTTTO36oUs-nTaPX0aM.pdf",
+      "doc_hash": "72fb5d0bbaa852192734294ade570b91914a10877e6ee5341fd102238ebf2531"
+    }
+  },
+  {
+    "query": "If a team needed someone to own both the user interface and the machine learning backend for an interactive, latency-sensitive product, what past experience shows Ridam can handle that end-to-end?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "12KtvkWPClajPliTTTO36oUs-nTaPX0aM",
+      "doc_title": "12KtvkWPClajPliTTTO36oUs-nTaPX0aM.pdf",
+      "doc_hash": "72fb5d0bbaa852192734294ade570b91914a10877e6ee5341fd102238ebf2531"
+    }
+  },
+  {
+    "query": "Can you share your 2-week Push-Pull-Legs workout routine, including specific exercises, sets, and weights you use?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1u4urV7g0VgU3KhWqk83eDPIbpX-ZkVog0pQ5ok8oRWc",
+      "doc_title": "1u4urV7g0VgU3KhWqk83eDPIbpX-ZkVog0pQ5ok8oRWc.docx",
+      "doc_hash": "107ae805ed6b5936272c6ff414787792dcdbb2a3da921be27acaf6fb2e389f8c"
+    }
+  },
+  {
+    "query": "How do you structure your strength training over a typical two-week period, and how do you decide when to increase the load?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1u4urV7g0VgU3KhWqk83eDPIbpX-ZkVog0pQ5ok8oRWc",
+      "doc_title": "1u4urV7g0VgU3KhWqk83eDPIbpX-ZkVog0pQ5ok8oRWc.docx",
+      "doc_hash": "107ae805ed6b5936272c6ff414787792dcdbb2a3da921be27acaf6fb2e389f8c"
+    }
+  },
+  {
+    "query": "If a teammate asked how your lifestyle habits reflect your commitment to long-term goals in both fitness and sustainability-focused career plans, how would you describe that?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1u4urV7g0VgU3KhWqk83eDPIbpX-ZkVog0pQ5ok8oRWc",
+      "doc_title": "1u4urV7g0VgU3KhWqk83eDPIbpX-ZkVog0pQ5ok8oRWc.docx",
+      "doc_hash": "107ae805ed6b5936272c6ff414787792dcdbb2a3da921be27acaf6fb2e389f8c"
+    }
+  },
+  {
+    "query": "How do you make your creamy matcha latte without using a whisk?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1xrs_EO44GB9ijcu2RrI3aQkB3PUDAZq8w4cr-2pHQ6s",
+      "doc_title": "1xrs_EO44GB9ijcu2RrI3aQkB3PUDAZq8w4cr-2pHQ6s.docx",
+      "doc_hash": "d2539f8aea08a58f2a64f47da0ab425b8b53830ccdb73ceadf596fb4d0efde77"
+    }
+  },
+  {
+    "query": "If I want a balanced green tea latte that isn\u2019t bitter, how do you suggest I combine the tea, dairy, and sweetener?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1xrs_EO44GB9ijcu2RrI3aQkB3PUDAZq8w4cr-2pHQ6s",
+      "doc_title": "1xrs_EO44GB9ijcu2RrI3aQkB3PUDAZq8w4cr-2pHQ6s.docx",
+      "doc_hash": "d2539f8aea08a58f2a64f47da0ab425b8b53830ccdb73ceadf596fb4d0efde77"
+    }
+  },
+  {
+    "query": "What quick breakfast, lunch, and dinner ideas would you recommend to a busy college student who needs simple, low-effort cooking options?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1xrs_EO44GB9ijcu2RrI3aQkB3PUDAZq8w4cr-2pHQ6s",
+      "doc_title": "1xrs_EO44GB9ijcu2RrI3aQkB3PUDAZq8w4cr-2pHQ6s.docx",
+      "doc_hash": "d2539f8aea08a58f2a64f47da0ab425b8b53830ccdb73ceadf596fb4d0efde77"
+    }
+  },
+  {
+    "query": "How is the final AScore for fashion products computed and then used to rank items on the PORTRAY website?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1_eWgah--QYkJN8GfAc_K1B_URiFZzpar",
+      "doc_title": "1_eWgah--QYkJN8GfAc_K1B_URiFZzpar.docx",
+      "doc_hash": "596188a5af6c7f011891251709944b4b1c4fa56558fd8582fd74dae70db3d0eb"
+    }
+  },
+  {
+    "query": "Can you walk me through your method for combining recency of fashion articles, celebrity mentions, and product\u2013trend keyword overlap into a single ranking metric?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1_eWgah--QYkJN8GfAc_K1B_URiFZzpar",
+      "doc_title": "1_eWgah--QYkJN8GfAc_K1B_URiFZzpar.docx",
+      "doc_hash": "596188a5af6c7f011891251709944b4b1c4fa56558fd8582fd74dae70db3d0eb"
+    }
+  },
+  {
+    "query": "If a retailer wants to quickly understand why certain t\u2011shirts are highlighted as best or worst performers without reading all reviews and articles manually, what does your system surface to them and how is it derived?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1_eWgah--QYkJN8GfAc_K1B_URiFZzpar",
+      "doc_title": "1_eWgah--QYkJN8GfAc_K1B_URiFZzpar.docx",
+      "doc_hash": "596188a5af6c7f011891251709944b4b1c4fa56558fd8582fd74dae70db3d0eb"
+    }
+  },
+  {
+    "query": "What kinds of activities did you organize as a district-level Director in the Interact Club?",
+    "namespace": "nontechnical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1xFecUMUEyYI6mgma7Y2R3KGMZn0yxYBV-S_AYOijxjY",
+      "doc_title": "1xFecUMUEyYI6mgma7Y2R3KGMZn0yxYBV-S_AYOijxjY.docx",
+      "doc_hash": "205ece23abab98cc0a38464defd60ea12f38dfe8e918a825128d8aa73d4f14b8"
+    }
+  },
+  {
+    "query": "Can you describe a formative experience working with children from low-income backgrounds that shaped your long-term commitment to volunteering?",
+    "namespace": "nontechnical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1xFecUMUEyYI6mgma7Y2R3KGMZn0yxYBV-S_AYOijxjY",
+      "doc_title": "1xFecUMUEyYI6mgma7Y2R3KGMZn0yxYBV-S_AYOijxjY.docx",
+      "doc_hash": "205ece23abab98cc0a38464defd60ea12f38dfe8e918a825128d8aa73d4f14b8"
+    }
+  },
+  {
+    "query": "If your future employer launched an employee-led social impact initiative, what past experiences would you draw on to design and lead meaningful projects?",
+    "namespace": "nontechnical",
+    "difficulty": "hard",
+    "query_type": "behavioural",
+    "gold": {
+      "doc_id": "1xFecUMUEyYI6mgma7Y2R3KGMZn0yxYBV-S_AYOijxjY",
+      "doc_title": "1xFecUMUEyYI6mgma7Y2R3KGMZn0yxYBV-S_AYOijxjY.docx",
+      "doc_hash": "205ece23abab98cc0a38464defd60ea12f38dfe8e918a825128d8aa73d4f14b8"
+    }
+  },
+  {
+    "query": "What combination of topic modeling and clustering does this work use for unsupervised extractive text summarization, and which ROUGE metrics are reported?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1nzg3nmP6mCz3R1GSpSX4UpwwfANS97bw",
+      "doc_title": "1nzg3nmP6mCz3R1GSpSX4UpwwfANS97bw.pdf",
+      "doc_hash": "489dfbee5a0eda7de3e20fa1b98c28ffe9aaebd7e969fd370e261baadf243870"
+    }
+  },
+  {
+    "query": "Describe the unsupervised strategy this paper follows to build summaries from a single article, including how it balances topics and how performance is measured.",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1nzg3nmP6mCz3R1GSpSX4UpwwfANS97bw",
+      "doc_title": "1nzg3nmP6mCz3R1GSpSX4UpwwfANS97bw.pdf",
+      "doc_hash": "489dfbee5a0eda7de3e20fa1b98c28ffe9aaebd7e969fd370e261baadf243870"
+    }
+  },
+  {
+    "query": "If you needed to automatically condense long instructional or news articles without any labeled summaries, which specific modeling and evaluation setup from this work could you replicate, and on what benchmarks?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1nzg3nmP6mCz3R1GSpSX4UpwwfANS97bw",
+      "doc_title": "1nzg3nmP6mCz3R1GSpSX4UpwwfANS97bw.pdf",
+      "doc_hash": "489dfbee5a0eda7de3e20fa1b98c28ffe9aaebd7e969fd370e261baadf243870"
+    }
+  },
+  {
+    "query": "What unsupervised extractive summarization method did you propose using LDA and K-Medoids, and on which datasets did you evaluate it?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1qHA0OtKTH13fVND__fhBVu8XgYOgssSS",
+      "doc_title": "1qHA0OtKTH13fVND__fhBVu8XgYOgssSS.pdf",
+      "doc_hash": "9bfc3f98e131ef23a7cf3e4514d341b433f3651fe217f5c7025ea4daa4ea56e5"
+    }
+  },
+  {
+    "query": "How did you design your single-document summarization system to limit topic bias while remaining label-free, and how was its quality benchmarked?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1qHA0OtKTH13fVND__fhBVu8XgYOgssSS",
+      "doc_title": "1qHA0OtKTH13fVND__fhBVu8XgYOgssSS.pdf",
+      "doc_hash": "9bfc3f98e131ef23a7cf3e4514d341b433f3651fe217f5c7025ea4daa4ea56e5"
+    }
+  },
+  {
+    "query": "In a role where latency and compute budgets are tight, how have you previously balanced model performance with faster execution in an NLP project?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1qHA0OtKTH13fVND__fhBVu8XgYOgssSS",
+      "doc_title": "1qHA0OtKTH13fVND__fhBVu8XgYOgssSS.pdf",
+      "doc_hash": "9bfc3f98e131ef23a7cf3e4514d341b433f3651fe217f5c7025ea4daa4ea56e5"
+    }
+  },
+  {
+    "query": "What did you work on during your Amazon Aurora Storage Fabric internship related to chaos engineering and large-scale failures?",
+    "namespace": "technical",
+    "difficulty": "easy",
+    "query_type": "direct",
+    "gold": {
+      "doc_id": "1llcesP5afp0R6amLX0CMgEQVevQANvjk",
+      "doc_title": "1llcesP5afp0R6amLX0CMgEQVevQANvjk.pdf",
+      "doc_hash": "a3085966fabe4c5d8c1e19cd4f8892648311a97f56440316e183dbb54ceae17c"
+    }
+  },
+  {
+    "query": "Can you describe your experience improving language-model planning methods that outperform common step-by-step reasoning baselines like basic tree search approaches?",
+    "namespace": "technical",
+    "difficulty": "medium",
+    "query_type": "paraphrased",
+    "gold": {
+      "doc_id": "1llcesP5afp0R6amLX0CMgEQVevQANvjk",
+      "doc_title": "1llcesP5afp0R6amLX0CMgEQVevQANvjk.pdf",
+      "doc_hash": "a3085966fabe4c5d8c1e19cd4f8892648311a97f56440316e183dbb54ceae17c"
+    }
+  },
+  {
+    "query": "If our trading risk platform started missing suspicious accounts in real time, based on your past work, what kind of backend and ranking strategies would you bring to fix that?",
+    "namespace": "technical",
+    "difficulty": "hard",
+    "query_type": "inferential",
+    "gold": {
+      "doc_id": "1llcesP5afp0R6amLX0CMgEQVevQANvjk",
+      "doc_title": "1llcesP5afp0R6amLX0CMgEQVevQANvjk.pdf",
+      "doc_hash": "a3085966fabe4c5d8c1e19cd4f8892648311a97f56440316e183dbb54ceae17c"
     }
   }
 ]

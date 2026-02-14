@@ -199,9 +199,6 @@ def main():
     count = 0
     
     for doc in documents:
-        if (count == 2):
-            break
-        
         doc_id = doc["doc_id"]
         doc_title = doc["doc_title"]
         namespace = doc["namespace"]
@@ -211,20 +208,18 @@ def main():
 
         doc_hash = compute_doc_hash(full_text)
 
-        # Reuse existing prompt builder
         prompt = build_user_prompt(
             source_text=full_text,
             doc_title=doc_title,
             namespace=namespace,
-            seed_field=None,  # not needed anymore
-            n_easy=2,
-            n_medium=2,
-            n_hard=2,
+            n_easy=1,
+            n_medium=1,
+            n_hard=1,
         )
 
         response = client.chat.completions.create(
             model=MODEL,
-            max_completion_tokens=1024,
+            max_completion_tokens=800,
             temperature=0.7,
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
