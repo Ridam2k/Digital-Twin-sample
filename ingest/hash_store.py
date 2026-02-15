@@ -17,7 +17,7 @@ def save_hash_store(store: dict) -> None:
 
 
 def is_changed(store: dict, file_key: str, current_sha: str) -> bool:
-    """Returns True if the file is new or its SHA has changed since last ingest."""
+    """Check if the file is new or its SHA has changed since last ingest"""
     entry = store.get(file_key)
     if entry is None:
         return True
@@ -25,7 +25,7 @@ def is_changed(store: dict, file_key: str, current_sha: str) -> bool:
 
 
 def record_file(store: dict, file_key: str, git_sha: str, point_ids: list[str]) -> None:
-    """Record that a file was ingested with this SHA and produced these Qdrant point IDs."""
+    """Record file was ingested with this SHA and produced these Qdrant point IDs"""
     store[file_key] = {
         "git_sha":   git_sha,
         "point_ids": point_ids,
@@ -33,7 +33,7 @@ def record_file(store: dict, file_key: str, git_sha: str, point_ids: list[str]) 
 
 
 def get_old_point_ids(store: dict, file_key: str) -> list[str]:
-    """Return the Qdrant point IDs previously produced by this file (for deletion)."""
+    """Return the Qdrant point IDs previously produced by this file (for deletion)"""
     entry = store.get(file_key)
     if entry is None:
         return []

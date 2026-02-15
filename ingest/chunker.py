@@ -1,4 +1,4 @@
-# Expected metadata schema per chunk (all fields set here or by GoogleDriveReader):
+# Expected metadata schema per chunk:
 # {
 #   "doc_id", "doc_title", "source_type", "source_url",
 #   "personality_ns", "content_type", "last_modified",

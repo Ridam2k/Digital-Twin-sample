@@ -1,11 +1,6 @@
 """
-Interactive CLI for the digital twin.
+CLI for the digital twin
 Run: uv run query_cli.py
-
-Commands:
-  Type any question and press Enter to query.
-  Type 'mode' to see which namespace was detected.
-  Type 'exit' or Ctrl+C to quit.
 """
 
 from core.router import detect_mode
@@ -58,7 +53,7 @@ def format_response(result: dict, mode: str, scores: dict,
 
 def run():
     print("\n Digital Twin — Query CLI")
-    print(" Type your question. 'exit' to quit.\n")
+    print(" Type your question\n")
 
     while True:
         try:
@@ -87,8 +82,7 @@ def run():
         # Step 4: generate
         result = generate(system_prompt, user_message, chunks, out_of_scope)
 
-        # Step 5: evaluation
-       
+        # Step 5: evaluation -> extra latency
         # Eval - Groundedness
         # grounded_result = check_groundedness(response=result["response"], retrieved_chunks=retrieved_texts)
 
@@ -101,9 +95,10 @@ def run():
 
         # Step 6: display
         # print(format_response(result, mode, scores, grounded_result, persona_result))
+        
+        #Basic display without eval metrics
         print(format_response(result, mode, scores, None, None))
 
-        # Log to JSONL — one record per query, append-only
         # log_entry = {
         #     "ts": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         #     "query": query,

@@ -1,7 +1,12 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
+import NavTabs from '../Navigation/NavTabs.jsx';
 import './Header.css';
 
-export default function Header({ mode, systemStatus }) {
+export default function Header({ mode, systemStatus, showNav = false }) {
+  const location = useLocation();
+  const isObservability = location.pathname === '/observability';
+
   return (
     <header className="header">
       {/* Logomark */}
@@ -16,16 +21,23 @@ export default function Header({ mode, systemStatus }) {
         {/* <div className="wordmark-subtitle"></div> */}
       </div>
 
+      {/* Navigation Tabs */}
+      {showNav && <NavTabs />}
+
       {/* Spacer */}
       <div className="spacer" />
 
-      {/* Mode Badge */}
-      <span key={mode} className="mode-badge">
-        [ {mode.toUpperCase()} ]
-      </span>
+      {/* Mode Badge - Only show on chat page */}
+      {!isObservability && mode && (
+        <span key={mode} className="mode-badge">
+          [ {mode.toUpperCase()} ]
+        </span>
+      )}
 
-      {/* Status Dot */}
-      <div className={`status-dot status-${systemStatus}`} />
+      {/* Status Dot - Only show on chat page */}
+      {!isObservability && systemStatus && (
+        <div className={`status-dot status-${systemStatus}`} />
+      )}
     </header>
   );
 }

@@ -13,11 +13,15 @@ from core.context_builder import build_context
 from core.generator import generate
 from core.groundedness import check_groundedness
 from core.persona_consistency import check_persona_consistency
+from api.eval_endpoints import router as eval_router
 import json
 import datetime
 from typing import Optional
 
 app = FastAPI(title="Digital Twin API", version="1.0.0")
+
+# Mount eval endpoints
+app.include_router(eval_router, prefix="/api/eval", tags=["evaluation"])
 
 # CORS middleware - allow Vite dev server
 app.add_middleware(
@@ -77,48 +81,51 @@ async def query_endpoint(req : QueryRequest):
         # Step 4: Generator - get LLM response
         result = generate(system_prompt, user_message, chunks, out_of_scope)
 
-        # # Step 5: Evaluation (backend-only, logged but not returned to frontend)
-        # # Eval 5a: Groundedness check
-        # grounded_result = check_groundedness(
-        #     response=result["response"],
-        #     retrieved_chunks=retrieved_texts
-        # )
+        # Step 5: Evaluation (backend-only, logged but not returned to frontend)
+        # Eval 5a: Groundedness check
+        grounded_result = check_groundedness(
+            response=result["response"],
+            retrieved_chunks=retrieved_texts
+        )
 
-        # # Eval 5b: Persona consistency check
-        # persona_result = check_persona_consistency(
-        #     response=result["response"],
-        #     mode=mode,
-        #     query=req.query
-        # )
+        # Eval 5b: Persona consistency check
+        persona_result = check_persona_consistency(
+            response=result["response"],
+            mode=mode,
+            query=req.query
+        )
 
-        # # Step 6: Logging (same format as CLI)
-        # log_entry = {
-        #     "ts": datetime.datetime.now(datetime.timezone.utc).isoformat(),
-        #     "query": req.query,
-        #     "namespace": mode,
+        # Step 6: Logging (same format as CLI)
+        log_entry = {
+            "ts": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            "query": req.query,
+            "namespace": mode,
 
-        #     # Groundedness metrics
-        #     "groundedness_score": grounded_result.groundedness_score,
-        #     "fabricated_claims": grounded_result.fabricated_claims,
-        #     "claim_audits": [vars(a) for a in grounded_result.claim_audits],
+            # Groundedness metrics
+            "groundedness_score": grounded_result.groundedness_score,
+            "fabricated_claims": grounded_result.fabricated_claims,
+            "claim_audits": [vars(a) for a in grounded_result.claim_audits],
 
-        #     # Persona consistency metrics
-        #     "persona_consistency_score": persona_result.weighted_score,
-        #     "persona_violations": (
-        #         persona_result.values_alignment.violations +
-        #         persona_result.tone_fidelity.violations
-        #     ),
-        #     "persona_dimension_scores": {
-        #         "values_alignment": persona_result.values_alignment.score,
-        #         "tone_fidelity": persona_result.tone_fidelity.score,
-        #     },
-        #     "persona_dimension_reasoning": {
-        #         "values_alignment": persona_result.values_alignment.reasoning,
-        #         "tone_fidelity": persona_result.tone_fidelity.reasoning,
-        #     },
-        # }
-        # with open("eval_log.jsonl", "a") as f:
-        #     f.write(json.dumps(log_entry) + "\n")
+            # Persona consistency metrics
+            "persona_consistency_score": persona_result.weighted_score,
+            "persona_violations": (
+                persona_result.values_alignment.violations +
+                persona_result.tone_fidelity.violations
+            ),
+            "persona_dimension_scores": {
+                "values_alignment": persona_result.values_alignment.score,
+                "tone_fidelity": persona_result.tone_fidelity.score,
+            },
+            "persona_dimension_reasoning": {
+                "values_alignment": persona_result.values_alignment.reasoning,
+                "tone_fidelity": persona_result.tone_fidelity.reasoning,
+            },
+
+            # Citation scores for similarity analysis
+            "citation_scores": [c["score"] for c in result["citations"]]
+        }
+        with open("eval_log.jsonl", "a") as f:
+            f.write(json.dumps(log_entry) + "\n")
 
         # Return API response (evaluation metrics not included in response)
         return QueryResponse(

@@ -4,7 +4,7 @@ from config import GDRIVE_HASH_STORE_PATH
 
 
 def load_gdrive_hash_store() -> dict:
-    """Load the Google Drive hash store from disk (or return empty dict if it doesn't exist)."""
+    """Load the Google Drive hash store"""
     path = Path(GDRIVE_HASH_STORE_PATH)
     if not path.exists():
         return {}

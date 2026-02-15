@@ -1,7 +1,6 @@
 from ingest.gdrive_reader import get_gdrive_reader
 from ingest.chunker import tag_and_chunk
 from ingest.embedder import upsert_nodes, delete_points_by_ids
-from config import TECHNICAL_FOLDER_ID, NONTECHNICAL_FOLDER_ID, GITHUB_REPOS
 from ingest.github_reader import fetch_repo_files, files_to_documents
 from ingest.hash_store import (
     load_hash_store, save_hash_store,
@@ -12,10 +11,11 @@ from ingest.gdrive_hash_store import (
     is_gdrive_changed, record_gdrive_file, get_old_gdrive_point_ids,
 )
 
+from config import TECHNICAL_FOLDER_ID, NONTECHNICAL_FOLDER_ID, GITHUB_REPOS
+
 def ingest_folder(folder_id: str, personality_ns: str, content_type: str) -> None:
     """
-    Ingest Google Drive folder with hash-based change detection.
-    Only files whose modified_time changed since last run are re-embedded.
+    Ingest Google Drive folders
     """
     print(f"\n[ingest] Starting: namespace='{personality_ns}', content_type='{content_type}'")
     reader = get_gdrive_reader(folder_id)
@@ -34,7 +34,7 @@ def ingest_folder(folder_id: str, personality_ns: str, content_type: str) -> Non
 
         # Skip files without proper metadata
         if not file_id or not modified_time:
-            print(f"[gdrive] Warning: Skipping document without file_id or modified_time: {doc.metadata.get('file_name', 'Unknown')}")
+            print(f"[gdrive] Warning: Skipping document without metadata: {doc.metadata.get('file_name', 'Unknown')}")
             continue
 
         # Check if file has changed
@@ -42,7 +42,7 @@ def ingest_folder(folder_id: str, personality_ns: str, content_type: str) -> Non
             skipped_count += 1
             continue
 
-        # Delete old chunks if this is an update (not a new file)
+        # Delete old chunks if this is an update on an existing doc
         old_ids = get_old_gdrive_point_ids(store, file_id)
         if old_ids:
             delete_points_by_ids(old_ids)
@@ -50,7 +50,7 @@ def ingest_folder(folder_id: str, personality_ns: str, content_type: str) -> Non
         else:
             new_count += 1
 
-        # Ingest the (new or changed) file
+        # Ingest updates/new
         nodes = tag_and_chunk([doc], personality_ns, content_type)
         upsert_nodes(nodes)
 
