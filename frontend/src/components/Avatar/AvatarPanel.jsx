@@ -10,6 +10,7 @@ export default function AvatarPanel({ systemStatus }) {
   const [isIngestingGithub, setIsIngestingGithub] = useState(false);
   const [customRepo, setCustomRepo] = useState('');
   const [ingestError, setIngestError] = useState(null);
+  const [ingestSuccess, setIngestSuccess] = useState(null); // 'gdrive' | 'github' | null
 
   // Hardcoded GITHUB_REPOS (synced with config.py)
   const GITHUB_REPOS = [
@@ -24,9 +25,12 @@ export default function AvatarPanel({ systemStatus }) {
   const handleGDriveIngest = async () => {
     setIsIngestingGDrive(true);
     setIngestError(null);
+    setIngestSuccess(null);
     try {
       const result = await ingestGoogleDrive();
       console.log('Google Drive ingestion complete:', result);
+      setIngestSuccess('gdrive');
+      setTimeout(() => setIngestSuccess(null), 3000);
     } catch (error) {
       console.error('Google Drive ingestion failed:', error);
       setIngestError(error.message || 'Google Drive ingestion failed');
@@ -38,6 +42,7 @@ export default function AvatarPanel({ systemStatus }) {
   const handleGithubIngest = async () => {
     setIsIngestingGithub(true);
     setIngestError(null);
+    setIngestSuccess(null);
     try {
       // Parse custom repo input
       const trimmedRepo = customRepo.trim();
@@ -52,6 +57,8 @@ export default function AvatarPanel({ systemStatus }) {
 
       // Clear input on success
       setCustomRepo('');
+      setIngestSuccess('github');
+      setTimeout(() => setIngestSuccess(null), 3000);
     } catch (error) {
       console.error('GitHub ingestion failed:', error);
       setIngestError(error.message || 'GitHub ingestion failed');
@@ -120,6 +127,9 @@ export default function AvatarPanel({ systemStatus }) {
         >
           {isIngestingGDrive ? 'Ingesting...' : 'Ingest Google Drive'}
         </button>
+        {ingestSuccess === 'gdrive' && (
+          <span className="ingest-success">✓ Ingestion Complete!</span>
+        )}
 
         <div className="github-ingest-group">
           <button
@@ -137,6 +147,9 @@ export default function AvatarPanel({ systemStatus }) {
             onChange={(e) => setCustomRepo(e.target.value)}
             disabled={isIngestingGDrive || isIngestingGithub}
           />
+          {ingestSuccess === 'github' && (
+            <span className="ingest-success">Ingestion Complete!</span>
+          )}
         </div>
 
         {ingestError && (

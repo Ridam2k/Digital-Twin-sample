@@ -196,3 +196,11 @@
   border-radius: 4px;
   text-align: center;
 }
+
+.ingest-success {
+  color: #00C2A8;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  display: block;
+  animation: fadeIn 500ms ease-out;
+}
