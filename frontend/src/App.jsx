@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ChatPage from './pages/ChatPage.jsx';
 import ObservabilityPage from './pages/ObservabilityPage.jsx';
-import { sendQuery, APIError } from './api/client.js';
+import { sendQuery, streamQuery, APIError } from './api/client.js';
 import './App.css';
 
 export default function App() {
@@ -26,28 +26,47 @@ export default function App() {
     setSystemStatus('processing');
 
     try {
-      const result = await sendQuery(queryText, contentType);
+      // Using streaming client for progressive response delivery
+      await streamQuery(queryText, contentType, {
+        onResponse: (data) => {
+          // Immediately display response when it arrives
+          if (data.mode !== mode) {
+            setMode(data.mode);
+            setRouterScores(data.router_scores);
+            setShowModeToast(true);
+          }
 
-      if (result.mode !== mode) {
-        setMode(result.mode);
-        setRouterScores(result.router_scores);
-        setShowModeToast(true);
-      }
+          setSystemStatus('speaking');
 
-      setSystemStatus('speaking');
+          const assistantMsg = {
+            id: nextMessageId.current++,
+            role: 'twin',
+            text: data.response,
+            citations: data.citations,
+            outOfScope: data.out_of_scope,
+          };
 
-      const assistantMsg = {
-        id: nextMessageId.current++,
-        role: 'twin',
-        text: result.response,
-        citations: result.citations,
-        outOfScope: result.out_of_scope,
-      };
-      setMessages((prev) => [...prev, assistantMsg]);
+          setMessages((prev) => [...prev, assistantMsg]);
 
-      setTimeout(() => {
-        setSystemStatus(result.out_of_scope ? 'out-of-scope' : 'idle');
-      }, 800);
+          setTimeout(() => {
+            setSystemStatus(data.out_of_scope ? 'out-of-scope' : 'idle');
+          }, 800);
+        },
+
+        onMetrics: (data) => {
+          // Metrics are logged server-side, just log to console for debugging
+          console.log('Metrics computed:', data);
+        },
+
+        onDone: () => {
+          console.log('Query stream completed');
+        },
+
+        onError: (error) => {
+          console.error('Query stream error:', error);
+          throw error; // Let outer catch handle it
+        }
+      });
 
     } catch (error) {
       console.error('Query failed:', error);

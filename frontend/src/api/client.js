@@ -50,6 +50,92 @@ export async function sendQuery(queryText, contentType = null) {
 }
 
 /**
+ * Stream a query and receive progressive updates via Server-Sent Events (SSE).
+ * Returns response immediately, then streams metrics as they complete in the background.
+ *
+ * @param {string} queryText - The user's question
+ * @param {string|null} contentType - Optional content type filter (e.g., "code")
+ * @param {Object} callbacks - Event handlers for different stream events
+ * @param {Function} callbacks.onResponse - Called when response arrives (data: {response, citations, mode, ...})
+ * @param {Function} callbacks.onMetrics - Called when metrics arrive (optional, for logging)
+ * @param {Function} callbacks.onDone - Called when stream completes
+ * @param {Function} callbacks.onError - Called on error
+ * @throws {APIError} If the request fails
+ */
+export async function streamQuery(queryText, contentType, callbacks) {
+  const url = `${API_BASE_URL}/api/query/stream`;
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      query: queryText,
+      ...(contentType && { content_type: contentType })
+    }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new APIError(
+      `API request failed: ${response.status}`,
+      response.status,
+      errorData.detail || 'Unknown error'
+    );
+  }
+
+  // Read SSE stream
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      // Decode chunk and add to buffer
+      buffer += decoder.decode(value, { stream: true });
+
+      // Split by newlines (SSE format uses \n\n as delimiter)
+      const lines = buffer.split('\n');
+      buffer = lines.pop() || ''; // Keep incomplete line in buffer
+
+      for (const line of lines) {
+        if (line.startsWith('data: ')) {
+          const eventData = JSON.parse(line.slice(6));
+
+          switch (eventData.type) {
+            case 'response':
+              callbacks.onResponse?.(eventData.data);
+              break;
+
+            case 'metrics_groundedness':
+            case 'metrics_persona':
+              // Metrics are logged server-side, optionally notify frontend
+              callbacks.onMetrics?.(eventData.data);
+              break;
+
+            case 'done':
+              callbacks.onDone?.();
+              break;
+
+            case 'error':
+              throw new APIError(
+                eventData.data.message,
+                500,
+                eventData.data.message
+              );
+          }
+        }
+      }
+    }
+  } catch (error) {
+    callbacks.onError?.(error);
+    throw error;
+  }
+}
+
+/**
  * Check backend health status.
  *
  * @returns {Promise<Object>} Health status object
