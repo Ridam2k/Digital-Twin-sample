@@ -202,7 +202,7 @@ export async function fetchRetrievalStats(recompute = false, k = 5) {
 /**
  * Fetch available projects (unique doc_title values) from Qdrant.
  *
- * @returns {Promise<Object>} Projects payload with {projects, total, collection}
+ * @returns {Promise<Object>} Projects payload with {groups, total_unique, collection}
  * @throws {APIError} If the request fails
  */
 export async function fetchProjects() {

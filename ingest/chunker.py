@@ -49,6 +49,14 @@ def tag_and_chunk(
                 "ingested_at":    ingested_at,
             }
         )
+
+        # Ensure doc_title is set for Google Drive docs (metadata uses "file path")
+        file_path = node.metadata.get("file path") or node.metadata.get("file_path")
+        file_name = node.metadata.get("file name") or node.metadata.get("file_name")
+        if file_path:
+            node.metadata["doc_title"] = file_path.split("/")[-1]
+        elif not node.metadata.get("doc_title") and file_name:
+            node.metadata["doc_title"] = file_name
         
         file_id = None
         if "file id" in node.metadata:

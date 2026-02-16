@@ -65,14 +65,14 @@ cd DT
 #### Create Virtual Environment
 
 ```bash
-python -m venv .venv
+uv venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 ```
 
 #### Install Dependencies
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 ### 3. Configuration Files (Provided Offline)

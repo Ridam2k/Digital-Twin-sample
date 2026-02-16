@@ -108,9 +108,35 @@ def upsert_nodes(client: QdrantClient, nodes: list) -> None:
     texts = [node.get_content() for node in valid_nodes]
     vectors = _embed_texts(texts)
 
+    def _extract_doc_title(meta: dict) -> str:
+        for key in ("file path", "file_path"):
+            val = meta.get(key)
+            if val:
+                return val.split("/")[-1]
+        if meta.get("doc_title"):
+            return meta["doc_title"]
+        for key in ("file name", "file_name"):
+            val = meta.get(key)
+            if val:
+                return val
+        return "Unknown"
+
+    def _extract_file_name(meta: dict, doc_title: str) -> str:
+        for key in ("file name", "file_name"):
+            val = meta.get(key)
+            if val:
+                return val
+        for key in ("file path", "file_path"):
+            val = meta.get(key)
+            if val:
+                return val.split("/")[-1]
+        return "" if doc_title == "Unknown" else doc_title
+
     points = []
     for node, vector in zip(valid_nodes, vectors):
         meta = node.metadata
+        doc_title = _extract_doc_title(meta)
+        file_name = _extract_file_name(meta, doc_title)
         points.append(
             PointStruct(
                 # Use the node_id that SentenceSplitter already assigned.
@@ -121,7 +147,7 @@ def upsert_nodes(client: QdrantClient, nodes: list) -> None:
                 payload={
                     # ── Core retrieval fields ──
                     "text":           node.get_content(),
-                    "doc_title":      meta.get("doc_title", meta.get("file_name", "Unknown")),
+                    "doc_title":      doc_title,
                     "source_url":     meta.get("source_url", ""),
                     "personality_ns": meta["personality_ns"],
                     "content_type":   meta["content_type"],
@@ -129,7 +155,8 @@ def upsert_nodes(client: QdrantClient, nodes: list) -> None:
                     "chunk_index":    meta.get("chunk_index", 0),
                     "chunk_total":    meta.get("chunk_total", 0),
                     "ingested_at":    meta.get("ingested_at", ""),
-                    "file_name":      meta.get("file_name", ""),
+                    "file_name":      file_name,
+                    "file_path":      meta.get("file_path") or meta.get("file path", ""),
                 },
             )
         )

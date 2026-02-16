@@ -22,8 +22,10 @@ import asyncio
 from main_ingest import ingest_folder
 from config import TECHNICAL_FOLDER_ID, NONTECHNICAL_FOLDER_ID
 from main_ingest import ingest_github
-from qdrant_client import QdrantClient
+from qdrant_client import QdrantClient, models
 from config import QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME
+from pathlib import Path
+from ingest.gdrive_reader import RateLimitedGoogleDriveReader
 
 
 app = FastAPI(title="Digital Twin API", version="1.0.0")
@@ -72,8 +74,67 @@ class GithubIngestRequest(BaseModel):
     repos: Optional[list[str]] = None
 
 
-def fetch_unique_doc_titles() -> list[str]:
-    client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+GDRIVE_HASH_STORE_PATH = Path("data/gdrive_hash_store.json")
+GDRIVE_NAME_MAP_PATH = Path("data/gdrive_name_map.json")
+
+
+def _load_gdrive_id_set() -> set[str]:
+    if not GDRIVE_HASH_STORE_PATH.exists():
+        return set()
+    try:
+        data = json.loads(GDRIVE_HASH_STORE_PATH.read_text())
+        return set(data.keys())
+    except Exception:
+        return set()
+
+
+def _load_gdrive_name_map() -> dict[str, str]:
+    if not GDRIVE_NAME_MAP_PATH.exists():
+        return {}
+    try:
+        return json.loads(GDRIVE_NAME_MAP_PATH.read_text())
+    except Exception:
+        return {}
+
+
+def _save_gdrive_name_map(name_map: dict[str, str]) -> None:
+    GDRIVE_NAME_MAP_PATH.write_text(json.dumps(name_map, indent=2))
+
+
+def _resolve_gdrive_names(file_ids: list[str]) -> dict[str, str]:
+    if not file_ids:
+        return {}
+    name_map = _load_gdrive_name_map()
+    missing = [fid for fid in file_ids if fid not in name_map]
+    if not missing:
+        return name_map
+
+    if not Path("token.json").exists() or not Path("credentials.json").exists():
+        return name_map
+
+    reader = RateLimitedGoogleDriveReader(
+        credentials_path="credentials.json",
+        token_path="token.json",
+        folder_id=None,
+    )
+
+    for fid in missing:
+        try:
+            info = reader.get_resource_info(fid)
+            file_path = (info.get("file_path") or "").strip()
+            name = file_path.split("/")[-1] if file_path else fid
+            name_map[fid] = name
+        except Exception:
+            name_map[fid] = fid
+
+    _save_gdrive_name_map(name_map)
+    return name_map
+
+
+def _scroll_titles(
+    client: QdrantClient,
+    scroll_filter: models.Filter | None,
+) -> list[str]:
     titles: set[str] = set()
     offset = None
 
@@ -83,6 +144,7 @@ def fetch_unique_doc_titles() -> list[str]:
             limit=1000,
             with_payload=["doc_title", "file_name"],
             with_vectors=False,
+            scroll_filter=scroll_filter,
             offset=offset,
         )
         if not points:
@@ -98,8 +160,98 @@ def fetch_unique_doc_titles() -> list[str]:
             break
         offset = next_offset
 
-    client.close()
     return sorted(titles)
+
+
+def _build_filter(personality_ns: str | None, content_type: str | None) -> models.Filter | None:
+    must = []
+    if personality_ns:
+        must.append(
+            models.FieldCondition(
+                key="personality_ns",
+                match=models.MatchValue(value=personality_ns),
+            )
+        )
+    if content_type:
+        must.append(
+            models.FieldCondition(
+                key="content_type",
+                match=models.MatchValue(value=content_type),
+            )
+        )
+    return models.Filter(must=must) if must else None
+
+
+def fetch_grouped_doc_titles() -> dict:
+    client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+
+    technical_code = _scroll_titles(
+        client,
+        _build_filter("technical", "code"),
+    )
+    technical_docs = _scroll_titles(
+        client,
+        _build_filter("technical", "documentation"),
+    )
+    nontechnical_all = _scroll_titles(
+        client,
+        _build_filter("nontechnical", None),
+    )
+
+    client.close()
+
+    gdrive_ids = _load_gdrive_id_set()
+    all_titles = set(technical_code + technical_docs + nontechnical_all)
+    ids_to_resolve = []
+    for t in all_titles:
+        if t in gdrive_ids:
+            ids_to_resolve.append(t)
+            continue
+        if "." in t:
+            stem = t.rsplit(".", 1)[0]
+            if stem in gdrive_ids:
+                ids_to_resolve.append(stem)
+    name_map = _resolve_gdrive_names(ids_to_resolve)
+
+    def _maybe_append_ext(name: str, ext: str) -> str:
+        if not ext:
+            return name
+        if name.lower().endswith(f".{ext.lower()}"):
+            return name
+        return f"{name}.{ext}"
+
+    def _map_titles(titles: list[str]) -> list[str]:
+        mapped = set()
+        for t in titles:
+            if t in name_map:
+                mapped.add(name_map[t])
+                continue
+            if "." in t:
+                stem, ext = t.rsplit(".", 1)
+                if stem in name_map:
+                    mapped.add(_maybe_append_ext(name_map[stem], ext))
+                    continue
+            mapped.add(t)
+        return sorted(mapped)
+
+    technical_code_mapped = _map_titles(technical_code)
+    technical_docs_mapped = _map_titles(technical_docs)
+    nontechnical_mapped = _map_titles(nontechnical_all)
+
+    total_unique = len(set(technical_code_mapped + technical_docs_mapped + nontechnical_mapped))
+
+    return {
+        "total_unique": total_unique,
+        "groups": {
+            "technical": {
+                "code": technical_code_mapped,
+                "documentation": technical_docs_mapped,
+            },
+            "nontechnical": {
+                "all": nontechnical_mapped,
+            },
+        },
+    }
 
 
 @app.post("/api/query", response_model=QueryResponse)
@@ -425,11 +577,11 @@ async def get_projects():
     Returns unique doc_title values from Qdrant.
     """
     try:
-        titles = fetch_unique_doc_titles()
+        grouped = fetch_grouped_doc_titles()
         return {
             "collection": COLLECTION_NAME,
-            "total": len(titles),
-            "projects": titles,
+            "total_unique": grouped["total_unique"],
+            "groups": grouped["groups"],
             "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         }
     except Exception as e:

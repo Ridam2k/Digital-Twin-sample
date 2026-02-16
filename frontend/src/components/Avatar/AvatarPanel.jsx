@@ -13,7 +13,10 @@ export default function AvatarPanel({ systemStatus }) {
   const [ingestSuccess, setIngestSuccess] = useState(null); // 'gdrive' | 'github' | null
 
   // Projects list state
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState({
+    technical: { code: [], documentation: [] },
+    nontechnical: { all: [] },
+  });
   const [projectsLoading, setProjectsLoading] = useState(true);
   const [projectsError, setProjectsError] = useState(null);
 
@@ -106,7 +109,33 @@ export default function AvatarPanel({ systemStatus }) {
       try {
         const data = await fetchProjects();
         if (!isMounted) return;
-        setProjects(Array.isArray(data.projects) ? data.projects : []);
+        if (data && data.groups) {
+          setProjects({
+            technical: {
+              code: Array.isArray(data.groups?.technical?.code)
+                ? data.groups.technical.code
+                : [],
+              documentation: Array.isArray(data.groups?.technical?.documentation)
+                ? data.groups.technical.documentation
+                : [],
+            },
+            nontechnical: {
+              all: Array.isArray(data.groups?.nontechnical?.all)
+                ? data.groups.nontechnical.all
+                : [],
+            },
+          });
+        } else if (Array.isArray(data.projects)) {
+          setProjects({
+            technical: { code: [], documentation: [] },
+            nontechnical: { all: data.projects },
+          });
+        } else {
+          setProjects({
+            technical: { code: [], documentation: [] },
+            nontechnical: { all: [] },
+          });
+        }
       } catch (error) {
         if (!isMounted) return;
         setProjectsError(error.message || 'Failed to load projects');
@@ -134,17 +163,61 @@ export default function AvatarPanel({ systemStatus }) {
         {projectsError && (
           <div className="projects-error">{projectsError}</div>
         )}
-        {!projectsLoading && !projectsError && projects.length === 0 && (
+        {!projectsLoading && !projectsError &&
+          projects.technical.code.length === 0 &&
+          projects.technical.documentation.length === 0 &&
+          projects.nontechnical.all.length === 0 && (
           <div className="projects-empty">No projects found.</div>
         )}
-        {!projectsLoading && !projectsError && projects.length > 0 && (
-          <ul className="projects-list">
-            {projects.map((title) => (
-              <li key={title} className="projects-item">
-                {title}
-              </li>
-            ))}
-          </ul>
+        {!projectsLoading && !projectsError && (
+          <div className="projects-grid">
+            <div className="projects-col">
+              <div className="projects-col-title">Technical</div>
+              <div className="projects-subgroup">
+                <div className="projects-subtitle">Code</div>
+                {projects.technical.code.length === 0 ? (
+                  <div className="projects-empty">No code projects.</div>
+                ) : (
+                  <ul className="projects-list">
+                    {projects.technical.code.map((title) => (
+                      <li key={`tech-code-${title}`} className="projects-item">
+                        {title}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              <div className="projects-subgroup">
+                <div className="projects-subtitle">Writeups</div>
+                {projects.technical.documentation.length === 0 ? (
+                  <div className="projects-empty">No documentation projects.</div>
+                ) : (
+                  <ul className="projects-list">
+                    {projects.technical.documentation.map((title) => (
+                      <li key={`tech-doc-${title}`} className="projects-item">
+                        {title}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+
+            <div className="projects-col">
+              <div className="projects-col-title">Non-Technical</div>
+              {projects.nontechnical.all.length === 0 ? (
+                <div className="projects-empty">No non-technical projects.</div>
+              ) : (
+                <ul className="projects-list">
+                  {projects.nontechnical.all.map((title) => (
+                    <li key={`nontech-${title}`} className="projects-item">
+                      {title}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
         )}
       </div>
 
