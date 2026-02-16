@@ -41,8 +41,8 @@ export default function AvatarPanel({ systemStatus }) {
       <div className={`silhouette-wrapper ${animClass}`}>
         <svg
           className="silhouette"
-          width="220"
-          height="220"
+          width="350"
+          height="390"
           viewBox="0 0 220 220"
           xmlns="http://www.w3.org/2000/svg"
         >
