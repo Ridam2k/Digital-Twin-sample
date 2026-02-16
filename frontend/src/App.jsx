@@ -16,7 +16,7 @@ export default function App() {
   const [showModeToast, setShowModeToast] = useState(false);
   const nextMessageId = useRef(1);
 
-  const handleQuery = async (queryText) => {
+  const handleQuery = async (queryText, contentType = null) => {
     const userMsg = {
       id: nextMessageId.current++,
       role: 'user',
@@ -26,7 +26,7 @@ export default function App() {
     setSystemStatus('processing');
 
     try {
-      const result = await sendQuery(queryText);
+      const result = await sendQuery(queryText, contentType);
 
       if (result.mode !== mode) {
         setMode(result.mode);

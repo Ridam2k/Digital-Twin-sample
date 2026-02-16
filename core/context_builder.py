@@ -15,10 +15,11 @@ def build_context(
     mode:      str,
     chunks:    list[RetrievedChunk],
     out_of_scope: bool,
+    content_type: str = None,
 ) -> tuple[str, str]:
-   
+
     identity      = _get_identity()
-    system_prompt = build_system_prompt_block(identity, mode)
+    system_prompt = build_system_prompt_block(identity, mode, content_type=content_type)
 
     if out_of_scope or not chunks:
         user_message = (
@@ -37,11 +38,20 @@ def build_context(
         )
     evidence_block = "\n\n---\n\n".join(evidence_lines)
 
-    user_message = (
-        f"Here's some context about yourself:\n\n"
-        f"{evidence_block}\n\n"
-        f"Now respond naturally to this question: {query}\n\n"
-        f"(You can reference sources with [number] if helpful, but integrate them naturally into your voice.)"
-    )
+    if content_type == "code":
+        user_message = (
+            f"Here is code and documentation from your repositories:\n\n"
+            f"{evidence_block}\n\n"
+            f"Now respond to this question about your code: {query}\n\n"
+            f"(Reference specific files, functions, or repos where relevant. "
+            f"Use [number] citations to link back to source chunks.)"
+        )
+    else:
+        user_message = (
+            f"Here's some context about yourself:\n\n"
+            f"{evidence_block}\n\n"
+            f"Now respond naturally to this question: {query}\n\n"
+            f"(You can reference sources with [number] if helpful, but integrate them naturally into your voice.)"
+        )
 
     return system_prompt, user_message

@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Mic, ArrowRight } from 'lucide-react';
+import { Mic, ArrowRight, Code2 } from 'lucide-react';
 import { ingestGoogleDrive, ingestGithub } from '../../api/client.js';
 import './ConvPanel.css';
 
 export default function ConvPanel({ messages, onSubmit, disabled }) {
   const [inputText, setInputText] = useState('');
   const [isRecording, setIsRecording] = useState(false);
+  const [isCodeMode, setIsCodeMode] = useState(false);
   const [isIngestingGDrive, setIsIngestingGDrive] = useState(false);
   const [isIngestingGithub, setIsIngestingGithub] = useState(false);
   const [ingestError, setIngestError] = useState(null);
@@ -78,8 +79,9 @@ export default function ConvPanel({ messages, onSubmit, disabled }) {
   const handleSubmit = () => {
     const trimmed = inputText.trim();
     if (trimmed !== '' && !disabled) {
-      onSubmit(trimmed);
+      onSubmit(trimmed, isCodeMode ? 'code' : null);
       setInputText('');
+      setIsCodeMode(false);
     }
   };
 
@@ -139,6 +141,10 @@ export default function ConvPanel({ messages, onSubmit, disabled }) {
     } finally {
       setIsIngestingGithub(false);
     }
+  };
+
+  const toggleCodeMode = () => {
+    setIsCodeMode(prev => !prev);
   };
 
   return (
@@ -206,6 +212,15 @@ export default function ConvPanel({ messages, onSubmit, disabled }) {
             <Mic size={18} />
           </button>
         )}
+
+        <button
+          className={`code-toggle-button ${isCodeMode ? 'active' : ''}`}
+          onClick={toggleCodeMode}
+          disabled={disabled}
+          title={isCodeMode ? 'Code query mode enabled' : 'Enable code query mode'}
+        >
+          <Code2 size={18} />
+        </button>
 
         <textarea
           ref={textareaRef}

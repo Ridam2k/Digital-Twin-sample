@@ -169,6 +169,44 @@
   }
 }
 
+.code-toggle-button {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.code-toggle-button:hover:not(:disabled) {
+  border-color: var(--teal);
+  color: var(--teal);
+  background: rgba(0, 194, 168, 0.05);
+}
+
+.code-toggle-button.active {
+  border-color: var(--teal);
+  background: var(--teal);
+  color: var(--bg-base);
+}
+
+.code-toggle-button.active:hover {
+  background: #00d4b8;
+  border-color: #00d4b8;
+}
+
+.code-toggle-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  color: var(--text-muted);
+}
+
 .text-input {
   flex: 1;
   min-height: 44px;

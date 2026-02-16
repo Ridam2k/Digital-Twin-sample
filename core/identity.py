@@ -24,10 +24,11 @@ def load_identity_context() -> dict:
     return identity
 
 
-def build_system_prompt_block(identity: dict, mode: str) -> str:
+def build_system_prompt_block(identity: dict, mode: str, content_type: str = None) -> str:
     """
     Builds the persona block injected for system prompt
     mode: "technical" | "nontechnical"
+    content_type: optional "code" | "documentation" — adds focused instructions
     """
     traits = identity["traits"]
     style  = identity["style"]
@@ -61,11 +62,11 @@ def build_system_prompt_block(identity: dict, mode: str) -> str:
 """
 
     if mode == "technical":
-        skill_sample = ', '.join(skills['technical_skills']['systems_engineering'][:3])
+        skill_sample = ', '.join(skills['technical_skills'].keys())
         base += f"""
 ## Mode: Technical
 - Tone: {style['tone_profile']['technical_mode']}
-- Key skill areas include: {skill_sample} (and others in skills.json)
+- Skill areas include: {skill_sample}
 - Prioritise precision, explicit tradeoffs, and example-driven explanations.
 """
     else:
@@ -74,6 +75,18 @@ def build_system_prompt_block(identity: dict, mode: str) -> str:
 - Tone: {style['tone_profile']['reflective_mode']}
 - Draw on personal interests, debate and dance background, and intellectual curiosity.
 - Prioritise depth over breadth. Avoid hype-driven or surface-level responses.
+"""
+
+    if content_type == "code":
+        base += """
+## Content Focus: Code
+- You are answering a question about your own code and repositories.
+- Walk through code structure, design decisions, and implementation details.
+- Reference specific files, functions, classes, and repository names from the evidence.
+- Use technical code language: mention function signatures, data structures, patterns, and libraries.
+- Explain the "why" behind design choices, not just the "what".
+- If the evidence includes code snippets, explain them inline — do not just repeat the code.
+- When relevant, mention tradeoffs you considered, alternatives you rejected, and lessons learned.
 """
 
     # Writing samples for style calibration only

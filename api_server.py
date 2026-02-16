@@ -39,6 +39,7 @@ app.add_middleware(
 
 class QueryRequest(BaseModel):
     query: str
+    content_type: Optional[str] = None
 
 
 class Citation(BaseModel):
@@ -54,6 +55,7 @@ class QueryResponse(BaseModel):
     citations: list[Citation]
     mode: str
     router_scores: dict[str, float]
+    content_type: Optional[str] = None
 
 
 @app.post("/api/query", response_model=QueryResponse)
@@ -71,15 +73,19 @@ async def query_endpoint(req : QueryRequest):
         mode, scores = detect_mode(req.query)
 
         # Step 2: Retriever - get relevant chunks from vector DB
-        chunks, out_of_scope = retrieve(req.query, namespace=mode)
-        
+        chunks, out_of_scope = retrieve(
+            req.query, namespace=mode,
+            content_types=[req.content_type] if req.content_type else None,
+        )
+
         retrieved_texts = [c.text for c in chunks]
-        
+
         print("Chunks retreived")
 
         # Step 3: Assemble system prompt + user message
         system_prompt, user_message = build_context(
-            req.query, mode, chunks, out_of_scope
+            req.query, mode, chunks, out_of_scope,
+            content_type=req.content_type,
         )
 
         # Step 4: Get LLM response
@@ -104,6 +110,7 @@ async def query_endpoint(req : QueryRequest):
             "ts": datetime.datetime.now(datetime.timezone.utc).isoformat(),
             "query": req.query,
             "namespace": mode,
+            "content_type": req.content_type,
 
             # Groundedness metrics
             "groundedness_score": grounded_result.groundedness_score,
@@ -137,7 +144,8 @@ async def query_endpoint(req : QueryRequest):
             out_of_scope=result["out_of_scope"],
             citations=result["citations"],
             mode=mode,
-            router_scores=scores
+            router_scores=scores,
+            content_type=req.content_type,
         )
 
     except Exception as e:

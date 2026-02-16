@@ -21,16 +21,20 @@ export class APIError extends Error {
  * Send a query to the backend and get a response.
  *
  * @param {string} queryText - The user's question
+ * @param {string|null} contentType - Optional content type filter (e.g., "code")
  * @returns {Promise<Object>} Response object with {response, citations, mode, router_scores, out_of_scope}
  * @throws {APIError} If the request fails
  */
-export async function sendQuery(queryText) {
+export async function sendQuery(queryText, contentType = null) {
   const response = await fetch(`${API_BASE_URL}/api/query`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ query: queryText }),
+    body: JSON.stringify({
+      query: queryText,
+      ...(contentType && { content_type: contentType })
+    }),
   });
 
   if (!response.ok) {

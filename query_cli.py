@@ -15,10 +15,14 @@ DIVIDER = "─" * 60
 
 
 def format_response(result: dict, mode: str, scores: dict,
-                   grounded_result=None, persona_result=None) -> str:
+                   grounded_result=None, persona_result=None,
+                   content_type: str = None) -> str:
     lines = []
     lines.append(f"\n{DIVIDER}")
-    lines.append(f"  Mode   : {mode}  (tech={scores['technical']:.3f}, non-tech={scores['nontechnical']:.3f})")
+    mode_line = f"  Mode   : {mode}  (tech={scores['technical']:.3f}, non-tech={scores['nontechnical']:.3f})"
+    if content_type:
+        mode_line += f"  | content_type={content_type}"
+    lines.append(mode_line)
 
     if result["out_of_scope"]:
         lines.append(f"  Status : OUT OF SCOPE")
@@ -53,7 +57,7 @@ def format_response(result: dict, mode: str, scores: dict,
 
 def run():
     print("\n Digital Twin — Query CLI")
-    print(" Type your question\n")
+    print(" Type your question (prefix with @code for code-focused queries)\n")
 
     while True:
         try:
@@ -68,16 +72,29 @@ def run():
             print("Bye.")
             break
 
+        # Check for @code prefix
+        content_type = None
+        if query.lower().startswith("@code "):
+            content_type = "code"
+            query = query[6:].strip()
+            if not query:
+                continue
+
         # Step 1: detect mode
         mode, scores = detect_mode(query)
 
         # Step 2: retrieve
-        chunks, out_of_scope = retrieve(query, namespace=mode)
+        chunks, out_of_scope = retrieve(
+            query, namespace=mode,
+            content_types=[content_type] if content_type else None,
+        )
         
         retrieved_texts = [c.text for c in chunks]
 
         # Step 3: assemble context
-        system_prompt, user_message = build_context(query, mode, chunks, out_of_scope)
+        system_prompt, user_message = build_context(
+            query, mode, chunks, out_of_scope, content_type=content_type,
+        )
 
         # Step 4: generate
         result = generate(system_prompt, user_message, chunks, out_of_scope)
@@ -97,7 +114,7 @@ def run():
         # print(format_response(result, mode, scores, grounded_result, persona_result))
         
         #Basic display without eval metrics
-        print(format_response(result, mode, scores, None, None))
+        print(format_response(result, mode, scores, None, None, content_type=content_type))
 
         # log_entry = {
         #     "ts": datetime.datetime.now(datetime.timezone.utc).isoformat(),
