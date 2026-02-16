@@ -3,6 +3,7 @@ Retrieval evaluation metrics (Recall@K, MRR@K) - refactored from eval_retrieval.
 """
 
 import json
+import hashlib
 from collections import defaultdict
 from typing import Dict
 from pathlib import Path
@@ -14,6 +15,16 @@ import datetime
 
 # File path for persistent storage
 RETRIEVAL_STATS_FILE = "retrieval_stats.json"
+
+
+def sha256(s: str) -> str:
+    """Generate SHA256 hash of a string."""
+    return hashlib.sha256(s.encode("utf-8")).hexdigest()
+
+
+def doc_title_hash(namespace: str, doc_title: str) -> str:
+    """Generate hash for a document title within a namespace."""
+    return sha256(f"{namespace}::{doc_title}".strip())
 
 
 def load_retrieval_stats_from_file():
@@ -70,28 +81,36 @@ def compute_retrieval_metrics(
         "recall_hits": 0,
         "reciprocal_ranks": []
     })
-
+    
+    
     # Evaluate each query
     for row in eval_data:
+        count+=1
         query = row["query"]
         namespace = row["namespace"]
-        gold_doc_id = row["gold"]["doc_id"]
+
+        # Use doc_title_hash for evaluation (new approach)
+        gold = row["gold"]
+        gold_hash = gold["doc_title_hash"]
 
         # Retrieve top-K chunks
         chunks, out_of_scope = retrieve(query, namespace)
 
-        # Extract retrieved doc_ids
-        retrieved_doc_ids = [chunk.doc_id for chunk in chunks]
+        # Extract retrieved doc_title hashes
+        retrieved_hashes = []
+        for c in chunks[:k]:
+            title = getattr(c, "doc_title", "") or ""
+            retrieved_hashes.append(doc_title_hash(namespace, title) if title else None)
 
         # Recall@K: Check if gold doc is in top-K
-        hit = gold_doc_id in retrieved_doc_ids
+        hit = gold_hash in retrieved_hashes
         if hit:
             recall_hits += 1
 
         # MRR@K: Find rank of gold doc
-        rr = 0
-        for rank, doc_id in enumerate(retrieved_doc_ids, start=1):
-            if doc_id == gold_doc_id:
+        rr = 0.0
+        for rank, h in enumerate(retrieved_hashes, start=1):
+            if h == gold_hash:
                 rr = 1.0 / rank
                 break
 
@@ -103,6 +122,7 @@ def compute_retrieval_metrics(
         if hit:
             ns["recall_hits"] += 1
         ns["reciprocal_ranks"].append(rr)
+    
 
     # Compute overall metrics
     recall_at_k = recall_hits / total_queries if total_queries > 0 else 0.0
