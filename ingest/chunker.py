@@ -1,4 +1,4 @@
-# Expected metadata schema per chunk:
+# Metadata schema per chunk:
 # {
 #   "doc_id", "doc_title", "source_type", "source_url",
 #   "personality_ns", "content_type", "last_modified",
@@ -49,9 +49,8 @@ def tag_and_chunk(
                 "ingested_at":    ingested_at,
             }
         )
-        # ✅ Deterministic ID
+        
         file_id = None
-        # GoogleDriveReader uses "file id" key in metadata (you already read it in main_ingest) :contentReference[oaicite:10]{index=10}
         if "file id" in node.metadata:
             file_id = node.metadata["file id"]
         else:
@@ -59,7 +58,8 @@ def tag_and_chunk(
             file_id = node.metadata.get("file_name", "unknown")
 
         raw = f"{file_id}|{personality_ns}|{content_type}|{i}"
-        # Convert SHA-1 hash to UUID format for Qdrant compatibility
+        
+        # UUID format for Qdrant compatibility
         hash_bytes = hashlib.sha1(raw.encode("utf-8")).digest()[:16]
         node.node_id = str(uuid.UUID(bytes=hash_bytes))
 

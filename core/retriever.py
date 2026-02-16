@@ -10,7 +10,7 @@ import os
 
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
-TOP_K                 = 6
+TOP_K                 = 5
 OUT_OF_SCOPE_THRESHOLD = 0.3
 AMBIGUOUS_K_PER_NS = TOP_K
 
@@ -37,11 +37,7 @@ def _query_namespace(
     content_types: list[str] = None,
 ) -> list[RetrievedChunk]:
     """
-    Run a single filtered Qdrant query for one namespace.
-    Extracted so both retrieve() and the ambiguous branch can reuse it.
-
-    Args:
-        content_types: Optional list of content types to filter by (e.g., ["code"], ["documentation"])
+    Run a single filtered Qdrant query for one namespace-> extracted so both retrieve() and the ambiguous branch can reuse it.
     """
     # Build filter conditions
     must_conditions = [
@@ -51,7 +47,7 @@ def _query_namespace(
         )
     ]
 
-    # Add content_type filter if specified
+    # If content_type given
     if content_types:
         must_conditions.append(
             models.FieldCondition(
@@ -71,8 +67,6 @@ def _query_namespace(
     chunks = []
     for r in results:
         p = r.payload
-        # Payload schema is now explicitly controlled by embedder.py.
-        # The "text" field is guaranteed; no more _node_content fallback.
         chunks.append(RetrievedChunk(
             text           = p.get("text", ""),
             score          = r.score,
@@ -88,48 +82,27 @@ def _query_namespace(
 def retrieve(
     query:         str,
     namespace:     str,                    # "technical" | "nontechnical" | "ambiguous"
-    content_types: list[str] = None,       # Optional filter: ["code"], ["documentation"], etc.
+    content_types: list[str] = None,       # Optional filter: ["code"] or ["documentation"]
 ) -> tuple[list[RetrievedChunk], bool]:
     """
     Retrieve top-k chunks from Qdrant.
-
-    - For a definite namespace ("technical" / "nontechnical"):
-        queries that namespace only, same behaviour as before.
-
-    - For "ambiguous":
-        queries ALL namespaces in `namespaces`, merges by score desc,
-        returns the global top-K. The caller must pass `namespaces`.
-
-    Args:
-        content_types: Optional list of content types to filter by.
-                       E.g., ["code"] to get only code files,
-                             ["documentation"] for docs/READMEs,
-                             None (default) to search all types.
-
-    Returns:
-        chunks       — list of RetrievedChunk, sorted by score desc
-        out_of_scope — True if best score < OUT_OF_SCOPE_THRESHOLD
     """
     client      = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
     embed_model = OpenAIEmbedding(model=EMBEDDING_MODEL)
     query_vec   = embed_model.get_text_embedding(query)
 
     if namespace == "ambiguous":
-        if not namespaces:
-            raise ValueError(
-                "namespace='ambiguous' requires the `namespaces` list "
-                "(e.g. ['technical', 'nontechnical'])."
-            )
-        # Query each namespace independently, then merge and re-rank.
-        all_chunks: list[RetrievedChunk] = []
+        # We query each namespace independently, then merge and re-rank
+        all_chunks = []
         for ns in namespaces:
             all_chunks.extend(
                 _query_namespace(client, query_vec, ns, limit=AMBIGUOUS_K_PER_NS, content_types=content_types)
             )
-        # Global re-rank by score; ties broken by namespace order in `namespaces`.
+        # Global re-rank by score-> ties broken by namespace order in `namespaces`.
         chunks = sorted(all_chunks, key=lambda c: c.score, reverse=True)[:TOP_K]
     else:
         chunks = _query_namespace(client, query_vec, namespace, limit=TOP_K, content_types=content_types)
 
     out_of_scope = len(chunks) == 0 or chunks[0].score < OUT_OF_SCOPE_THRESHOLD
+    
     return chunks, out_of_scope

@@ -13,18 +13,7 @@ def aggregate_eval_logs(
     namespace_filter: str = None,
     limit: int = 50
 ) -> Tuple[Dict, List]:
-    """
-    Aggregates groundedness and persona consistency scores from eval_log.jsonl
-
-    Args:
-        log_file: Path to eval_log.jsonl
-        namespace_filter: Optional filter by namespace (technical/nontechnical/ambiguous)
-        limit: Number of recent entries to include in response
-
-    Returns:
-        Tuple of (summary_dict, recent_entries_list)
-    """
-
+    
     # Check if log file exists
     if not Path(log_file).exists():
         return {
@@ -153,13 +142,6 @@ def aggregate_similarity_stats(
 ) -> Dict:
     """
     Aggregates chunk similarity statistics from eval_log.jsonl
-
-    Args:
-        log_file: Path to eval_log.jsonl
-        limit: Number of recent queries to analyze
-
-    Returns:
-        Dict with statistics and distribution
     """
 
     # Check if log file exists

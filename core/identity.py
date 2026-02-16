@@ -26,7 +26,7 @@ def load_identity_context() -> dict:
 
 def build_system_prompt_block(identity: dict, mode: str) -> str:
     """
-    Builds the persona block injected at the top of every system prompt.
+    Builds the persona block injected for system prompt
     mode: "technical" | "nontechnical"
     """
     traits = identity["traits"]

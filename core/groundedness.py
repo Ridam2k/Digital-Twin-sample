@@ -23,10 +23,6 @@ from config import OPENAI_API_KEY
 
 from openai import OpenAI
 
-# ---------------------------------------------------------------------------
-# Types
-# ---------------------------------------------------------------------------
-
 @dataclass
 class ClaimAudit:
     claim: str
@@ -39,12 +35,8 @@ class GroundednessResult:
     claim_audits: list[ClaimAudit]
     groundedness_score: float   # 0.0 – 1.0
     fabricated_claims: list[str]
-    raw_response: str           # full judge output, for debugging
+    raw_response: str           # full judge output
 
-
-# ---------------------------------------------------------------------------
-# Prompt
-# ---------------------------------------------------------------------------
 
 _SYSTEM_PROMPT = """\
 You are a precise groundedness auditor for a digital twin system.
@@ -103,11 +95,7 @@ def _build_context_block(chunks: list[str]) -> str:
 
 def _score(audits: list[ClaimAudit]) -> float:
     """
-    Weighted score:
-      SUPPORTED   → 1.0
-      INFERRED    → 0.5
-      FABRICATED  → 0.0
-    Returns 0.0 if there are no claims.
+    Weighted score
     """
     if not audits:
         return 0.0
@@ -118,23 +106,23 @@ def _score(audits: list[ClaimAudit]) -> float:
 
 def _parse_judge_output(raw: str) -> list[ClaimAudit]:
     """
-    Parse the judge's JSON output into ClaimAudit objects.
-    Raises ValueError with a descriptive message on malformed output.
+    Parse JSON output to ClaimAudit objects
     """
     try:
         data = json.loads(raw)
     except json.JSONDecodeError as e:
-        raise ValueError(f"Judge returned non-JSON output: {e}\n\nRaw:\n{raw}")
+        raise ValueError(f"Returned non-JSON output: {e}\n\nRaw:\n{raw}")
 
     audits = []
     for item in data.get("claim_audits", []):
         verdict = item.get("verdict", "FABRICATED").upper()
+        
         if verdict not in ("SUPPORTED", "INFERRED", "FABRICATED"):
             verdict = "FABRICATED"
 
-        # Guard: if verdict is SUPPORTED/INFERRED but span is empty,
-        # downgrade to FABRICATED — the judge didn't actually find evidence.
+        # Check supporting span
         span = item.get("supporting_span", "").strip()
+        
         if verdict in ("SUPPORTED", "INFERRED") and not span:
             verdict = "FABRICATED"
 
@@ -150,22 +138,14 @@ def _parse_judge_output(raw: str) -> list[ClaimAudit]:
 def check_groundedness(
     response: str,
     retrieved_chunks: list[str],
-    model: str = "gpt-4o-mini"
 ) -> GroundednessResult:
     """
-    Run the groundedness check for a single twin response.
-
-    Args:
-        response:         The twin's response string.
-        retrieved_chunks: List of raw text chunks retrieved for this query.
-        model:            OpenAI model to use as judge.
-        api_key:          Optional API key override; falls back to env var.
-
     Returns:
         GroundednessResult with per-claim audits, a 0–1 score,
         and a list of any fabricated claims for easy surfacing.
     """
     client = OpenAI(api_key=OPENAI_API_KEY)
+    model = "gpt-4o-mini"
 
     context_block = _build_context_block(retrieved_chunks)
     user_message = _USER_TEMPLATE.format(
@@ -175,7 +155,7 @@ def check_groundedness(
 
     completion = client.chat.completions.create(
         model=model,
-        temperature=0,   # deterministic for evaluation
+        temperature=0,  
         messages=[
             {"role": "system", "content": _SYSTEM_PROMPT},
             {"role": "user",   "content": user_message},
@@ -185,6 +165,7 @@ def check_groundedness(
     raw = completion.choices[0].message.content.strip()
     audits = _parse_judge_output(raw)
     score = _score(audits)
+    
     fabricated = [a.claim for a in audits if a.verdict == "FABRICATED"]
 
     return GroundednessResult(
@@ -195,42 +176,15 @@ def check_groundedness(
     )
 
 
-# ---------------------------------------------------------------------------
-# Pretty printer (useful in dev / notebook contexts)
-# ---------------------------------------------------------------------------
-
 def print_result(result: GroundednessResult) -> None:
     print(f"\nGroundedness Score: {result.groundedness_score:.3f}\n")
     for audit in result.claim_audits:
-        icon = {"SUPPORTED": "✓", "INFERRED": "~", "FABRICATED": "✗"}.get(audit.verdict, "?")
-        print(f"  {icon} [{audit.verdict}] {audit.claim}")
+        print(f"[{audit.verdict}] {audit.claim}")
+        
         if audit.supporting_span:
-            print(f"      └─ \"{audit.supporting_span}\"")
+            print(f"{audit.supporting_span}")
+            
     if result.fabricated_claims:
-        print(f"\n⚠ Fabricated claims ({len(result.fabricated_claims)}):")
+        print(f"Fabricated claims ({len(result.fabricated_claims)}):")
         for c in result.fabricated_claims:
-            print(f"  - {c}")
-
-
-# ---------------------------------------------------------------------------
-# Quick smoke test
-# ---------------------------------------------------------------------------
-
-if __name__ == "__main__":
-    _test_chunks = [
-        # Simulates what might be retrieved from your persona files
-        'technical_skills includes "RAG pipeline architecture" and "LLM agent orchestration".',
-        'core_identity role_archetype: ["Builder", "Systems Thinker", "Research-to-Production Translator"].',
-        'growth_edges: ["asking for help earlier", "navigating career ambiguity"].',
-    ]
-
-    _test_response = (
-        "I have deep experience building RAG pipelines and consider myself a systems thinker. "
-        "I also love competitive gaming and find it helps me decompress."  # fabricated
-    )
-
-    result = check_groundedness(
-        response=_test_response,
-        retrieved_chunks=_test_chunks,
-    )
-    print_result(result)
+            print(f"{c}")

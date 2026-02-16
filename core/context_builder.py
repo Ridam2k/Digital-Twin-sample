@@ -1,8 +1,7 @@
 from core.identity import load_identity_context, build_system_prompt_block
 from core.retriever import RetrievedChunk
 
-_identity = None   # lazy-loaded once
-
+_identity = None   
 
 def _get_identity():
     global _identity
@@ -17,9 +16,7 @@ def build_context(
     chunks:    list[RetrievedChunk],
     out_of_scope: bool,
 ) -> tuple[str, str]:
-    """
-    Returns (system_prompt, user_message) ready to pass to the LLM.
-    """
+   
     identity      = _get_identity()
     system_prompt = build_system_prompt_block(identity, mode)
 

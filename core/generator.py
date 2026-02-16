@@ -15,11 +15,11 @@ def generate(
     out_of_scope:  bool,
 ) -> dict:
     """
-    Calls gpt-4o-mini and returns a structured result:
+    Structured Result
     {
-        "response":     str,          # the generated answer
+        "response":     str,          
         "out_of_scope": bool,
-        "citations":    list[dict],   # [{index, doc_title, source_url, score}]
+        "citations":    list[dict],   -> [{index, doc_title, source_url, score}]
     }
     """
     response = _client.chat.completions.create(
@@ -29,7 +29,7 @@ def generate(
             {"role": "system",  "content": system_prompt},
             {"role": "user",    "content": user_message},
         ],
-        temperature=0.3,    # low temp — grounded, consistent, not creative
+        temperature=0.2,
     )
 
     answer = response.choices[0].message.content.strip()

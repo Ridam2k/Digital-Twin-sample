@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Mic, ArrowRight } from 'lucide-react';
+import { ingestGoogleDrive, ingestGithub } from '../../api/client.js';
 import './ConvPanel.css';
 
 export default function ConvPanel({ messages, onSubmit, disabled }) {
   const [inputText, setInputText] = useState('');
   const [isRecording, setIsRecording] = useState(false);
+  const [isIngestingGDrive, setIsIngestingGDrive] = useState(false);
+  const [isIngestingGithub, setIsIngestingGithub] = useState(false);
+  const [ingestError, setIngestError] = useState(null);
   const messagesEndRef = useRef(null);
   const recognitionRef = useRef(null);
   const textareaRef = useRef(null);
@@ -109,6 +113,34 @@ export default function ConvPanel({ messages, onSubmit, disabled }) {
     }
   };
 
+  const handleGDriveIngest = async () => {
+    setIsIngestingGDrive(true);
+    setIngestError(null);
+    try {
+      const result = await ingestGoogleDrive();
+      console.log('Google Drive ingestion complete:', result);
+    } catch (error) {
+      console.error('Google Drive ingestion failed:', error);
+      setIngestError(error.message || 'Google Drive ingestion failed');
+    } finally {
+      setIsIngestingGDrive(false);
+    }
+  };
+
+  const handleGithubIngest = async () => {
+    setIsIngestingGithub(true);
+    setIngestError(null);
+    try {
+      const result = await ingestGithub();
+      console.log('GitHub ingestion complete:', result);
+    } catch (error) {
+      console.error('GitHub ingestion failed:', error);
+      setIngestError(error.message || 'GitHub ingestion failed');
+    } finally {
+      setIsIngestingGithub(false);
+    }
+  };
+
   return (
     <div className="conv-panel">
       <div className="transcript-feed">
@@ -139,6 +171,28 @@ export default function ConvPanel({ messages, onSubmit, disabled }) {
           </div>
         ))}
         <div ref={messagesEndRef} />
+      </div>
+
+      <div className="ingestion-dock">
+        <button
+          className="ingest-button"
+          onClick={handleGDriveIngest}
+          disabled={isIngestingGDrive || isIngestingGithub || disabled}
+        >
+          {isIngestingGDrive ? 'Ingesting Google Drive...' : 'Ingest Google Drive'}
+        </button>
+
+        <button
+          className="ingest-button"
+          onClick={handleGithubIngest}
+          disabled={isIngestingGDrive || isIngestingGithub || disabled}
+        >
+          {isIngestingGithub ? 'Ingesting Github...' : 'Ingest Github'}
+        </button>
+
+        {ingestError && (
+          <div className="ingest-error">{ingestError}</div>
+        )}
       </div>
 
       <div className="input-dock">

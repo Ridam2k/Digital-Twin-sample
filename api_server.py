@@ -1,5 +1,5 @@
 """
-FastAPI server exposing the digital twin query pipeline.
+FastAPI server
 
 Run: uvicorn api_server:app --reload --port 8000
 """
@@ -17,6 +17,10 @@ from api.eval_endpoints import router as eval_router
 import json
 import datetime
 from typing import Optional
+from main_ingest import ingest_folder
+from config import TECHNICAL_FOLDER_ID, NONTECHNICAL_FOLDER_ID
+from main_ingest import ingest_github
+
 
 app = FastAPI(title="Digital Twin API", version="1.0.0")
 
@@ -69,36 +73,33 @@ async def query_endpoint(req : QueryRequest):
         # Step 2: Retriever - get relevant chunks from vector DB
         chunks, out_of_scope = retrieve(req.query, namespace=mode)
         
-        print()
         retrieved_texts = [c.text for c in chunks]
         
         print("Chunks retreived")
 
-        # Step 3: Context Builder - assemble system prompt + user message
+        # Step 3: Assemble system prompt + user message
         system_prompt, user_message = build_context(
             req.query, mode, chunks, out_of_scope
         )
 
-        # Step 4: Generator - get LLM response
+        # Step 4: Get LLM response
         result = generate(system_prompt, user_message, chunks, out_of_scope)
         
         print("Response generated")
 
-        # Step 5: Evaluation (backend-only, logged but not returned to frontend)
-        # Eval 5a: Groundedness check
+        # Step 5: Evaluation
         grounded_result = check_groundedness(
             response=result["response"],
             retrieved_chunks=retrieved_texts
         )
 
-        # Eval 5b: Persona consistency check
         persona_result = check_persona_consistency(
             response=result["response"],
             mode=mode,
             query=req.query
         )
 
-        # Step 6: Logging (same format as CLI)
+        # Step 6: Logging 
         log_entry = {
             "ts": datetime.datetime.now(datetime.timezone.utc).isoformat(),
             "query": req.query,
@@ -124,13 +125,13 @@ async def query_endpoint(req : QueryRequest):
                 "tone_fidelity": persona_result.tone_fidelity.reasoning,
             },
 
-            # Citation scores for similarity analysis
             "citation_scores": [c["score"] for c in result["citations"]]
         }
+        
         with open("eval_log.jsonl", "a") as f:
             f.write(json.dumps(log_entry) + "\n")
 
-        # Return API response (evaluation metrics not included in response)
+        # Return API response (without evaluation metrics)
         return QueryResponse(
             response=result["response"],
             out_of_scope=result["out_of_scope"],
@@ -140,13 +141,64 @@ async def query_endpoint(req : QueryRequest):
         )
 
     except Exception as e:
-        # Log error for debugging
         print(f"Pipeline error: {str(e)}")
         raise HTTPException(
             status_code=500,
             detail=f"Pipeline error: {str(e)}"
         )
 
+
+@app.post("/api/ingest/gdrive")
+async def ingest_gdrive_endpoint():
+    """
+    Triggers ingestion of both technical and non-technical Google Drive folders
+    """
+    try:
+        # Ingest technical folder
+        tech_result = ingest_folder(
+            TECHNICAL_FOLDER_ID,
+            "technical",
+            "documentation"
+        )
+
+        # Ingest non-technical folder
+        nontech_result = ingest_folder(
+            NONTECHNICAL_FOLDER_ID,
+            "nontechnical",
+            "documentation"
+        )
+
+        return {
+            "status": "success",
+            "message": "Google Drive ingestion completed",
+            "technical": tech_result,
+            "nontechnical": nontech_result
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Ingestion failed: {str(e)}"
+        )
+
+
+@app.post("/api/ingest/github")
+async def ingest_github_endpoint():
+    """
+    Triggers ingestion of configured GitHub repositories.
+    """
+    try:
+        result = ingest_github()
+
+        return {
+            "status": "success",
+            "message": "GitHub ingestion completed",
+            "result": result
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Ingestion failed: {str(e)}"
+        )
 
 @app.get("/health")
 async def health_check():

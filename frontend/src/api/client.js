@@ -151,3 +151,55 @@ export async function fetchSimilarityStats(limit = 100) {
 
   return response.json();
 }
+
+/**
+ * Trigger Google Drive ingestion (both technical and non-technical).
+ *
+ * @returns {Promise<Object>} Ingestion result with statistics
+ * @throws {APIError} If the request fails
+ */
+export async function ingestGoogleDrive() {
+  const response = await fetch(`${API_BASE_URL}/api/ingest/gdrive`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new APIError(
+      `Google Drive ingestion failed: ${response.status}`,
+      response.status,
+      errorData.detail || 'Unknown error'
+    );
+  }
+
+  return response.json();
+}
+
+/**
+ * Trigger GitHub ingestion for configured repositories.
+ *
+ * @returns {Promise<Object>} Ingestion result with statistics
+ * @throws {APIError} If the request fails
+ */
+export async function ingestGithub() {
+  const response = await fetch(`${API_BASE_URL}/api/ingest/github`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new APIError(
+      `GitHub ingestion failed: ${response.status}`,
+      response.status,
+      errorData.detail || 'Unknown error'
+    );
+  }
+
+  return response.json();
+}

@@ -158,13 +158,12 @@ _USER_TEMPLATE = """
 # ---------------------------------------------------------------------------
 def _parse_judge_output(raw: str) -> tuple[DimensionScore, DimensionScore]:
     """
-    We parse the judge's JSON output to the DimensionScore objects
-    ValueError raised with a descriptive message on malformed output
+    Parse JSON output to DimensionScore objects
     """
     try:
         data = json.loads(raw)
     except json.JSONDecodeError as e:
-        raise ValueError(f"Judge returned non-JSON output: {e}\n\nRaw:\n{raw}")
+        raise ValueError(f"Returned non-JSON output: {e}\n\nRaw:\n{raw}")
 
     def _extract(key: str) -> DimensionScore:
         block = data.get(key, {})
@@ -198,17 +197,17 @@ def _weighted_score(va: DimensionScore, tf: DimensionScore) -> float:
 def check_persona_consistency(
     response: str,
     mode: str,
-    query: str = "",
-    model: str = "gpt-4o-mini",
+    query
 ) -> PersonaConsistencyResult:
-    # Load identity context (cached by identity.py)
+    
+    model = "gpt-4o-mini"
+    client = OpenAI(api_key=OPENAI_API_KEY)
+   
     identity = load_identity_context()
 
     # Build dynamic persona references
     values_ref = _build_values_reference(identity["traits"])
     tone_ref = _build_tone_reference(identity["style"], mode)
-
-    client = OpenAI(api_key=OPENAI_API_KEY)
 
     user_message = _USER_TEMPLATE.format(
         values_reference=values_ref,
@@ -221,7 +220,7 @@ def check_persona_consistency(
     try:
         completion = client.chat.completions.create(
             model=model,
-            temperature=0,  # deterministic for evaluation
+            temperature=0, 
             messages=[
                 {"role": "system", "content": _SYSTEM_PROMPT},
                 {"role": "user",   "content": user_message},
@@ -237,25 +236,6 @@ def check_persona_consistency(
             tone_fidelity=tf,
             weighted_score=score,
             raw_response=raw,
-        )
-
-    except json.JSONDecodeError as e:
-        # Return degraded result on JSON parse error
-        return PersonaConsistencyResult(
-            values_alignment=DimensionScore(
-                dimension="values_alignment",
-                score=1,
-                reasoning="Evaluator error: malformed judge output",
-                violations=[],
-            ),
-            tone_fidelity=DimensionScore(
-                dimension="tone_fidelity",
-                score=1,
-                reasoning="Evaluator error: malformed judge output",
-                violations=[],
-            ),
-            weighted_score=0.0,
-            raw_response=str(e),
         )
 
     except Exception as e:
