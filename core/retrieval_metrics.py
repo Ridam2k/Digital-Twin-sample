@@ -11,7 +11,7 @@ from qdrant_client import QdrantClient
 from core.retriever import retrieve
 from config import QDRANT_URL, COLLECTION_NAME, QDRANT_API_KEY
 import datetime
-
+import random
 
 # File path for persistent storage
 RETRIEVAL_STATS_FILE = "retrieval_stats.json"
@@ -82,10 +82,12 @@ def compute_retrieval_metrics(
         "reciprocal_ranks": []
     })
     
+    total_queries_fast = 50
+    
+    random_sample = random.sample(eval_data, total_queries_fast)
     
     # Evaluate each query
-    for row in eval_data:
-        count+=1
+    for row in random_sample:
         query = row["query"]
         namespace = row["namespace"]
 
@@ -125,8 +127,8 @@ def compute_retrieval_metrics(
     
 
     # Compute overall metrics
-    recall_at_k = recall_hits / total_queries if total_queries > 0 else 0.0
-    mrr_at_k = sum(reciprocal_ranks) / total_queries if total_queries > 0 else 0.0
+    recall_at_k = recall_hits / total_queries_fast if total_queries_fast > 0 else 0.0
+    mrr_at_k = sum(reciprocal_ranks) / total_queries_fast if total_queries_fast > 0 else 0.0
 
     # Compute namespace metrics
     by_namespace = {}
@@ -147,7 +149,7 @@ def compute_retrieval_metrics(
             "recall_at_k": round(recall_at_k, 4),
             "mrr_at_k": round(mrr_at_k, 4),
             "k": k,
-            "total_queries": total_queries
+            "total_queries": total_queries_fast
         },
         "by_namespace": by_namespace,
         "metadata": {

@@ -5,6 +5,18 @@ import ObservabilityPage from './pages/ObservabilityPage.jsx';
 import { sendQuery, streamQuery, APIError } from './api/client.js';
 import './App.css';
 
+const MAX_HISTORY_MESSAGES = 10;
+
+function buildHistory(messages) {
+  return messages
+    .filter((msg) => msg.role === 'user' || msg.role === 'twin')
+    .map((msg) => ({
+      role: msg.role === 'twin' ? 'assistant' : 'user',
+      content: msg.text,
+    }))
+    .slice(-MAX_HISTORY_MESSAGES);
+}
+
 export default function App() {
   const [mode, setMode] = useState('technical');
   const [systemStatus, setSystemStatus] = useState('idle');
@@ -17,6 +29,9 @@ export default function App() {
   const nextMessageId = useRef(1);
 
   const handleQuery = async (queryText, contentType = null) => {
+    // Build history from existing messages BEFORE adding the new user message
+    const history = buildHistory(messages);
+
     const userMsg = {
       id: nextMessageId.current++,
       role: 'user',
@@ -66,7 +81,7 @@ export default function App() {
           console.error('Query stream error:', error);
           throw error; // Let outer catch handle it
         }
-      });
+      }, history);
 
     } catch (error) {
       console.error('Query failed:', error);

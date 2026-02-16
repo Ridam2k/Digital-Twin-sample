@@ -17,11 +17,13 @@ from core.persona_consistency import check_persona_consistency
 from api.eval_endpoints import router as eval_router
 import json
 import datetime
-from typing import Optional, AsyncGenerator
+from typing import Optional, AsyncGenerator, List
 import asyncio
 from main_ingest import ingest_folder
 from config import TECHNICAL_FOLDER_ID, NONTECHNICAL_FOLDER_ID
 from main_ingest import ingest_github
+from qdrant_client import QdrantClient
+from config import QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME
 
 
 app = FastAPI(title="Digital Twin API", version="1.0.0")
@@ -39,9 +41,15 @@ app.add_middleware(
 )
 
 
+class ConversationTurn(BaseModel):
+    role: str       # "user" or "assistant"
+    content: str
+
+
 class QueryRequest(BaseModel):
     query: str
     content_type: Optional[str] = None
+    history: List[ConversationTurn] = []
 
 
 class Citation(BaseModel):
@@ -62,6 +70,36 @@ class QueryResponse(BaseModel):
 
 class GithubIngestRequest(BaseModel):
     repos: Optional[list[str]] = None
+
+
+def fetch_unique_doc_titles() -> list[str]:
+    client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+    titles: set[str] = set()
+    offset = None
+
+    while True:
+        points, next_offset = client.scroll(
+            collection_name=COLLECTION_NAME,
+            limit=1000,
+            with_payload=["doc_title", "file_name"],
+            with_vectors=False,
+            offset=offset,
+        )
+        if not points:
+            break
+
+        for p in points:
+            payload = p.payload or {}
+            title = (payload.get("doc_title") or payload.get("file_name") or "").strip()
+            if title:
+                titles.add(title)
+
+        if next_offset is None:
+            break
+        offset = next_offset
+
+    client.close()
+    return sorted(titles)
 
 
 @app.post("/api/query", response_model=QueryResponse)
@@ -95,8 +133,8 @@ async def query_endpoint(req : QueryRequest):
         )
 
         # Step 4: Get LLM response
-        result = generate(system_prompt, user_message, chunks, out_of_scope)
-        
+        result = generate(system_prompt, user_message, chunks, out_of_scope, history=req.history)
+
         print("Response generated")
 
         # Step 5: Evaluation
@@ -185,7 +223,7 @@ async def query_stream_endpoint(req: QueryRequest):
                 content_type=req.content_type,
             )
 
-            result = generate(system_prompt, user_message, chunks, out_of_scope)
+            result = generate(system_prompt, user_message, chunks, out_of_scope, history=req.history)
 
             print("Response generated, streaming to client...")
 
@@ -378,6 +416,26 @@ async def ingest_github_endpoint(req: GithubIngestRequest = GithubIngestRequest(
         raise HTTPException(
             status_code=500,
             detail=f"Ingestion failed: {str(e)}"
+        )
+
+
+@app.get("/api/projects")
+async def get_projects():
+    """
+    Returns unique doc_title values from Qdrant.
+    """
+    try:
+        titles = fetch_unique_doc_titles()
+        return {
+            "collection": COLLECTION_NAME,
+            "total": len(titles),
+            "projects": titles,
+            "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error retrieving projects: {str(e)}"
         )
 
 @app.get("/health")

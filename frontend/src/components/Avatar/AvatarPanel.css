@@ -10,14 +10,6 @@
   height: 100%;
 }
 
-.silhouette-wrapper {
-  filter: drop-shadow(0 0 24px var(--glow-teal));
-}
-
-.silhouette {
-  display: block;
-}
-
 .waveform {
   display: block;
 }
@@ -29,78 +21,6 @@
   animation: fadeIn 300ms ease-out;
 }
 
-/* Animations */
-
-/* idle: slow vertical bob */
-@keyframes breathe {
-  0%, 100% {
-    transform: translateY(0px);
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(-6px);
-    opacity: 0.88;
-  }
-}
-
-.anim-breathe {
-  animation: breathe 4s ease-in-out infinite;
-}
-
-/* listening: outline shimmer via filter hue-rotate */
-@keyframes shimmer {
-  0%, 100% {
-    filter: drop-shadow(0 0 24px rgba(0, 194, 168, 0.35));
-  }
-  50% {
-    filter: drop-shadow(0 0 36px rgba(245, 158, 11, 0.55));
-  }
-}
-
-.anim-shimmer {
-  animation: shimmer 1.2s ease-in-out infinite;
-}
-
-/* processing: scan-line sweep via clip-path animation */
-@keyframes scan {
-  0% {
-    clip-path: inset(0 0 100% 0);
-    opacity: 0.5;
-  }
-  50% {
-    clip-path: inset(0 0 0 0);
-    opacity: 1;
-  }
-  100% {
-    clip-path: inset(100% 0 0 0);
-    opacity: 0.5;
-  }
-}
-
-.anim-scan {
-  animation: scan 1.5s linear infinite;
-}
-
-/* speaking: gentle scale pulse */
-@keyframes speak-pulse {
-  0%, 100% {
-    transform: scale(1.00);
-  }
-  50% {
-    transform: scale(1.02);
-  }
-}
-
-.anim-speaking {
-  animation: speak-pulse 0.6s ease-in-out infinite;
-}
-
-/* out-of-scope: desaturate */
-.anim-oos {
-  filter: grayscale(0.85) drop-shadow(0 0 8px rgba(224, 82, 82, 0.2));
-  opacity: 0.55;
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -108,6 +28,69 @@
   to {
     opacity: 1;
   }
+}
+
+/* Projects list */
+.projects-panel {
+  width: 100%;
+  max-width: 360px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 14px;
+  box-shadow: 0 0 24px rgba(0, 194, 168, 0.08);
+}
+
+.projects-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.projects-status,
+.projects-empty {
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 6px 0;
+}
+
+.projects-error {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--danger);
+  padding: 6px 10px;
+  background: rgba(224, 82, 82, 0.1);
+  border-radius: 4px;
+  text-align: center;
+}
+
+.projects-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding: 0;
+  margin: 0;
+}
+
+.projects-item {
+  font-size: 12px;
+  color: var(--text-primary);
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: rgba(13, 15, 20, 0.6);
+  border: 1px solid rgba(42, 47, 66, 0.6);
+  transition: border-color 120ms ease, transform 120ms ease;
+}
+
+.projects-item:hover {
+  border-color: rgba(0, 194, 168, 0.6);
+  transform: translateY(-1px);
 }
 
 /* Ingestion controls */

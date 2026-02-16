@@ -30,7 +30,7 @@ def build_context(
         return system_prompt, user_message
 
     evidence_lines = []
-    for i, chunk in enumerate(chunks, 1):
+    for i, chunk in enumerate(chunks):
         evidence_lines.append(
             f"[{i}] SOURCE: {chunk.doc_title} | score={chunk.score:.3f}\n"
             f"URL: {chunk.source_url}\n"
@@ -48,7 +48,7 @@ def build_context(
         )
     else:
         user_message = (
-            f"Here's some context about yourself:\n\n"
+            f"Here's some context about this query:\n\n"
             f"{evidence_block}\n\n"
             f"Now respond naturally to this question: {query}\n\n"
             f"(You can reference sources with [number] if helpful, but integrate them naturally into your voice.)"

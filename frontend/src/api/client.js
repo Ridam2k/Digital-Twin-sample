@@ -25,7 +25,7 @@ export class APIError extends Error {
  * @returns {Promise<Object>} Response object with {response, citations, mode, router_scores, out_of_scope}
  * @throws {APIError} If the request fails
  */
-export async function sendQuery(queryText, contentType = null) {
+export async function sendQuery(queryText, contentType = null, history = []) {
   const response = await fetch(`${API_BASE_URL}/api/query`, {
     method: 'POST',
     headers: {
@@ -33,7 +33,8 @@ export async function sendQuery(queryText, contentType = null) {
     },
     body: JSON.stringify({
       query: queryText,
-      ...(contentType && { content_type: contentType })
+      ...(contentType && { content_type: contentType }),
+      history,
     }),
   });
 
@@ -62,7 +63,7 @@ export async function sendQuery(queryText, contentType = null) {
  * @param {Function} callbacks.onError - Called on error
  * @throws {APIError} If the request fails
  */
-export async function streamQuery(queryText, contentType, callbacks) {
+export async function streamQuery(queryText, contentType, callbacks, history = []) {
   const url = `${API_BASE_URL}/api/query/stream`;
 
   const response = await fetch(url, {
@@ -70,7 +71,8 @@ export async function streamQuery(queryText, contentType, callbacks) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       query: queryText,
-      ...(contentType && { content_type: contentType })
+      ...(contentType && { content_type: contentType }),
+      history,
     }),
   });
 
@@ -189,6 +191,27 @@ export async function fetchRetrievalStats(recompute = false, k = 5) {
     const errorData = await response.json().catch(() => ({}));
     throw new APIError(
       `Failed to fetch retrieval stats: ${response.status}`,
+      response.status,
+      errorData.detail || 'Unknown error'
+    );
+  }
+
+  return response.json();
+}
+
+/**
+ * Fetch available projects (unique doc_title values) from Qdrant.
+ *
+ * @returns {Promise<Object>} Projects payload with {projects, total, collection}
+ * @throws {APIError} If the request fails
+ */
+export async function fetchProjects() {
+  const response = await fetch(`${API_BASE_URL}/api/projects`);
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new APIError(
+      `Failed to fetch projects: ${response.status}`,
       response.status,
       errorData.detail || 'Unknown error'
     );

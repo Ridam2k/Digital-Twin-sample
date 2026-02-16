@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ingestGoogleDrive, ingestGithub } from '../../api/client.js';
+import { ingestGoogleDrive, ingestGithub, fetchProjects } from '../../api/client.js';
 import './AvatarPanel.css';
 
 export default function AvatarPanel({ systemStatus }) {
@@ -11,6 +11,11 @@ export default function AvatarPanel({ systemStatus }) {
   const [customRepo, setCustomRepo] = useState('');
   const [ingestError, setIngestError] = useState(null);
   const [ingestSuccess, setIngestSuccess] = useState(null); // 'gdrive' | 'github' | null
+
+  // Projects list state
+  const [projects, setProjects] = useState([]);
+  const [projectsLoading, setProjectsLoading] = useState(true);
+  const [projectsError, setProjectsError] = useState(null);
 
   // Hardcoded GITHUB_REPOS (synced with config.py)
   const GITHUB_REPOS = [
@@ -91,31 +96,56 @@ export default function AvatarPanel({ systemStatus }) {
     ctx.stroke();
   }, []);
 
-  const animClass = {
-    idle: 'anim-breathe',
-    listening: 'anim-shimmer',
-    processing: 'anim-scan',
-    speaking: 'anim-speaking',
-    'out-of-scope': 'anim-oos',
-  }[systemStatus] || 'anim-breathe';
+  // Fetch available projects once on mount
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadProjects = async () => {
+      setProjectsLoading(true);
+      setProjectsError(null);
+      try {
+        const data = await fetchProjects();
+        if (!isMounted) return;
+        setProjects(Array.isArray(data.projects) ? data.projects : []);
+      } catch (error) {
+        if (!isMounted) return;
+        setProjectsError(error.message || 'Failed to load projects');
+      } finally {
+        if (isMounted) {
+          setProjectsLoading(false);
+        }
+      }
+    };
+
+    loadProjects();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <div className="avatar-panel">
-      <div className={`silhouette-wrapper ${animClass}`}>
-        <svg
-          className="silhouette"
-          width="350"
-          height="390"
-          viewBox="0 0 220 220"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M110,20 a30,30 0 1,0 60,0 a30,30 0 1,0 -60,0M80,75 Q80,55 110,55 L140,55 Q175,55 175,75L185,160 Q185,170 175,170 L85,170 Q75,170 75,160 Z"
-            fill="rgba(0, 194, 168, 0.10)"
-            stroke="var(--teal)"
-            strokeWidth="1.5"
-          />
-        </svg>
+      <div className="projects-panel">
+        <div className="projects-title">Available Projects</div>
+        {projectsLoading && (
+          <div className="projects-status">Loading...</div>
+        )}
+        {projectsError && (
+          <div className="projects-error">{projectsError}</div>
+        )}
+        {!projectsLoading && !projectsError && projects.length === 0 && (
+          <div className="projects-empty">No projects found.</div>
+        )}
+        {!projectsLoading && !projectsError && projects.length > 0 && (
+          <ul className="projects-list">
+            {projects.map((title) => (
+              <li key={title} className="projects-item">
+                {title}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
       {/* Ingestion controls section */}
