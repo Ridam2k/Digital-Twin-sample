@@ -58,6 +58,10 @@ class QueryResponse(BaseModel):
     content_type: Optional[str] = None
 
 
+class GithubIngestRequest(BaseModel):
+    repos: Optional[list[str]] = None
+
+
 @app.post("/api/query", response_model=QueryResponse)
 async def query_endpoint(req : QueryRequest):
     """
@@ -190,12 +194,15 @@ async def ingest_gdrive_endpoint():
 
 
 @app.post("/api/ingest/github")
-async def ingest_github_endpoint():
+async def ingest_github_endpoint(req: GithubIngestRequest = GithubIngestRequest()):
     """
     Triggers ingestion of configured GitHub repositories.
+    Optionally accepts custom repos list.
     """
     try:
-        result = ingest_github()
+        # Use custom repos if provided, otherwise use config defaults
+        repos = req.repos if req.repos else None
+        result = ingest_github(repos=repos)
 
         return {
             "status": "success",

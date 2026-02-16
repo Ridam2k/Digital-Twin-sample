@@ -185,15 +185,21 @@ export async function ingestGoogleDrive() {
 /**
  * Trigger GitHub ingestion for configured repositories.
  *
+ * @param {Array<string>|null} customRepos - Optional array of custom repos to ingest (e.g., ["owner/repo"])
  * @returns {Promise<Object>} Ingestion result with statistics
  * @throws {APIError} If the request fails
  */
-export async function ingestGithub() {
+export async function ingestGithub(customRepos = null) {
   const response = await fetch(`${API_BASE_URL}/api/ingest/github`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify(
+      customRepos && customRepos.length > 0
+        ? { repos: customRepos }
+        : {}
+    ),
   });
 
   if (!response.ok) {

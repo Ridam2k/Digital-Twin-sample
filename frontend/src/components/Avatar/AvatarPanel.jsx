@@ -1,8 +1,64 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { ingestGoogleDrive, ingestGithub } from '../../api/client.js';
 import './AvatarPanel.css';
 
 export default function AvatarPanel({ systemStatus }) {
   const canvasRef = useRef(null);
+
+  // Ingestion state
+  const [isIngestingGDrive, setIsIngestingGDrive] = useState(false);
+  const [isIngestingGithub, setIsIngestingGithub] = useState(false);
+  const [customRepo, setCustomRepo] = useState('');
+  const [ingestError, setIngestError] = useState(null);
+
+  // Hardcoded GITHUB_REPOS (synced with config.py)
+  const GITHUB_REPOS = [
+    "Ridam2k/EcoNest",
+    "Ridam2k/FinDocSummariser",
+    "Ridam2k/Udemy_contact-keeper",
+    "Ridam2k/her-hygiene",
+    "Ridam2k/user-groups-app"
+  ];
+
+  // Ingestion handlers
+  const handleGDriveIngest = async () => {
+    setIsIngestingGDrive(true);
+    setIngestError(null);
+    try {
+      const result = await ingestGoogleDrive();
+      console.log('Google Drive ingestion complete:', result);
+    } catch (error) {
+      console.error('Google Drive ingestion failed:', error);
+      setIngestError(error.message || 'Google Drive ingestion failed');
+    } finally {
+      setIsIngestingGDrive(false);
+    }
+  };
+
+  const handleGithubIngest = async () => {
+    setIsIngestingGithub(true);
+    setIngestError(null);
+    try {
+      // Parse custom repo input
+      const trimmedRepo = customRepo.trim();
+
+      // Build repos array: add custom repo to config defaults if provided
+      const customRepos = trimmedRepo
+        ? [...GITHUB_REPOS, trimmedRepo]  // Add to config repos
+        : null;  // Use config defaults only
+
+      const result = await ingestGithub(customRepos);
+      console.log('GitHub ingestion complete:', result);
+
+      // Clear input on success
+      setCustomRepo('');
+    } catch (error) {
+      console.error('GitHub ingestion failed:', error);
+      setIngestError(error.message || 'GitHub ingestion failed');
+    } finally {
+      setIsIngestingGithub(false);
+    }
+  };
 
   // Draw static waveform baseline on mount
   useEffect(() => {
@@ -53,6 +109,39 @@ export default function AvatarPanel({ systemStatus }) {
             strokeWidth="1.5"
           />
         </svg>
+      </div>
+
+      {/* Ingestion controls section */}
+      <div className="ingestion-controls">
+        <button
+          className="ingest-button"
+          onClick={handleGDriveIngest}
+          disabled={isIngestingGDrive || isIngestingGithub}
+        >
+          {isIngestingGDrive ? 'Ingesting...' : 'Ingest Google Drive'}
+        </button>
+
+        <div className="github-ingest-group">
+          <button
+            className="ingest-button"
+            onClick={handleGithubIngest}
+            disabled={isIngestingGDrive || isIngestingGithub}
+          >
+            {isIngestingGithub ? 'Ingesting...' : 'Ingest Github'}
+          </button>
+          <input
+            type="text"
+            className="repo-input"
+            placeholder="owner/repo (optional) for Ingest Github"
+            value={customRepo}
+            onChange={(e) => setCustomRepo(e.target.value)}
+            disabled={isIngestingGDrive || isIngestingGithub}
+          />
+        </div>
+
+        {ingestError && (
+          <div className="ingest-error">{ingestError}</div>
+        )}
       </div>
 
       <canvas
