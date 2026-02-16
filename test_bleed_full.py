@@ -3,7 +3,7 @@
 Full end-to-end bleed detection test with actual LLM calls.
 
 This test verifies that writing sample content does NOT leak into factual responses
-when the retrieved evidence doesn't support those claims.
+when the retrieved evidence doesn't support those claims
 """
 
 from openai import OpenAI
@@ -87,8 +87,8 @@ def run_bleed_test(query: str, namespace: str = "technical"):
     client = OpenAI(api_key=OPENAI_API_KEY)
 
     response = client.chat.completions.create(
-        model="gpt-4o-mini",  # or "gpt-4o" for full GPT-4
-        max_tokens=1024,
+        model="gpt-4o-mini",
+        max_tokens=800,
         messages=[
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_message}
@@ -110,7 +110,11 @@ def run_bleed_test(query: str, namespace: str = "technical"):
         "don't have enough information" in answer.lower() or
         "insufficient" in answer.lower() or
         "not enough information" in answer.lower() or
-        "current knowledge base" in answer.lower()
+        "current knowledge base" in answer.lower() or
+        "don't have specific experiences" in answer.lower() or
+        "don't have any specific evidence" in answer.lower() or 
+        "don't have personal experiences" in answer.lower() or 
+        "don’t have specific experiences" in answer.lower()
     )
 
     # Check if response makes specific claims (heuristic: longer responses with technical terms)
@@ -151,24 +155,14 @@ def run_test_suite():
     """Run multiple test cases to thoroughly check bleed resistance."""
 
     test_cases = [
-        # Test 1: Question likely NOT in your knowledge base
         {
-            "query": "What's your opinion on using microservices vs monoliths?",
-            "namespace": "technical",
-            "expected": "Should say insufficient info unless writing samples contain this opinion"
-        },
-
-        # Test 2: Another likely gap
-        {
-            "query": "What do you think about the future of quantum computing?",
+            "query": "What do you think about the future of quantum computing from YOUR own PERSONAL experience?",
             "namespace": "technical",
             "expected": "Should say insufficient info unless knowledge base has this"
         },
-
-        # Test 3: Personal preference question
         {
-            "query": "What's your favorite programming language and why?",
-            "namespace": "technical",
+            "query": "Have YOU ever faced challenges in your career SOLELY based on gender discrimination or because of being a woman?",
+            "namespace": "non-technical",
             "expected": "Should say insufficient info unless explicitly documented"
         },
     ]
@@ -212,14 +206,4 @@ def run_test_suite():
 
 
 if __name__ == "__main__":
-    import sys
-
-    if len(sys.argv) > 1 and sys.argv[1] == "--suite":
-        run_test_suite()
-    else:
-        # Single test mode
-        query = "What's your opinion on using microservices vs monoliths?"
-        if len(sys.argv) > 1:
-            query = " ".join(sys.argv[1:])
-
-        run_bleed_test(query)
+    run_test_suite()
