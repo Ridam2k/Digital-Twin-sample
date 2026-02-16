@@ -84,19 +84,15 @@ The following files contain sensitive credentials and will be provided separatel
 - **`config.py`**: Contains API keys and configuration:
   - Qdrant database URL and API key
   - OpenAI API keys (for embeddings and generation)
-  - Google Drive folder IDs (technical and non-technical)
+  - Google Drive folder IDs (technical and non-technical) 
   - GitHub personal access token
   - Collection names, chunk sizes, and other parameters
 
+- The project setup currently connects to my(Ridam Srivastava's) Google Drive folders and Github Repos that have been granted access for the same; configuring to your own Drive and Github would require additional steps for setting up access
+
 **⚠️ Important**: Place these files in the project root directory before proceeding
 
-### 4. Create Required Directories
-
-```bash
-mkdir -p data
-```
-
-### 5. Frontend Setup
+### 4. Frontend Setup
 
 ```bash
 cd frontend
@@ -148,7 +144,13 @@ python query_cli.py
 
 ### Initial Data Ingestion
 
-Before first use, ingest your data sources:
+- The following files would be provided to DIRECTLY run the retrieval: data/gdrive_hash_store.json, data/github_hash_store.json, data/synthetic_hash_store.json
+- If these files are put into the data folder, then the ingestion step DOES NOT need to be run for the app to be run locally, as the associated files are ALREADY present in the QDRANT client
+
+- If running the ingestion flow from scratch:
+- First run the deletions script to delete the existing data points: 
+
+Then ingest data sources as:
 
 ```bash
 source .venv/bin/activate

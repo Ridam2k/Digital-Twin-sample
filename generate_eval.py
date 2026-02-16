@@ -44,6 +44,15 @@ def doc_title_hash(namespace: str, doc_title: str) -> str:
     # include namespace to avoid collisions across namespaces
     return sha256(f"{namespace}::{doc_title}".strip())
 
+def extract_doc_title(payload: dict) -> str:
+    file_path = payload.get("file_path") or payload.get("file path")
+    if file_path:
+        return file_path.split("/")[-1]
+    title = payload.get("doc_title")
+    if title:
+        return title
+    return (payload.get("file_name") or payload.get("file name") or "")
+
 def build_user_prompt(source_text: str, doc_title: str, namespace: str,
                       n_easy: int = 1, n_medium: int = 1, n_hard: int = 1) -> str:
     return f"""
@@ -87,7 +96,7 @@ def fetch_documents_from_qdrant() -> List[Dict[str, Any]]:
         for p in points:
             payload = p.payload or {}
             ns = payload.get("personality_ns")
-            title = payload.get("doc_title") or payload.get("file_name") or ""
+            title = extract_doc_title(payload)
             text = payload.get("text") or ""
             if not ns or not title or not text.strip():
                 continue
