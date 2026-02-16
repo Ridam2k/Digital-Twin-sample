@@ -5,16 +5,29 @@ Retrieval evaluation metrics (Recall@K, MRR@K) - refactored from eval_retrieval.
 import json
 from collections import defaultdict
 from typing import Dict
+from pathlib import Path
 from qdrant_client import QdrantClient
 from core.retriever import retrieve
 from config import QDRANT_URL, COLLECTION_NAME, QDRANT_API_KEY
 import datetime
 
 
-# Global cache for retrieval stats
-_retrieval_stats_cache = None
-_cache_timestamp = None
-CACHE_TTL_SECONDS = 3600  # 1 hour
+# File path for persistent storage
+RETRIEVAL_STATS_FILE = "retrieval_stats.json"
+
+
+def load_retrieval_stats_from_file():
+    """Load retrieval stats from JSON file if it exists."""
+    if Path(RETRIEVAL_STATS_FILE).exists():
+        with open(RETRIEVAL_STATS_FILE, 'r') as f:
+            return json.load(f)
+    return None
+
+
+def save_retrieval_stats_to_file(stats_dict):
+    """Save retrieval stats to JSON file."""
+    with open(RETRIEVAL_STATS_FILE, 'w') as f:
+        json.dump(stats_dict, f, indent=2)
 
 
 def compute_retrieval_metrics(
@@ -24,6 +37,7 @@ def compute_retrieval_metrics(
 ) -> Dict:
     """
     Computes Recall@K and MRR@K metrics from evaluation set.
+    Uses file-based caching to persist results across server restarts.
 
     Args:
         k: K value for Recall@K and MRR@K
@@ -33,14 +47,15 @@ def compute_retrieval_metrics(
     Returns:
         Dict with overall and namespace-level metrics
     """
-    global _retrieval_stats_cache, _cache_timestamp
 
-    # Check cache
-    if not force_recompute and _retrieval_stats_cache is not None:
-        if _cache_timestamp is not None:
-            age_seconds = (datetime.datetime.now(datetime.timezone.utc) - _cache_timestamp).total_seconds()
-            if age_seconds < CACHE_TTL_SECONDS:
-                return _retrieval_stats_cache
+    # Try to load from file first (unless force_recompute)
+    if not force_recompute:
+        cached_stats = load_retrieval_stats_from_file()
+        if cached_stats is not None:
+            print(f"✓ Loaded retrieval stats from {RETRIEVAL_STATS_FILE}")
+            return cached_stats
+
+    print(f"Computing retrieval metrics for {eval_file}...")
 
     # Load eval set
     with open(eval_file, "r") as f:
@@ -117,13 +132,13 @@ def compute_retrieval_metrics(
         "by_namespace": by_namespace,
         "metadata": {
             "computed_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
-            "cache_ttl_seconds": CACHE_TTL_SECONDS,
+            "cache_ttl_seconds": 3600,
             "eval_set_file": eval_file
         }
     }
 
-    # Update cache
-    _retrieval_stats_cache = result
-    _cache_timestamp = datetime.datetime.now(datetime.timezone.utc)
+    # Save to file for future use
+    save_retrieval_stats_to_file(result)
+    print(f"✓ Saved retrieval stats to {RETRIEVAL_STATS_FILE}")
 
     return result

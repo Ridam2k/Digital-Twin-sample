@@ -58,7 +58,6 @@ async def query_endpoint(req : QueryRequest):
     Main query endpoint - runs the 6-stage pipeline and returns response.
     """
     print("Query: ", req)
-    print("Type :", type(req))
     
     if not req.query or not req.query.strip():
         raise HTTPException(status_code=400, detail="Query cannot be empty")
@@ -72,6 +71,8 @@ async def query_endpoint(req : QueryRequest):
         
         print()
         retrieved_texts = [c.text for c in chunks]
+        
+        print("Chunks retreived")
 
         # Step 3: Context Builder - assemble system prompt + user message
         system_prompt, user_message = build_context(
@@ -80,6 +81,8 @@ async def query_endpoint(req : QueryRequest):
 
         # Step 4: Generator - get LLM response
         result = generate(system_prompt, user_message, chunks, out_of_scope)
+        
+        print("Response generated")
 
         # Step 5: Evaluation (backend-only, logged but not returned to frontend)
         # Eval 5a: Groundedness check

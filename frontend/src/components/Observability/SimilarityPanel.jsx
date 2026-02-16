@@ -22,10 +22,6 @@ export default function SimilarityPanel() {
 
   useEffect(() => {
     loadStats();
-
-    // Auto-refresh every 30 seconds
-    const interval = setInterval(loadStats, 30000);
-    return () => clearInterval(interval);
   }, []);
 
   const getMaxCount = () => {
@@ -77,7 +73,6 @@ export default function SimilarityPanel() {
             Out-of-scope threshold: {data.thresholds.out_of_scope_threshold} • Top-K: {data.thresholds.top_k}
           </div>
 
-          <div className="refresh-note">Auto-refreshing every 30s</div>
         </>
       )}
     </MetricsCard>

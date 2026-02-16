@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MetricsCard from './MetricsCard.jsx';
+import RecentQueriesTable from './RecentQueriesTable.jsx';
 import { fetchEvalMetrics } from '../../api/client.js';
 import './QualityPanel.css';
 
@@ -22,10 +23,6 @@ export default function QualityPanel() {
 
   useEffect(() => {
     loadMetrics();
-
-    // Auto-refresh every 30 seconds
-    const interval = setInterval(loadMetrics, 30000);
-    return () => clearInterval(interval);
   }, []);
 
   const getScoreClass = (score) => {
@@ -95,7 +92,7 @@ export default function QualityPanel() {
             </>
           )}
 
-          <div className="refresh-note">Auto-refreshing every 30s</div>
+          <RecentQueriesTable entries={data.recent_entries} />
         </>
       )}
     </MetricsCard>
