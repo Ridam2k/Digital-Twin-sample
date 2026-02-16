@@ -1,0 +1,81 @@
+.recent-queries-table {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.table-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin: 0 0 0.75rem 0;
+}
+
+.recent-queries-table {
+  overflow-x: auto;
+}
+
+.recent-queries-table table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.recent-queries-table th {
+  text-align: left;
+  padding: 0.5rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.recent-queries-table td {
+  padding: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.recent-queries-table tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.timestamp {
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.query-text {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.namespace {
+  color: var(--teal);
+  text-transform: uppercase;
+}
+
+.score {
+  font-weight: 600;
+  text-align: center;
+}
+
+.fabricated {
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.no-queries {
+  padding: 1rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+}

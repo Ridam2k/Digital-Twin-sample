@@ -1,0 +1,25 @@
+{
+  "overall": {
+    "recall_at_k": 0.9053,
+    "mrr_at_k": 0.7664,
+    "k": 5,
+    "total_queries": 285
+  },
+  "by_namespace": {
+    "technical": {
+      "count": 192,
+      "recall_at_k": 0.8958,
+      "mrr_at_k": 0.7649
+    },
+    "nontechnical": {
+      "count": 93,
+      "recall_at_k": 0.9247,
+      "mrr_at_k": 0.7694
+    }
+  },
+  "metadata": {
+    "computed_at": "2026-02-16T10:14:00.000000Z",
+    "cache_ttl_seconds": 3600,
+    "eval_set_file": "eval_set.json"
+  }
+}

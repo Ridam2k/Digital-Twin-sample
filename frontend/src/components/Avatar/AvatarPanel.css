@@ -1,0 +1,206 @@
+.avatar-panel {
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 32px 24px;
+  height: 100%;
+}
+
+.silhouette-wrapper {
+  filter: drop-shadow(0 0 24px var(--glow-teal));
+}
+
+.silhouette {
+  display: block;
+}
+
+.waveform {
+  display: block;
+}
+
+.oos-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--danger);
+  animation: fadeIn 300ms ease-out;
+}
+
+/* Animations */
+
+/* idle: slow vertical bob */
+@keyframes breathe {
+  0%, 100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-6px);
+    opacity: 0.88;
+  }
+}
+
+.anim-breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+/* listening: outline shimmer via filter hue-rotate */
+@keyframes shimmer {
+  0%, 100% {
+    filter: drop-shadow(0 0 24px rgba(0, 194, 168, 0.35));
+  }
+  50% {
+    filter: drop-shadow(0 0 36px rgba(245, 158, 11, 0.55));
+  }
+}
+
+.anim-shimmer {
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+/* processing: scan-line sweep via clip-path animation */
+@keyframes scan {
+  0% {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0.5;
+  }
+  50% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(100% 0 0 0);
+    opacity: 0.5;
+  }
+}
+
+.anim-scan {
+  animation: scan 1.5s linear infinite;
+}
+
+/* speaking: gentle scale pulse */
+@keyframes speak-pulse {
+  0%, 100% {
+    transform: scale(1.00);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+.anim-speaking {
+  animation: speak-pulse 0.6s ease-in-out infinite;
+}
+
+/* out-of-scope: desaturate */
+.anim-oos {
+  filter: grayscale(0.85) drop-shadow(0 0 8px rgba(224, 82, 82, 0.2));
+  opacity: 0.55;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Ingestion controls */
+.ingestion-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.ingest-button {
+  width: 100%;
+  padding: 10px 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--bg-base);
+  background: var(--teal);
+  border: 1.5px solid var(--teal);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ingest-button:hover:not(:disabled) {
+  background: #00d4b8;
+  border-color: #00d4b8;
+  transform: translateY(-1px);
+}
+
+.ingest-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.ingest-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--bg-raised);
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+.github-ingest-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.repo-input {
+  width: 100%;
+  padding: 8px 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.repo-input::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.repo-input:focus {
+  border-color: var(--teal);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 194, 168, 0.1);
+}
+
+.repo-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ingest-error {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--danger);
+  padding: 6px 10px;
+  background: rgba(224, 82, 82, 0.1);
+  border-radius: 4px;
+  text-align: center;
+}
+
+.ingest-success {
+  color: #00C2A8;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  display: block;
+  animation: fadeIn 500ms ease-out;
+}

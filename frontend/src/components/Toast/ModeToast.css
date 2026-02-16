@@ -1,0 +1,38 @@
+.mode-toast {
+  position: fixed;
+  top: 76px;
+  right: 20px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+  animation: toast-slide-in 250ms ease-out;
+  z-index: 1000;
+}
+
+.toast-line {
+  margin-bottom: 4px;
+}
+
+.toast-line:last-child {
+  margin-bottom: 0;
+}
+
+.toast-mode {
+  color: var(--amber);
+  font-weight: 500;
+}
+
+@keyframes toast-slide-in {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

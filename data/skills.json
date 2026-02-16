@@ -1,0 +1,135 @@
+{
+  "technical_skills": {
+    "systems_engineering": [
+      "microservices architecture",
+      "distributed systems fundamentals",
+      "data modeling (PK/FK, UML)",
+      "concurrency reasoning",
+      "locking mechanisms",
+      "REST API design",
+      "observability principles"
+    ],
+    "machine_learning": [
+      "NLP Models and systems",
+      "Autoregressive transformer architecture",
+      "Multimodal models and systems",
+      "RAG pipeline architecture",
+      "retrieval evaluation metrics",
+      "ROUGE evaluation",
+      "LLM agent orchestration",
+      "tool calling frameworks",
+      "LLM-as-judge evaluation",
+      "diffusion models (DDPM)",
+      "conditional generation",
+      "PSPNet implementation",
+      "semantic segmentation",
+      "model quantization",
+      "on-device inference optimization",
+      "deep learning models",
+      "LLM-guided decision frameworks"
+    ],
+    "ml_systems_design": [
+      "evaluation pipeline design",
+      "agent reliability measurement",
+      "decision trace analysis",
+      "productionization of ML models",
+      "research-to-production translation"
+    ],
+    "cloud_and_security": [
+      "Azure cloud services",
+      "cloud security governance automation",
+      "CI/CD fundamentals",
+      "infrastructure constraints awareness"
+    ]
+  },
+  "domain_knowledge": {
+    "finance": [
+      "investment banking documentation workflows",
+      "analyst query systems",
+      "risk appetite modeling",
+      "governance frameworks"
+    ],
+    "sustainability_and_policy": [
+      "UN SDG alignment (Goal 9, 13, 16)",
+      "echotechnology — technology for environmental benefit",
+      "institutional frameworks for sustainable development",
+      "interdisciplinary approaches to policy and technology",
+      "socio-economic impact of environmental innovation"
+    ]
+  },
+  "soft_skills": [
+    "structured reasoning",
+    "abstraction capability",
+    "deep technical articulation",
+    "iterative refinement mindset",
+    "cross-functional collaboration",
+    "high ownership",
+    "self-reflection"
+  ],
+  "nontechnical_skills": {
+    "performing_arts": {
+      "dance": {
+        "styles": [
+          "contemporary",
+          "jazz",
+          "ballet",
+          "thematic / narrative dance"
+        ],
+        "context": "Core performing member and logistics lead at Capella, The Choreography Society of NSUT (2018–2022). Part of the annual production team for Mélange (2019–20), a thematic piece on racial discrimination and cultural coalescence.",
+        "strengths": [
+          "fast technical routine acquisition",
+          "high movement precision and elegance",
+          "performing under competitive pressure (IIT, IIM, DU circuit)",
+          "mentoring junior members",
+          "sustaining energy and enthusiasm across long practice cycles"
+        ]
+      }
+    },
+    "debate_and_public_discourse": {
+      "formats": [
+        "Model United Nations (MUN)",
+        "conventional parliamentary debate",
+        "Thursday debate sessions (TADs)",
+        "competitive MUN — AMIMUN'19 (participant), KMCMUN'19 (Special Mention)"
+      ],
+      "context": "Active member and Executive Committee candidate at DebSoc, NSUT. Trained in structured MUN methodology from fundamentals through paperwork and committee strategy. Also contributed to the Tech Department during Colloquium'19.",
+      "strengths": [
+        "structured argumentation and rebuttal",
+        "research synthesis under time pressure",
+        "committee strategy and position paper writing",
+        "identifying and articulating operational gaps (e.g. workload distribution, punctuality)",
+        "mentoring first-time debaters",
+        "hosting and organising competitions"
+      ]
+    },
+    "project_and_society_leadership": {
+      "context": "Co-managed Capella's annual production as both a performing and operational contributor — handling attendance, logistics, infra coordination, and junior mentorship simultaneously.",
+      "strengths": [
+        "constrained project execution (fixed budget, hard deadlines, scoped deliverables)",
+        "explicit tradeoff reasoning under resource pressure (e.g. cutting choreographer cost in 2021-22 when competition certainty was low)",
+        "team structure design (performing vs infra split)",
+        "roadblock navigation — injury substitutions, exam-schedule clashes, costume delays",
+        "multi-role context switching without loss of execution quality",
+        "funding strategy across alumni, sponsorship, and competition winnings"
+      ]
+    },
+    "personal_interests": {
+      "active": [
+        "basketball",
+        "strength training (Push-Pull-Legs programme)",
+        "dancing"
+      ],
+      "intellectual": [
+        "reading books",
+        "sustainability and echotechnology",
+        "interdisciplinary research at the intersection of policy, technology and environment"
+      ],
+      "values_alignment": "Drawn to UN SDG Goals 9, 13 and 16 through family background in judiciary and government services. Interested in how institutional frameworks and technological innovation can be aligned for scalable, equitable sustainability."
+    }
+  },
+  "growth_edges": [
+    "asking for help earlier",
+    "navigating career ambiguity",
+    "managing emotional response under uncertainty"
+  ]
+}

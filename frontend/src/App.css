@@ -1,0 +1,7 @@
+.app-container {
+  display: grid;
+  grid-template-rows: var(--header-h) 1fr;
+  grid-template-columns: var(--avatar-col) var(--conv-col);
+  height: 100vh;
+  overflow: hidden;
+}
