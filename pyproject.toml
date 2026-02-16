@@ -1,0 +1,155 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "digital-twin"
+version = "0.1.0"
+description = "RAG-based Dual Persona AI Assistant with Google Drive, GitHub, and synthetic data ingestion"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "Ridam Srivastava", email = "your.email@example.com"}
+]
+keywords = [
+    "rag",
+    "retrieval-augmented-generation",
+    "ai-assistant",
+    "vector-database",
+    "qdrant",
+    "openai",
+    "llamaindex",
+    "fastapi"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Framework :: FastAPI",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "qdrant-client>=1.7.0",
+    "openai>=1.0.0",
+    "llama-index>=0.9.0",
+    "google-api-python-client>=2.0.0",
+    "google-auth-httplib2>=0.2.0",
+    "google-auth-oauthlib>=1.0.0",
+    "python-pptx>=0.6.0",
+    "python-docx>=1.0.0",
+    "PyPDF2>=3.0.0",
+    "GitPython>=3.1.0",
+    "requests>=2.31.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "numpy>=1.24.0",
+    "tiktoken>=0.5.0",
+    "anthropic>=0.34.0",
+    "aiofiles>=24.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.1.0",
+    "mypy>=1.5.0",
+    "pre-commit>=3.4.0",
+]
+frontend = [
+    # Frontend dependencies managed by npm/package.json
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/digital-twin"
+Documentation = "https://github.com/yourusername/digital-twin#readme"
+Repository = "https://github.com/yourusername/digital-twin"
+Issues = "https://github.com/yourusername/digital-twin/issues"
+
+[project.scripts]
+dt-ingest = "main_ingest:main"
+dt-query = "query_cli:main"
+dt-api = "api_server:main"
+
+[tool.setuptools]
+packages = ["core", "ingest", "api"]
+
+[tool.setuptools.package-data]
+"*" = ["*.json", "*.txt"]
+
+[tool.black]
+line-length = 88
+target-version = ["py39", "py310", "py311", "py312"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.venv
+  | build
+  | dist
+  | data
+  | frontend
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 88
+skip_gitignore = true
+skip = [".venv", "build", "dist", "data", "frontend"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+exclude = [
+    "^.venv/",
+    "^build/",
+    "^dist/",
+    "^data/",
+    "^frontend/",
+]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--strict-config",
+    "--showlocals",
+]
+testpaths = ["tests"]
+pythonpath = ["."]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.coverage.run]
+source = ["core", "ingest", "api"]
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+    "*/.venv/*",
+    "*/frontend/*",
+]
+
+[tool.coverage.report]
+precision = 2
+show_missing = true
+skip_covered = false
