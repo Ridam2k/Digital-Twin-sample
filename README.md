@@ -57,7 +57,7 @@ A sophisticated Retrieval-Augmented Generation (RAG) system that creates a perso
 
 ```bash
 git clone <repository-url>
-cd DT
+cd Digital-Twin-sample
 ```
 
 ### 2. Backend Setup
