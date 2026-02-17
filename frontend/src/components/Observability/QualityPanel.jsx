@@ -8,6 +8,7 @@ export default function QualityPanel() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [refreshing, setRefreshing] = useState(false);
 
   const loadMetrics = async () => {
     try {
@@ -18,6 +19,19 @@ export default function QualityPanel() {
       setError(err.message || 'Failed to load metrics');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    try {
+      const result = await fetchEvalMetrics();
+      setData(result);
+      setError(null);
+    } catch (err) {
+      setError(err.message || 'Failed to refresh metrics');
+    } finally {
+      setRefreshing(false);
     }
   };
 
@@ -92,7 +106,7 @@ export default function QualityPanel() {
             </>
           )}
 
-          <RecentQueriesTable entries={data.recent_entries} />
+          <RecentQueriesTable entries={data.recent_entries} onRefresh={handleRefresh} refreshing={refreshing} />
         </>
       )}
     </MetricsCard>

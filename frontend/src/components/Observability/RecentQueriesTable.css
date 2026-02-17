@@ -4,13 +4,45 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
 .table-title {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--text-secondary);
   text-transform: uppercase;
-  margin: 0 0 0.75rem 0;
+  margin: 0;
+}
+
+.fetch-btn {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.fetch-btn:hover:not(:disabled) {
+  color: var(--teal);
+  border-color: var(--teal);
+}
+
+.fetch-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 .recent-queries-table {

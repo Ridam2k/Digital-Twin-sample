@@ -1,24 +1,24 @@
 {
   "overall": {
-    "recall_at_k": 0.86,
-    "mrr_at_k": 0.6513,
+    "recall_at_k": 0.84,
+    "mrr_at_k": 0.7483,
     "k": 5,
     "total_queries": 50
   },
   "by_namespace": {
-    "technical": {
-      "count": 32,
-      "recall_at_k": 0.8125,
-      "mrr_at_k": 0.6208
-    },
     "nontechnical": {
-      "count": 18,
-      "recall_at_k": 0.9444,
-      "mrr_at_k": 0.7056
+      "count": 14,
+      "recall_at_k": 0.9286,
+      "mrr_at_k": 0.8393
+    },
+    "technical": {
+      "count": 36,
+      "recall_at_k": 0.8056,
+      "mrr_at_k": 0.713
     }
   },
   "metadata": {
-    "computed_at": "2026-02-16T15:46:36.234424+00:00",
+    "computed_at": "2026-02-17T21:21:33.660660+00:00",
     "cache_ttl_seconds": 3600,
     "eval_set_file": "eval_set.json"
   }

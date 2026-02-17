@@ -184,6 +184,20 @@ DT/
 ├── credentials.json       # Google OAuth (gitignored)
 ├── token.json             # Google token (gitignored)
 ├── requirements.txt       # Python dependencies
+├── pyproject.toml         # Python project metadata
+├── uv.lock                # uv lockfile
+├── generate_eval.py       # Evaluation dataset generation
+├── generate_synthetic_data.py # Synthetic data generator
+├── eval_retrieval.py      # Retrieval evaluation runner
+├── eval_set.json          # Evaluation dataset
+├── eval_log.jsonl         # Evaluation run logs
+├── retrieval_stats.json   # Aggregated retrieval stats
+├── quick_fix.py           # Utility script
+├── test_persona_consistency.py # Tests
+├── test_bleed_full.py     # Tests
+├── verify_checkpoint1.py  # Checkpoint verification
+├── verify_checkpoint2.py  # Checkpoint verification
+├── verify_checkpoint3.py  # Checkpoint verification
 │
 ├── core/                  # Core RAG pipeline modules
 │   ├── router.py          # Mode detection (technical/non-technical)
@@ -192,30 +206,59 @@ DT/
 │   ├── generator.py       # LLM response generation
 │   ├── groundedness.py    # Response grounding evaluation
 │   ├── persona_consistency.py  # Persona alignment checks
-│   └── retrieval_metrics.py    # Retrieval quality metrics
+│   ├── retrieval_metrics.py    # Retrieval quality metrics
+│   ├── eval_aggregator.py  # Eval aggregation utilities
+│   ├── pdf_extractor.py    # PDF parsing utilities
+│   ├── identity.py         # Persona/identity helpers
+│   └── __init__.py
 │
 ├── ingest/                # Ingestion modules
 │   ├── gdrive_reader.py   # Google Drive integration
 │   ├── github_reader.py   # GitHub repository processing
+│   ├── synthetic_reader.py # Synthetic JSON ingestion
 │   ├── chunker.py         # Text chunking and tagging
 │   ├── embedder.py        # Embedding generation
-│   └── *_hash_store.py    # Change detection stores
+│   ├── hash_store.py      # Hash store base class
+│   ├── gdrive_hash_store.py # Google Drive change detection
+│   ├── synthetic_hash_store.py # Synthetic change detection
+│   └── __init__.py
 │
 ├── api/                   # API endpoints
-│   └── eval_endpoints.py  # Evaluation API routes
+│   ├── eval_endpoints.py  # Evaluation API routes
+│   ├── models.py          # API request/response models
+│   └── __init__.py
 │
-├── data/                  # Data directory (gitignored)
+├── data/                  # Data assets and hash stores (partially gitignored)
 │   ├── sources/           # Synthetic JSON documents
+│   ├── writing_samples/   # PDF writing samples
+│   ├── traits.json
+│   ├── skills.json
+│   ├── style.json
+│   ├── gdrive_name_map.json
 │   ├── github_hash_store.json
 │   ├── gdrive_hash_store.json
 │   └── synthetic_hash_store.json
 │
+├── scripts/               # One-off scripts
+│   └── export_doc_titles.py
+│
+├── utility/               # Maintenance utilities
+│   ├── delete_collection.py
+│   ├── generate_eval.py
+│   └── generate_synthetic_data.py
+│
 └── frontend/              # React UI
+    ├── index.html
+    ├── package-lock.json
     ├── package.json
     ├── src/
     │   ├── App.jsx        # Main application
-    │   ├── components/    # UI components
-    │   └── pages/         # Page components
+    │   ├── App.css
+    │   ├── main.jsx       # Vite entrypoint
+    │   ├── api/           # API client utilities
+    │   ├── pages/         # Page components
+    │   ├── styles/        # Global tokens/styles
+    │   └── mock/          # Local mock data
     └── vite.config.js
 ```
 

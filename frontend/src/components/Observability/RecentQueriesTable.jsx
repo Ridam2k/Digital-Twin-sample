@@ -1,7 +1,7 @@
 import React from 'react';
 import './RecentQueriesTable.css';
 
-export default function RecentQueriesTable({ entries }) {
+export default function RecentQueriesTable({ entries, onRefresh, refreshing }) {
   if (!entries || entries.length === 0) {
     return <div className="no-queries">No queries logged yet</div>;
   }
@@ -14,7 +14,16 @@ export default function RecentQueriesTable({ entries }) {
 
   return (
     <div className="recent-queries-table">
-      <h4 className="table-title">Recent Queries (Last 5)</h4>
+      <div className="table-header">
+        <h4 className="table-title">Recent Queries (Last 5)</h4>
+        <button
+          className="fetch-btn"
+          onClick={onRefresh}
+          disabled={refreshing}
+        >
+          {refreshing ? 'Fetching…' : 'Fetch Latest'}
+        </button>
+      </div>
       <table>
         <thead>
           <tr>
