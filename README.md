@@ -32,7 +32,7 @@ A sophisticated Retrieval-Augmented Generation (RAG) system that creates a perso
 2. **Processing**: Content is chunked, tagged with metadata (personality namespace, content type), and embedded
 3. **Storage**: Embeddings stored in Qdrant vector database with metadata for filtering
 4. **Query Processing**:
-   - User submits query (optionally prefixed with `@code` for code-specific queries)
+   - User submits query (optionally prefixed with `@code` for code-specific queries) -> can type in textbox or give speech input
    - Router detects appropriate personality mode (technical/non-technical)
    - Retriever performs semantic search with optional content-type filtering
    - Context builder assembles relevant chunks with system prompts
@@ -271,7 +271,7 @@ DT/
 - **Non-technical**: Simplified explanations, accessible language, concept-focused
 
 ### Content Type Filtering
-- Use `@code` prefix to filter retrieval to code-related content only
+- Uses `@code` prefix to filter retrieval to code-related content only
 - Ensures code queries retrieve implementation details, not just documentation
 
 ### Smart Retrieval
@@ -287,6 +287,18 @@ DT/
 - **Groundedness**: Checks if response claims are supported by retrieved context
 - **Persona Consistency**: Validates alignment with personality mode
 - **Retrieval Quality**: Precision, recall, and F1 score tracking
+
+### Grounded Responses
+Every claim in a response is verified by a GPT-4o-mini judge that classifies each statement as `SUPPORTED`, `INFERRED`, or `FABRICATED` against the retrieved chunks.
+Only content traceable back to actual retrieved evidence influences the final answer — writing samples are explicitly excluded from the evidence pool and used for style calibration only.
+
+### Retrieval Threshold
+The out-of-scope similarity threshold is set to `0.3` (cosine similarity) — intentionally permissive given the current corpus of ~350 indexed chunks drawn from real personal documents.
+As the knowledge base grows this threshold will be raised to sharpen precision and reduce borderline retrievals.
+
+### Persona & Voice Consistency
+`data/traits.json`, `data/skills.json`, and `data/style.json` are injected wholesale into every system prompt, encoding role archetypes, core values, communication preferences, and domain knowledge so every response reflects the real person's voice.
+Short excerpts from PDF writing samples (`data/writing_samples/`) are additionally provided for style calibration — teaching the model *how* to phrase and structure an answer, not *what* to say.
 
 ---
 

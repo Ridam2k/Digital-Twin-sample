@@ -26,7 +26,8 @@ export default function AvatarPanel({ systemStatus }) {
     "Ridam2k/FinDocSummariser",
     "Ridam2k/Udemy_contact-keeper",
     "Ridam2k/her-hygiene",
-    "Ridam2k/user-groups-app"
+    "Ridam2k/user-groups-app",
+    "Ridam2k/BinaryNeuralNetworks"
   ];
 
   // Ingestion handlers

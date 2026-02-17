@@ -1,3 +1,4 @@
+import re
 from openai import OpenAI
 import tiktoken
 from core.retriever import RetrievedChunk
@@ -9,30 +10,23 @@ GENERATION_MODEL = "gpt-4o-mini"
 MAX_TOKENS       = 1024
 
 
-def _truncate_history(history: list, budget: int) -> list:
-    """Keep the most recent turns that fit within the token budget."""
-    if not history:
-        return []
+def _strip_markdown_emphasis(text: str) -> str:
+    """Remove GPT-style emphasis markers and map '*' bullets to '-'."""
+    if not text:
+        return text
 
-    enc = tiktoken.encoding_for_model(GENERATION_MODEL)
-    truncated = []
-    used = 0
+    lines = []
+    for line in text.splitlines():
+        stripped = line.lstrip()
+        if stripped.startswith("* "):
+            indent = " " * (len(line) - len(stripped))
+            line = f"{indent}- {stripped[2:]}"
+        lines.append(line)
 
-    for turn in reversed(history):
-        content = turn.content if hasattr(turn, "content") else turn["content"]
-        turn_tokens = len(enc.encode(content))
-        if used + turn_tokens > budget:
-            break
-        truncated.append(turn)
-        used += turn_tokens
-
-    truncated.reverse()
-
-    # Ensure history starts with a user message (trim orphaned assistant at start)
-    while truncated and (truncated[0].role if hasattr(truncated[0], "role") else truncated[0]["role"]) == "assistant":
-        truncated.pop(0)
-
-    return truncated
+    text = "\n".join(lines)
+    text = re.sub(r"\*\*(.+?)\*\*", r"\1", text)
+    text = re.sub(r"(?<!\*)\*(?!\s)(.+?)(?<!\s)\*(?!\*)", r"\1", text)
+    return text
 
 
 def generate(
@@ -70,6 +64,7 @@ def generate(
     )
 
     answer = response.choices[0].message.content.strip()
+    answer = _strip_markdown_emphasis(answer)
 
     citations = []
     if not out_of_scope:
