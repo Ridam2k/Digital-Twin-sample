@@ -58,12 +58,14 @@ def tag_and_chunk(
         elif not node.metadata.get("doc_title") and file_name:
             node.metadata["doc_title"] = file_name
         
-        file_id = None
-        if "file id" in node.metadata:
-            file_id = node.metadata["file id"]
-        else:
-            # fall back to file_name to avoid crashing if metadata missing
-            file_id = node.metadata.get("file_name", "unknown")
+        # Build a unique file_id for deterministic chunk UUIDs.
+        # Google Drive docs have "file id"; GitHub docs have "doc_id".
+        file_id = (
+            node.metadata.get("file id")
+            or node.metadata.get("doc_id")
+            or node.metadata.get("file_name")
+            or "unknown"
+        )
 
         raw = f"{file_id}|{personality_ns}|{content_type}|{i}"
         
