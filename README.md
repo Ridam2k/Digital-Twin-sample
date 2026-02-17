@@ -292,28 +292,6 @@ Edit `config.py` to customize:
 
 ---
 
-## 🐛 Troubleshooting
-
-### "No module named 'config'"
-- Ensure `config.py` is in the project root
-- Verify you've activated the virtual environment
-
-### "Invalid credentials" from Google Drive
-- Check `credentials.json` and `token.json` are present
-- Re-authenticate if needed
-
-### Frontend can't connect to backend
-- Ensure backend is running on port 8000
-- Check CORS settings in `api_server.py`
-
-### Empty search results
-- Run `python main_ingest.py` to populate the database
-- Verify Qdrant connection in `config.py`
-
----
-
----
-
 ## 🧪 Testing
 
 ### Test Persona Consistency
@@ -332,5 +310,24 @@ python eval_retrieval.py
 ```
 
 ---
+
+--- 
+
+## Steps to setup own ingestion pipeline
+
+### Google Drive
+1. Create a Google Cloud project, enable the Google Drive API, and create OAuth client credentials.
+2. Download the OAuth client JSON and place it at the repo root as `credentials.json` (same level as `config.py`).
+3. Decide which Google Drive folder you want to ingest and copy its folder ID from the URL.
+4. Set the folder ID in `config.py` if you’re using `main_ingest.py` (`TECHNICAL_FOLDER_ID` / `NONTECHNICAL_FOLDER_ID`), or pass it directly to `get_gdrive_reader(folder_id)` if you call it yourself
+5. Run your ingest flow once; the first run will open a browser for OAuth and create `token.json` at the repo root (this is the cached auth token used on subsequent runs)
+6. Re-run ingest as needed; the cached `token.json` is reused automatically
+
+### GitHub
+1. Create a GitHub personal access token with read access to the repos you want to ingest
+2. Set that token in `config.py` as `GITHUB_TOKEN`
+3. Add repo names (`"owner/repo"`) to `GITHUB_REPOS` in `config.py` (or pass a list to `ingest_github(repos=...)`)
+4. Verify file filters: `GITHUB_ALLOWED_EXTENSIONS` and `GITHUB_IGNORE_PATTERNS` in `config.py` control what gets ingested
+5. Run the ingest flow; it uses `fetch_repo_files()` to traverse repos and pull eligible files
 
 **Built with**: FastAPI, React, Qdrant, OpenAI, LlamaIndex, Google Drive API

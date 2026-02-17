@@ -109,26 +109,25 @@ export default function AvatarPanel({ systemStatus }) {
       try {
         const data = await fetchProjects();
         if (!isMounted) return;
+        // Normalize items: accept both {title, url} objects and plain strings
+        const normalize = (arr) =>
+          (Array.isArray(arr) ? arr : []).map((item) =>
+            typeof item === 'string' ? { title: item, url: '' } : item
+          );
         if (data && data.groups) {
           setProjects({
             technical: {
-              code: Array.isArray(data.groups?.technical?.code)
-                ? data.groups.technical.code
-                : [],
-              documentation: Array.isArray(data.groups?.technical?.documentation)
-                ? data.groups.technical.documentation
-                : [],
+              code: normalize(data.groups?.technical?.code),
+              documentation: normalize(data.groups?.technical?.documentation),
             },
             nontechnical: {
-              all: Array.isArray(data.groups?.nontechnical?.all)
-                ? data.groups.nontechnical.all
-                : [],
+              all: normalize(data.groups?.nontechnical?.all),
             },
           });
         } else if (Array.isArray(data.projects)) {
           setProjects({
             technical: { code: [], documentation: [] },
-            nontechnical: { all: data.projects },
+            nontechnical: { all: normalize(data.projects) },
           });
         } else {
           setProjects({
@@ -179,9 +178,13 @@ export default function AvatarPanel({ systemStatus }) {
                   <div className="projects-empty">No code projects.</div>
                 ) : (
                   <ul className="projects-list">
-                    {projects.technical.code.map((title) => (
-                      <li key={`tech-code-${title}`} className="projects-item">
-                        {title}
+                    {projects.technical.code.map((item) => (
+                      <li key={`tech-code-${item.title}`} className="projects-item">
+                        {item.url ? (
+                          <a href={item.url} target="_blank" rel="noopener noreferrer" className="projects-link">
+                            {item.title}
+                          </a>
+                        ) : item.title}
                       </li>
                     ))}
                   </ul>
@@ -193,9 +196,13 @@ export default function AvatarPanel({ systemStatus }) {
                   <div className="projects-empty">No documentation projects.</div>
                 ) : (
                   <ul className="projects-list">
-                    {projects.technical.documentation.map((title) => (
-                      <li key={`tech-doc-${title}`} className="projects-item">
-                        {title}
+                    {projects.technical.documentation.map((item) => (
+                      <li key={`tech-doc-${item.title}`} className="projects-item">
+                        {item.url ? (
+                          <a href={item.url} target="_blank" rel="noopener noreferrer" className="projects-link">
+                            {item.title}
+                          </a>
+                        ) : item.title}
                       </li>
                     ))}
                   </ul>
@@ -209,9 +216,13 @@ export default function AvatarPanel({ systemStatus }) {
                 <div className="projects-empty">No non-technical projects.</div>
               ) : (
                 <ul className="projects-list">
-                  {projects.nontechnical.all.map((title) => (
-                    <li key={`nontech-${title}`} className="projects-item">
-                      {title}
+                  {projects.nontechnical.all.map((item) => (
+                    <li key={`nontech-${item.title}`} className="projects-item">
+                      {item.url ? (
+                        <a href={item.url} target="_blank" rel="noopener noreferrer" className="projects-link">
+                          {item.title}
+                        </a>
+                      ) : item.title}
                     </li>
                   ))}
                 </ul>

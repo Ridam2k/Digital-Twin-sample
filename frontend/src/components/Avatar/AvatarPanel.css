@@ -127,6 +127,18 @@
   transform: translateY(-1px);
 }
 
+.projects-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  display: block;
+  width: 100%;
+}
+
+.projects-link:hover {
+  color: var(--teal);
+  text-decoration: underline;
+}
+
 @media (max-width: 1100px) {
   .projects-grid {
     grid-template-columns: 1fr;

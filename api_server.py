@@ -134,15 +134,16 @@ def _resolve_gdrive_names(file_ids: list[str]) -> dict[str, str]:
 def _scroll_titles(
     client: QdrantClient,
     scroll_filter: models.Filter | None,
-) -> list[str]:
-    titles: set[str] = set()
+) -> dict[str, str]:
+    """Return {doc_title: source_url} for all unique titles matching the filter."""
+    title_urls: dict[str, str] = {}
     offset = None
 
     while True:
         points, next_offset = client.scroll(
             collection_name=COLLECTION_NAME,
             limit=1000,
-            with_payload=["doc_title", "file_name"],
+            with_payload=["doc_title", "file_name", "source_url"],
             with_vectors=False,
             scroll_filter=scroll_filter,
             offset=offset,
@@ -153,14 +154,14 @@ def _scroll_titles(
         for p in points:
             payload = p.payload or {}
             title = (payload.get("doc_title") or payload.get("file_name") or "").strip()
-            if title:
-                titles.add(title)
+            if title and title not in title_urls:
+                title_urls[title] = (payload.get("source_url") or "").strip()
 
         if next_offset is None:
             break
         offset = next_offset
 
-    return sorted(titles)
+    return title_urls
 
 
 def _build_filter(personality_ns: str | None, content_type: str | None) -> models.Filter | None:
@@ -201,7 +202,11 @@ def fetch_grouped_doc_titles() -> dict:
     client.close()
 
     gdrive_ids = _load_gdrive_id_set()
-    all_titles = set(technical_code + technical_docs + nontechnical_all)
+    all_titles = set(
+        list(technical_code.keys())
+        + list(technical_docs.keys())
+        + list(nontechnical_all.keys())
+    )
     ids_to_resolve = []
     for t in all_titles:
         if t in gdrive_ids:
@@ -220,25 +225,39 @@ def fetch_grouped_doc_titles() -> dict:
             return name
         return f"{name}.{ext}"
 
-    def _map_titles(titles: list[str]) -> list[str]:
-        mapped = set()
-        for t in titles:
+    def _gdrive_url(file_id: str) -> str:
+        return f"https://drive.google.com/file/d/{file_id}/view"
+
+    def _map_titles(title_urls: dict[str, str]) -> list[dict]:
+        """Map raw titles to {title, url} objects with name resolution."""
+        mapped: dict[str, str] = {}  # display_name -> url
+        for t, url in title_urls.items():
+            # Google Drive name resolution
             if t in name_map:
-                mapped.add(name_map[t])
+                display = name_map[t]
+                mapped[display] = url or _gdrive_url(t)
                 continue
             if "." in t:
                 stem, ext = t.rsplit(".", 1)
                 if stem in name_map:
-                    mapped.add(_maybe_append_ext(name_map[stem], ext))
+                    display = _maybe_append_ext(name_map[stem], ext)
+                    mapped[display] = url or _gdrive_url(stem)
                     continue
-            mapped.add(t)
-        return sorted(mapped)
+            # Non-GDrive (GitHub) or unresolved
+            mapped[t] = url
+        return [
+            {"title": name, "url": u}
+            for name, u in sorted(mapped.items(), key=lambda x: x[0])
+        ]
 
     technical_code_mapped = _map_titles(technical_code)
     technical_docs_mapped = _map_titles(technical_docs)
     nontechnical_mapped = _map_titles(nontechnical_all)
 
-    total_unique = len(set(technical_code_mapped + technical_docs_mapped + nontechnical_mapped))
+    seen = set()
+    for item in technical_code_mapped + technical_docs_mapped + nontechnical_mapped:
+        seen.add(item["title"])
+    total_unique = len(seen)
 
     return {
         "total_unique": total_unique,
