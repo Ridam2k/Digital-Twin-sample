@@ -64,12 +64,20 @@
   border-radius: 4px;
   padding: 3px 8px;
   color: var(--teal);
-  cursor: pointer;
   transition: background 0.15s ease;
 }
 
 .citation-badge:hover {
   background: rgba(0, 194, 168, 0.18);
+}
+
+a.citation-badge-link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a.citation-badge-link:hover {
+  text-decoration: underline;
 }
 
 .input-dock {

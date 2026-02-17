@@ -131,6 +131,31 @@ def _resolve_gdrive_names(file_ids: list[str]) -> dict[str, str]:
     return name_map
 
 
+def _gdrive_url(file_id: str) -> str:
+    return f"https://drive.google.com/file/d/{file_id}/view"
+
+
+def _enrich_citations(citations: list[dict]) -> list[dict]:
+    """Fill in source_url for GDrive citations that have empty URLs."""
+    gdrive_ids = _load_gdrive_id_set()
+    name_map = _load_gdrive_name_map()
+    for cite in citations:
+        if cite.get("source_url"):
+            continue
+        doc_title = cite.get("doc_title", "")
+        if doc_title in gdrive_ids:
+            cite["source_url"] = _gdrive_url(doc_title)
+            if doc_title in name_map:
+                cite["doc_title"] = name_map[doc_title]
+        elif "." in doc_title:
+            stem = doc_title.rsplit(".", 1)[0]
+            if stem in gdrive_ids:
+                cite["source_url"] = _gdrive_url(stem)
+                if stem in name_map:
+                    cite["doc_title"] = name_map[stem]
+    return citations
+
+
 def _scroll_titles(
     client: QdrantClient,
     scroll_filter: models.Filter | None,
@@ -224,9 +249,6 @@ def fetch_grouped_doc_titles() -> dict:
         if name.lower().endswith(f".{ext.lower()}"):
             return name
         return f"{name}.{ext}"
-
-    def _gdrive_url(file_id: str) -> str:
-        return f"https://drive.google.com/file/d/{file_id}/view"
 
     def _map_titles(title_urls: dict[str, str]) -> list[dict]:
         """Map raw titles to {title, url} objects with name resolution."""
@@ -353,6 +375,9 @@ async def query_endpoint(req : QueryRequest):
         with open("eval_log.jsonl", "a") as f:
             f.write(json.dumps(log_entry) + "\n")
 
+        # Enrich GDrive citations with URLs and resolved names
+        result["citations"] = _enrich_citations(result["citations"])
+
         # Return API response (without evaluation metrics)
         return QueryResponse(
             response=result["response"],
@@ -397,6 +422,9 @@ async def query_stream_endpoint(req: QueryRequest):
             result = generate(system_prompt, user_message, chunks, out_of_scope, history=req.history)
 
             print("Response generated, streaming to client...")
+
+            # Enrich GDrive citations with URLs and resolved names
+            result["citations"] = _enrich_citations(result["citations"])
 
             # IMMEDIATE: Send response to client
             yield f"data: {json.dumps({

@@ -133,11 +133,18 @@ export default function ConvPanel({ messages, onSubmit, disabled }) {
                 </div>
                 {msg.citations && msg.citations.length > 0 && (
                   <div className="citations-row">
-                    {msg.citations.map((cite) => (
-                      <button key={cite.index} className="citation-badge">
-                        [{cite.index}] {cite.doc_title} · {cite.score.toFixed(2)}
-                      </button>
-                    ))}
+                    {msg.citations.map((cite) =>
+                      cite.source_url ? (
+                        <a key={cite.index} href={cite.source_url} target="_blank"
+                           rel="noopener noreferrer" className="citation-badge citation-badge-link">
+                          [{cite.index}] {cite.doc_title} · {cite.score.toFixed(2)}
+                        </a>
+                      ) : (
+                        <span key={cite.index} className="citation-badge">
+                          [{cite.index}] {cite.doc_title} · {cite.score.toFixed(2)}
+                        </span>
+                      )
+                    )}
                   </div>
                 )}
               </>
