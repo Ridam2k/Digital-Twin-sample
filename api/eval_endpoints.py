@@ -66,6 +66,12 @@ async def get_db_stats():
     Queries Qdrant for collection metadata and statistics.
     """
     try:
+        def _extract_doc_title(payload: dict) -> str:
+            file_path = payload.get("file_path") or payload.get("file path")
+            if file_path:
+                return file_path.split("/")[-1]
+            return (payload.get("doc_title") or payload.get("file_name") or "").strip()
+
         # Get collection info
         collection_info = qdrant_client.get_collection(collection_name=COLLECTION_NAME)
         total_chunks = collection_info.points_count
@@ -91,14 +97,19 @@ async def get_db_stats():
 
             # Count chunks and unique docs
             chunk_count = len(results)
-            doc_ids = set(point.payload.get("doc_id") for point in results if "doc_id" in point.payload)
+            doc_titles = set()
+            for point in results:
+                payload = point.payload or {}
+                title = _extract_doc_title(payload)
+                if title:
+                    doc_titles.add(title)
 
             namespace_stats[ns] = {
                 "chunk_count": chunk_count,
-                "doc_count": len(doc_ids)
+                "doc_count": len(doc_titles)
             }
 
-            total_unique_docs.update(doc_ids)
+            total_unique_docs.update(doc_titles)
 
         return {
             "collection_name": COLLECTION_NAME,

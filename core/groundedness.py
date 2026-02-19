@@ -145,7 +145,7 @@ def check_groundedness(
         and a list of any fabricated claims for easy surfacing.
     """
     client = OpenAI(api_key=OPENAI_API_KEY)
-    model = "gpt-4o-mini"
+    model = "gpt-4o-mini" #Ideally would want to use a larger or different model here for evaluation
 
     context_block = _build_context_block(retrieved_chunks)
     user_message = _USER_TEMPLATE.format(
