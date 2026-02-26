@@ -35,7 +35,7 @@ def tag_and_chunk(
         return []
 
     parser = SentenceSplitter(chunk_size=CHUNK_SIZE, chunk_overlap=CHUNK_OVERLAP)
-    nodes = parser.get_nodes_from_documents(valid_docs)
+    nodes = parser.get_nodes_from_documents(valid_docs, show_progress=True)
     chunk_total = len(nodes)
     ingested_at = datetime.now(timezone.utc).isoformat()
 
@@ -51,7 +51,7 @@ def tag_and_chunk(
         )
 
         # Ensure doc_title is set for Google Drive docs (metadata uses "file path")
-        file_path = node.metadata.get("file path") or node.metadata.get("file_path")
+        file_path = node.metadata.get("file path") or node.metadata.get("file_path") #On revisting -> file_path
         file_name = node.metadata.get("file name") or node.metadata.get("file_name")
         if file_path:
             node.metadata["doc_title"] = file_path.split("/")[-1]
@@ -71,6 +71,7 @@ def tag_and_chunk(
         
         # UUID format for Qdrant compatibility
         hash_bytes = hashlib.sha1(raw.encode("utf-8")).digest()[:16]
-        node.node_id = str(uuid.UUID(bytes=hash_bytes))
+        node.node_id = str(uuid.UUID(bytes=hash_bytes)) 
+        # set as node ID -> determinstic and idempotent IDs - allows me to upsert reliably, can keep references stable
 
     return nodes

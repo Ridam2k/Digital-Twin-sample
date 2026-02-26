@@ -81,7 +81,7 @@ def upsert_nodes(client: QdrantClient, nodes: list) -> None:
     """
     Embed and upsert LlamaIndex TextNode objects directly into Qdrant.
 
-    Payload schema written here is the *single source of truth* and
+    Payload schema written here is the single source of truth and
     must stay aligned with what retriever.py reads:
         text, doc_title, source_url, personality_ns, content_type,
         chunk_index, chunk_total, ingested_at, file_name
@@ -139,9 +139,6 @@ def upsert_nodes(client: QdrantClient, nodes: list) -> None:
         file_name = _extract_file_name(meta, doc_title)
         points.append(
             PointStruct(
-                # Use the node_id that SentenceSplitter already assigned.
-                # main_ingest.py records these IDs in the hash store for
-                # incremental deletion, so they must match.
                 id=node.node_id,
                 vector=vector,
                 payload={

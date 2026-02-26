@@ -200,7 +200,7 @@ def check_persona_consistency(
     query
 ) -> PersonaConsistencyResult:
     
-    model = "gpt-4o-mini"
+    model = "gpt-4o-mini" # ideally we'd want to use a larger or different model here
     client = OpenAI(api_key=OPENAI_API_KEY)
    
     identity = load_identity_context()
