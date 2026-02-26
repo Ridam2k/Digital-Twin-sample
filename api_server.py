@@ -320,15 +320,16 @@ async def query_endpoint(req : QueryRequest):
         print("Chunks retreived")
 
         # Step 3: Assemble system prompt + user message
-        system_prompt, user_message = build_context(
+        system_prompt, user_message, response_format_json_text = build_context(
             req.query, mode, chunks, out_of_scope,
             content_type=req.content_type,
         )
 
         # Step 4: Get LLM response
-        result = generate(system_prompt, user_message, chunks, out_of_scope, history=req.history)
+        result = generate(system_prompt, user_message, chunks, out_of_scope, response_format_json=response_format_json_text, history=req.history)
 
         print("Response generated")
+        print(result)
 
         # Step 5: Evaluation
         grounded_result = check_groundedness(
@@ -414,12 +415,25 @@ async def query_stream_endpoint(req: QueryRequest):
 
             retrieved_texts = [c.text for c in chunks]
 
-            system_prompt, user_message = build_context(
+            # system_prompt, user_message = build_context(
+            #     req.query, mode, chunks, out_of_scope,
+            #     content_type=req.content_type,
+            # )
+
+            # result = generate(system_prompt, user_message, chunks, out_of_scope, history=req.history)
+            
+            # Step 3: Assemble system prompt + user message
+            system_prompt, user_message, response_format_json_text = build_context(
                 req.query, mode, chunks, out_of_scope,
                 content_type=req.content_type,
             )
 
-            result = generate(system_prompt, user_message, chunks, out_of_scope, history=req.history)
+            # Step 4: Get LLM response
+            result = generate(system_prompt, user_message, chunks, out_of_scope, response_format_json=response_format_json_text, history=req.history)
+
+            print("Response generated")
+            print(result)
+
 
             print("Response generated, streaming to client...")
 

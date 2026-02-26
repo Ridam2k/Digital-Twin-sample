@@ -425,7 +425,13 @@ All connector actions will pass through a centralized policy check before execut
      - Write permission changes
      - Reauthorization events
 
-   This introduces enterprise-grade visibility and compliance readiness.
+This introduces enterprise-grade visibility and compliance readiness.
+
+---
+
+## Future Enhancements: Multimodal Inputs & Outputs
+
+- Add image and slide ingestion for visual reasoning (charts/diagrams), and return image‑anchored citations in responses.
 
 ---
 

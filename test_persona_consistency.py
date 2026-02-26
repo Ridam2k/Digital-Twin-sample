@@ -216,10 +216,19 @@ def test_integration_with_full_pipeline():
     print(f"Retrieved {len(chunks)} chunks, out_of_scope={out_of_scope}")
 
     # Step 3: build context
-    system_prompt, user_message = build_context(query, mode, chunks, out_of_scope)
+    system_prompt, user_message, response_format_json = build_context(
+        query, mode, chunks, out_of_scope
+    )
 
     # Step 4: generate
-    result = generate(system_prompt, user_message, chunks, out_of_scope)
+    result = generate(
+        system_prompt,
+        user_message,
+        chunks,
+        out_of_scope,
+        response_format_json=response_format_json,
+        history=[],
+    )
     print(f"Generated response ({len(result['response'])} chars)")
 
     # Step 5a: check groundedness

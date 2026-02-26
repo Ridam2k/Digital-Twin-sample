@@ -115,6 +115,46 @@ export default function ConvPanel({ messages, onSubmit, disabled }) {
     setIsCodeMode(prev => !prev);
   };
 
+  const renderTextWithCitations = (text, citations = []) => {
+    if (!text) return text;
+    const citeMap = new Map(
+      (citations || []).map((cite) => [String(cite.index), cite])
+    );
+    const parts = text.split(/\[(\d+)\]/g);
+
+    return parts.map((part, idx) => {
+      if (idx % 2 === 1) {
+        const cite = citeMap.get(part);
+        if (cite?.source_url) {
+          return (
+            <a
+              key={`cite-${idx}`}
+              href={cite.source_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-citation inline-citation-link"
+            >
+              [{part}]
+            </a>
+          );
+        }
+        if (cite) {
+          return (
+            <span key={`cite-${idx}`} className="inline-citation">
+              [{part}]
+            </span>
+          );
+        }
+        return <span key={`cite-${idx}`}>[{part}]</span>;
+      }
+      return (
+        <span key={`text-${idx}`}>
+          {part}
+        </span>
+      );
+    });
+  };
+
   return (
     <div className="conv-panel">
       <div className="transcript-feed">
@@ -129,7 +169,7 @@ export default function ConvPanel({ messages, onSubmit, disabled }) {
               <>
                 <div className={`message-text twin-text ${msg.outOfScope ? 'oos-text' : ''}`}>
                   {msg.outOfScope && '⊘ '}
-                  {msg.text}
+                  {renderTextWithCitations(msg.text, msg.citations)}
                 </div>
                 {msg.citations && msg.citations.length > 0 && (
                   <div className="citations-row">

@@ -1,8 +1,10 @@
+import json
 import re
 from openai import OpenAI
 import tiktoken
 from core.retriever import RetrievedChunk
 from config import OPENAI_API_KEY, HISTORY_TOKEN_BUDGET
+# from types import Any
 
 _client = OpenAI(api_key=OPENAI_API_KEY)
 
@@ -29,12 +31,38 @@ def _strip_markdown_emphasis(text: str) -> str:
     return text
 
 
+def _format_structured_response(raw_content: str) -> str:
+    try:
+        payload = json.loads(raw_content)
+    except json.JSONDecodeError:
+        return raw_content.strip()
+
+    items = payload.get("items")
+    if not isinstance(items, list):
+        return raw_content.strip()
+
+    parts = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        text = str(item.get("response_text", "")).strip()
+        if not text:
+            continue
+        citation_number = item.get("citation_number")
+        if isinstance(citation_number, int) and citation_number > 0:
+            text = f"{text} [{citation_number}]"
+        parts.append(text)
+
+    return " ".join(parts).strip()
+
+
 def generate(
     system_prompt: str,
     user_message:  str,
     chunks:        list[RetrievedChunk],
     out_of_scope:  bool,
-    history:       list = None,
+    response_format_json,
+    history,
 ) -> dict:
     """
     Structured Result
@@ -56,14 +84,19 @@ def generate(
     
     print("Messages: ", messages)
 
-    response = _client.chat.completions.create(
-        model=GENERATION_MODEL,
-        max_tokens=MAX_TOKENS,
-        messages=messages,
-        temperature=0.2,
-    )
+    request_params = {
+        "model": GENERATION_MODEL,
+        "max_tokens": MAX_TOKENS,
+        "messages": messages,
+        "temperature": 0.2,
+    }
+    if response_format_json:
+        request_params["response_format"] = response_format_json
 
-    answer = response.choices[0].message.content.strip()
+    response = _client.chat.completions.create(**request_params)
+
+    raw_content = response.choices[0].message.content.strip()
+    answer = _format_structured_response(raw_content) if response_format_json else raw_content
     answer = _strip_markdown_emphasis(answer)
 
     citations = []

@@ -92,12 +92,19 @@ def run():
         retrieved_texts = [c.text for c in chunks]
 
         # Step 3: assemble context
-        system_prompt, user_message = build_context(
+        system_prompt, user_message, response_format_json = build_context(
             query, mode, chunks, out_of_scope, content_type=content_type,
         )
 
         # Step 4: generate
-        result = generate(system_prompt, user_message, chunks, out_of_scope)
+        result = generate(
+            system_prompt,
+            user_message,
+            chunks,
+            out_of_scope,
+            response_format_json=response_format_json,
+            history=[],
+        )
 
         # Step 5: evaluation -> extra latency
         # Eval - Groundedness
