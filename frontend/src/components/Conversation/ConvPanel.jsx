@@ -155,6 +155,43 @@ export default function ConvPanel({ messages, onSubmit, disabled }) {
     });
   };
 
+  const groupCitationsByDoc = (citations = []) => {
+    const grouped = new Map();
+
+    citations.forEach((cite) => {
+      const title = cite.doc_title || 'Unknown';
+      const existing = grouped.get(title);
+      if (!existing) {
+        grouped.set(title, {
+          doc_title: title,
+          source_url: cite.source_url || '',
+          indices: [cite.index],
+          maxScore: cite.score ?? 0,
+        });
+      } else {
+        if (cite.source_url && !existing.source_url) {
+          existing.source_url = cite.source_url;
+        }
+        if (typeof cite.index === 'number') {
+          existing.indices.push(cite.index);
+        }
+        if (typeof cite.score === 'number' && cite.score > existing.maxScore) {
+          existing.maxScore = cite.score;
+        }
+      }
+    });
+
+    return Array.from(grouped.values())
+      .map((item) => ({
+        ...item,
+        indices: Array.from(new Set(item.indices)).sort((a, b) => a - b),
+      }))
+      .sort((a, b) => {
+        if (b.maxScore !== a.maxScore) return b.maxScore - a.maxScore;
+        return a.indices[0] - b.indices[0];
+      });
+  };
+
   return (
     <div className="conv-panel">
       <div className="transcript-feed">
@@ -173,18 +210,30 @@ export default function ConvPanel({ messages, onSubmit, disabled }) {
                 </div>
                 {msg.citations && msg.citations.length > 0 && (
                   <div className="citations-row">
-                    {msg.citations.map((cite) =>
-                      cite.source_url ? (
-                        <a key={cite.index} href={cite.source_url} target="_blank"
-                           rel="noopener noreferrer" className="citation-badge citation-badge-link">
-                          [{cite.index}] {cite.doc_title} · {cite.score.toFixed(2)}
+                    {groupCitationsByDoc(msg.citations).map((cite) => {
+                      const indicesLabel = cite.indices.length > 1
+                        ? `[${cite.indices.join(', ')}]`
+                        : `[${cite.indices[0]}]`;
+                      const scoreLabel = typeof cite.maxScore === 'number'
+                        ? cite.maxScore.toFixed(2)
+                        : '0.00';
+
+                      return cite.source_url ? (
+                        <a
+                          key={`${cite.doc_title}-${indicesLabel}`}
+                          href={cite.source_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="citation-badge citation-badge-link"
+                        >
+                          {indicesLabel} {cite.doc_title} · {scoreLabel}
                         </a>
                       ) : (
-                        <span key={cite.index} className="citation-badge">
-                          [{cite.index}] {cite.doc_title} · {cite.score.toFixed(2)}
+                        <span key={`${cite.doc_title}-${indicesLabel}`} className="citation-badge">
+                          {indicesLabel} {cite.doc_title} · {scoreLabel}
                         </span>
-                      )
-                    )}
+                      );
+                    })}
                   </div>
                 )}
               </>
